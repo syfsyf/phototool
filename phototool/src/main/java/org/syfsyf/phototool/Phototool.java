@@ -68,7 +68,7 @@ public class Phototool {
 		gui.getDirLabel().setText(cwd.getAbsolutePath());
 		gui.getOutDirLabel().setText(outDir.getAbsolutePath());
 		gui.getNumOfFileLabel().setText("" + files.size());
-		gui.getResizeWidthEdit().setText("" + profile.getResizeWidth());
+		gui.getResizeWidth().setText("" + profile.getResizeWidth());
 		gui.getProgressBar().setMaximum(files.size());
 		gui.getProgresLabel().setText("0/" + files.size());
 		gui.getErrorLabel().setText("Błędów:0");

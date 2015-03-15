@@ -7,6 +7,9 @@ public class Profile {
 
 	private boolean resize=true;
 	private int resizeWidth=1300;
+	private boolean border=false;
+	private int borderSize;
+	private boolean autolevel=false;
 	private String outDirName="__resize_";	
 	private String imgMagicConvert="d:\\progs\\ImageMagick-6.9.0-Q16\\convert.exe";
 	public boolean isResize() {
@@ -35,6 +38,24 @@ public class Profile {
 	}
 	public void setImgMagicConvert(String imgMagicConvert) {
 		this.imgMagicConvert = imgMagicConvert;
+	}
+	public boolean isBorder() {
+		return border;
+	}
+	public void setBorder(boolean border) {
+		this.border = border;
+	}
+	public int getBorderSize() {
+		return borderSize;
+	}
+	public void setBorderSize(int borderSize) {
+		this.borderSize = borderSize;
+	}
+	public boolean isAutolevel() {
+		return autolevel;
+	}
+	public void setAutolevel(boolean autolevel) {
+		this.autolevel = autolevel;
 	}
 	
 	

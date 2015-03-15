@@ -9,7 +9,7 @@ public class TestRun {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		System.setProperty("user.dir", "D:\\mb\\workspace\\phototool\\test files");
+		System.setProperty("user.dir", "d:\\mb\\photootool\\test files\\");
 		Main.main(args);
 	}
 }
