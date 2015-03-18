@@ -18,7 +18,6 @@ import org.syfsyf.phototool.gui.GUI;
 
 import com.thoughtworks.xstream.XStream;
 
-
 public class Phototool {
 
 	private static final Logger LOGGER = Logger.getLogger(Phototool.class);
@@ -47,20 +46,51 @@ public class Phototool {
 		if (interacrive) {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
-					try {
-						gui = new GUI();
-						bindGUI();
-						gui.getFrmPhotoTool().setVisible(true);
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					runGUI();
 				}
 			});
 		} else {
 			createJobs(profile);
 		}
 
+	}
+
+	protected void runGUI() {
+		try {
+			gui = new GUI();
+			gui.getRunButton().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					onGo();
+				}
+			});
+			
+			
+			
+			
+			bindGUI();
+			gui.getFrmPhotoTool().setVisible(true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	protected void onGo() {
+
+		createJobs(profile);
+		gui.getRunButton().setEnabled(false);
+		Thread queryThread = new Thread() {
+			public void run() {
+				try {
+					runJobsThreadGUI();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		queryThread.start();
 	}
 
 	protected void bindGUI() {
@@ -72,26 +102,6 @@ public class Phototool {
 		gui.getProgressBar().setMaximum(files.size());
 		gui.getProgresLabel().setText("0/" + files.size());
 		gui.getErrorLabel().setText("Błędów:0");
-
-		gui.getRunButton().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				createJobs(profile);
-				gui.getRunButton().setEnabled(false);
-				Thread queryThread = new Thread() {
-					public void run() {
-						try {
-							runJobsThreadGUI();
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				};
-				queryThread.start();
-			}
-		});
 
 	}
 
@@ -188,7 +198,7 @@ public class Phototool {
 		}
 		System.out.println("" + count + "/" + jobs.size());
 		guiUpdate();
-		try {			
+		try {
 			saveProfile(profile);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -233,10 +243,10 @@ public class Phototool {
 		for (File f : files) {
 			Job job = null;
 			if (profile.isResize()) {
-				job = new ResizeJob(profile.getImgMagicConvert() ,f, new File(outDir, f.getName()), profile.getResizeWidth());
+				job = new ResizeJob(profile.getImgMagicConvert(), f, new File(outDir, f.getName()), profile.getResizeWidth());
 			}
 			jobs.add(job);
-		}		
+		}
 	}
 
 	private List<File> scanFiles() {

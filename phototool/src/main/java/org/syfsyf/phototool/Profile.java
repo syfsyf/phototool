@@ -1,5 +1,7 @@
 package org.syfsyf.phototool;
 
+import java.awt.Color;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("config")
@@ -9,7 +11,9 @@ public class Profile {
 	private int resizeWidth=1300;
 	private boolean border=false;
 	private int borderSize;
+	private Color borderColor=Color.black;
 	private boolean autolevel=false;
+	
 	private String outDirName="__resize_";	
 	private String imgMagicConvert="d:\\progs\\ImageMagick-6.9.0-Q16\\convert.exe";
 	public boolean isResize() {
@@ -56,6 +60,12 @@ public class Profile {
 	}
 	public void setAutolevel(boolean autolevel) {
 		this.autolevel = autolevel;
+	}
+	public Color getBorderColor() {
+		return borderColor;
+	}
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
 	}
 	
 	

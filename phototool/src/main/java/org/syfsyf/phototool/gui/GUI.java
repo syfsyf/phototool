@@ -1,34 +1,30 @@
 package org.syfsyf.phototool.gui;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFormattedTextField.AbstractFormatter;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.NumberFormat;
-import java.util.Formatter;
 
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.JProgressBar;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.text.NumberFormatter;
-import javax.swing.JFormattedTextField;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class GUI {
 
@@ -51,6 +47,7 @@ public class GUI {
 	private JCheckBox resizeCheckBox;
 	private JLabel label_2;
 	private JFormattedTextField resizeWidth;
+	private ColorChooserButton borderColor;
 
 	/**
 	 * Launch the application.
@@ -88,7 +85,7 @@ public class GUI {
 	private void initialize() {
 		frmPhotoTool = new JFrame();
 		frmPhotoTool.setTitle("Photo Tool");
-		frmPhotoTool.setBounds(100, 100, 749, 270);
+		frmPhotoTool.setBounds(100, 100, 749, 306);
 		frmPhotoTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -160,6 +157,11 @@ public class GUI {
 
 		label_1 = new JLabel("px");
 		panel_2.add(label_1);
+		
+		borderColor = new ColorChooserButton("New button");
+		borderColor.setLabel("...");
+		borderColor.setBackground(UIManager.getColor("Button.focus"));
+		panel_2.add(borderColor);
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -252,5 +254,8 @@ public class GUI {
 
 	public JCheckBox getResizeCheckBox() {
 		return resizeCheckBox;
+	}
+	public ColorChooserButton getBorderColor() {
+		return borderColor;
 	}
 }
