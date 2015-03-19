@@ -57,7 +57,18 @@ public abstract class AbstractJob implements Job {
 		@Override
 		public String toString() {
 			return "\ncmd:"+cmd+"\nexit:"+getExitStatus()+"\nerror:"+errorLines;
-			
+						
+		}
+		public String getErrorLinesStr()
+		{
+			if(getErrorLines()==null){
+				return null;
+			}
+			StringBuilder builder=new StringBuilder();
+			for(String s:getErrorLines()){
+				builder.append(s);
+			}
+			return builder.toString();
 		}
 
 	}

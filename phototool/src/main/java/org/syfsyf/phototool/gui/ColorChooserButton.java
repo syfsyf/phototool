@@ -34,13 +34,18 @@ public class ColorChooserButton extends Button {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color color = JColorChooser.showDialog(ColorChooserButton.this, "Wybierz kolor", ColorChooserButton.this.getBackground());
-				setColor(color);
+				if(color!=null){
+					setColor(color);
+				}
 			}
 		});
 
 	}
 
 	public static Color getContrastColor(Color color) {
+		if(color==null){
+			return Color.WHITE;
+		}
 		double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
 		return y >= 128 ? Color.black : Color.white;
 	}

@@ -11,6 +11,9 @@ public class ResizeJob extends AbstractJob {
 
 	public ResizeJob(String converterExe,File inFile, File outFile, int size) {
 		super();
+		if(inFile==null || outFile==null){
+			throw new IllegalArgumentException();
+		}
 		this.inFile = inFile;
 		this.outFile = outFile;
 		this.size = size;

@@ -25,9 +25,18 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
+import java.awt.Color;
+import javax.swing.JSpinner;
+import java.awt.Dimension;
 
 public class GUI {
 
+	private BindingGroup m_bindingGroup;
 	private JFrame frmPhotoTool;
 	private JLabel dirLabel;
 	private JLabel outDirLabel;
@@ -41,13 +50,17 @@ public class GUI {
 	private JCheckBox autoLevelCheckBox;
 	private JPanel panel_2;
 	private JCheckBox borderCheckBox;
-	private JFormattedTextField borderSize;
+	private JSpinner borderSize;
 	private JLabel label_1;
 	private JPanel panel_3;
 	private JCheckBox resizeCheckBox;
 	private JLabel label_2;
 	private JFormattedTextField resizeWidth;
 	private ColorChooserButton borderColor;
+	/**
+	 * @wbp.nonvisual location=67,239
+	 */
+	private ViewModel viewModel;
 
 	/**
 	 * Launch the application.
@@ -151,8 +164,8 @@ public class GUI {
 		borderCheckBox.setSelected(true);
 		panel_2.add(borderCheckBox);
 
-		borderSize = new JFormattedTextField();
-		borderSize.setColumns(3);
+		borderSize = new JSpinner();
+		borderSize.setPreferredSize(new Dimension(40, 18));
 		panel_2.add(borderSize);
 
 		label_1 = new JLabel("px");
@@ -189,6 +202,10 @@ public class GUI {
 
 		runButton = new JButton("Go!");
 		frmPhotoTool.getContentPane().add(runButton, "4, 16, right, default");
+		
+		if (viewModel != null) {
+			m_bindingGroup = initDataBindings();
+		}
 
 	}
 
@@ -244,9 +261,7 @@ public class GUI {
 		return resizeWidth;
 	}
 
-	public JFormattedTextField getBorderSize() {
-		return borderSize;
-	}
+	
 
 	public JCheckBox getAutoLevelCheckBox() {
 		return autoLevelCheckBox;
@@ -257,5 +272,112 @@ public class GUI {
 	}
 	public ColorChooserButton getBorderColor() {
 		return borderColor;
+	}
+	
+	public ViewModel getViewModel() {
+		return viewModel;
+	}
+
+	public void setViewModel(ViewModel newViewModel) {
+		setViewModel(newViewModel, true);
+	}
+
+	public void setViewModel(ViewModel newViewModel, boolean update) {
+		viewModel = newViewModel;
+		if (update) {
+			if (m_bindingGroup != null) {
+				m_bindingGroup.unbind();
+				m_bindingGroup = null;
+			}
+			if (viewModel != null) {
+				m_bindingGroup = initDataBindings();
+			}
+		}
+	}
+	protected BindingGroup initDataBindings() {
+		BeanProperty<ViewModel, Boolean> viewModelBeanProperty = BeanProperty.create("autolevel");
+		BeanProperty<JCheckBox, Boolean> jCheckBoxBeanProperty = BeanProperty.create("selected");
+		AutoBinding<ViewModel, Boolean, JCheckBox, Boolean> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty, autoLevelCheckBox, jCheckBoxBeanProperty);
+		autoBinding.bind();
+		//
+		BeanProperty<ViewModel, Boolean> viewModelBeanProperty_1 = BeanProperty.create("border");
+		AutoBinding<ViewModel, Boolean, JCheckBox, Boolean> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_1, borderCheckBox, jCheckBoxBeanProperty);
+		autoBinding_1.bind();
+		//
+		BeanProperty<ViewModel, Boolean> viewModelBeanProperty_4 = BeanProperty.create("resize");
+		AutoBinding<ViewModel, Boolean, JCheckBox, Boolean> autoBinding_4 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_4, resizeCheckBox, jCheckBoxBeanProperty);
+		autoBinding_4.bind();
+		//
+		BeanProperty<ViewModel, Integer> viewModelBeanProperty_5 = BeanProperty.create("resizeWidth");
+		BeanProperty<JFormattedTextField, Object> jFormattedTextFieldBeanProperty = BeanProperty.create("value");
+		AutoBinding<ViewModel, Integer, JFormattedTextField, Object> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_5, resizeWidth, jFormattedTextFieldBeanProperty);
+		autoBinding_5.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_6 = BeanProperty.create("outDirLabel");
+		BeanProperty<JLabel, String> jLabelBeanProperty = BeanProperty.create("text");
+		AutoBinding<ViewModel, String, JLabel, String> autoBinding_6 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_6, outDirLabel, jLabelBeanProperty);
+		autoBinding_6.bind();
+		//
+		BeanProperty<ViewModel, Color> viewModelBeanProperty_2 = BeanProperty.create("borderColor");
+		BeanProperty<ColorChooserButton, Color> colorChooserButtonBeanProperty_1 = BeanProperty.create("color");
+		AutoBinding<ViewModel, Color, ColorChooserButton, Color> autoBinding_7 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_2, borderColor, colorChooserButtonBeanProperty_1);
+		autoBinding_7.bind();
+		//
+		BeanProperty<JFormattedTextField, Boolean> jFormattedTextFieldBeanProperty_1 = BeanProperty.create("enabled");
+		AutoBinding<ViewModel, Boolean, JFormattedTextField, Boolean> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_4, resizeWidth, jFormattedTextFieldBeanProperty_1);
+		autoBinding_2.bind();
+		//
+		BeanProperty<ColorChooserButton, Boolean> colorChooserButtonBeanProperty = BeanProperty.create("enabled");
+		AutoBinding<ViewModel, Boolean, ColorChooserButton, Boolean> autoBinding_9 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_1, borderColor, colorChooserButtonBeanProperty);
+		autoBinding_9.bind();
+		//
+		BeanProperty<ViewModel, Integer> viewModelBeanProperty_3 = BeanProperty.create("borderSize");
+		BeanProperty<JSpinner, Object> jSpinnerBeanProperty = BeanProperty.create("value");
+		AutoBinding<ViewModel, Integer, JSpinner, Object> autoBinding_3 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_3, borderSize, jSpinnerBeanProperty);
+		autoBinding_3.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_7 = BeanProperty.create("errorLabel");
+		AutoBinding<ViewModel, String, JLabel, String> autoBinding_8 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_7, errorLabel, jLabelBeanProperty);
+		autoBinding_8.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_8 = BeanProperty.create("progressLabel");
+		AutoBinding<ViewModel, String, JLabel, String> autoBinding_10 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_8, progresLabel, jLabelBeanProperty);
+		autoBinding_10.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_9 = BeanProperty.create("dirLabel");
+		AutoBinding<ViewModel, String, JLabel, String> autoBinding_11 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_9, dirLabel, jLabelBeanProperty);
+		autoBinding_11.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_10 = BeanProperty.create("numOfFiles");
+		AutoBinding<ViewModel, String, JLabel, String> autoBinding_12 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_10, numOfFileLabel, jLabelBeanProperty);
+		autoBinding_12.bind();
+		//
+		BeanProperty<ViewModel, Integer> viewModelBeanProperty_11 = BeanProperty.create("progressValue");
+		BeanProperty<JProgressBar, Integer> jProgressBarBeanProperty = BeanProperty.create("value");
+		AutoBinding<ViewModel, Integer, JProgressBar, Integer> autoBinding_13 = Bindings.createAutoBinding(UpdateStrategy.READ, viewModel, viewModelBeanProperty_11, progressBar, jProgressBarBeanProperty);
+		autoBinding_13.bind();
+		//
+		BeanProperty<JProgressBar, Integer> jProgressBarBeanProperty_1 = BeanProperty.create("maximum");
+		AutoBinding<ViewModel, String, JProgressBar, Integer> autoBinding_14 = Bindings.createAutoBinding(UpdateStrategy.READ_ONCE, viewModel, viewModelBeanProperty_10, progressBar, jProgressBarBeanProperty_1);
+		autoBinding_14.bind();
+		//
+		BindingGroup bindingGroup = new BindingGroup();
+		//
+		bindingGroup.addBinding(autoBinding);
+		bindingGroup.addBinding(autoBinding_1);
+		bindingGroup.addBinding(autoBinding_4);
+		bindingGroup.addBinding(autoBinding_5);
+		bindingGroup.addBinding(autoBinding_6);
+		bindingGroup.addBinding(autoBinding_7);
+		bindingGroup.addBinding(autoBinding_2);
+		bindingGroup.addBinding(autoBinding_9);
+		bindingGroup.addBinding(autoBinding_3);
+		bindingGroup.addBinding(autoBinding_8);
+		bindingGroup.addBinding(autoBinding_10);
+		bindingGroup.addBinding(autoBinding_11);
+		bindingGroup.addBinding(autoBinding_12);
+		bindingGroup.addBinding(autoBinding_13);
+		bindingGroup.addBinding(autoBinding_14);
+		return bindingGroup;
 	}
 }

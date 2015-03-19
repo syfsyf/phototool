@@ -26,7 +26,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>phototool.Main</mainClass>
+							<mainClass>org.syfsyf.phototool.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -70,19 +70,22 @@
 			<artifactId>xstream</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.jgoodies</groupId>
 			<artifactId>jgoodiesforms</artifactId>
 			<version>1.5.1</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.jgoodies</groupId>
 			<artifactId>jgoodies-common</artifactId>
 			<version>1.7.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jdesktop</groupId>
+			<artifactId>beansbinding</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 
 
 

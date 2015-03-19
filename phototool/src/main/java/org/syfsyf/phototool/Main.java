@@ -9,14 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		
-		BasicConfigurator.configure();
-		//
-		new Phototool().run(args);
-	}
-
-	private static void test() throws Exception {
-		
-		
-	}
-	
+		BasicConfigurator.configure();		
+		new Phototool().run(args);				
+	}	
 }
