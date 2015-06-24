@@ -61,6 +61,8 @@ public class GUI {
 	 * @wbp.nonvisual location=67,239
 	 */
 	private ViewModel viewModel;
+	private JPanel panel_4;
+	private JCheckBox chckbxDodajPodpis;
 
 	/**
 	 * Launch the application.
@@ -184,6 +186,19 @@ public class GUI {
 		autoLevelCheckBox = new JCheckBox("autoLevel?");
 		autoLevelCheckBox.setSelected(true);
 		panel_1.add(autoLevelCheckBox);
+		
+		panel_4 = new JPanel();
+		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		optionsPanel.add(panel_4);
+		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
+				com.jgoodies.forms.layout.FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("87px"),},
+			new RowSpec[] {
+				com.jgoodies.forms.layout.FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),}));
+		
+		chckbxDodajPodpis = new JCheckBox("dodaj podpis");
+		panel_4.add(chckbxDodajPodpis, "2, 2, left, top");
 
 		JLabel lblNewLabel_1 = new JLabel("Out");
 		frmPhotoTool.getContentPane().add(lblNewLabel_1, "2, 8");

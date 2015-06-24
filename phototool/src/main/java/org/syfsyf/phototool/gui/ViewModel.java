@@ -19,6 +19,16 @@ public class ViewModel {
 	private boolean autolevel = false;
 
 	private String outDirLabel = "test";
+	
+	
+	private boolean addSignature=true;
+	private String sigFile;
+	private String sigGravity = "SouthWest";
+	private String sigGeometry = "+20+20";
+	private String sigResize = "x10";
+	
+	 
+	
 
 	private String progressLabel;
 	private String errorLabel;
@@ -163,6 +173,46 @@ public class ViewModel {
 
 	public int getProgressValue() {
 		return this.progressValue;
+	}
+
+	public boolean isAddSignature() {
+		return addSignature;
+	}
+
+	public void setAddSignature(boolean addSignature) {
+		this.addSignature = addSignature;
+	}
+
+	public String getSigFile() {
+		return sigFile;
+	}
+
+	public void setSigFile(String sigFile) {
+		this.sigFile = sigFile;
+	}
+
+	public String getSigGravity() {
+		return sigGravity;
+	}
+
+	public void setSigGravity(String sigGravity) {
+		this.sigGravity = sigGravity;
+	}
+
+	public String getSigGeometry() {
+		return sigGeometry;
+	}
+
+	public void setSigGeometry(String sigGeometry) {
+		this.sigGeometry = sigGeometry;
+	}
+
+	public String getSigResize() {
+		return sigResize;
+	}
+
+	public void setSigResize(String sigResize) {
+		this.sigResize = sigResize;
 	}
 	
 	

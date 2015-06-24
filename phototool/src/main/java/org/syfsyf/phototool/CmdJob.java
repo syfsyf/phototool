@@ -24,6 +24,10 @@ public class CmdJob extends AbstractJob {
 		} catch (Exception ex) {
 			setError(ex.getMessage());
 		}		
-		setDone(true);
+		setDone(true);		
+	}
+	@Override
+	public String toString() {		
+		return "CmdJob:"+cmd;
 	}
 }
