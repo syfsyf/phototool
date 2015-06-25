@@ -6,38 +6,24 @@ import java.beans.PropertyChangeSupport;
 
 public class ViewModel {
 
-	private boolean resize = true;
-
-	private int resizeWidth = 1300;
-
-	private boolean border = false;
-
-	private int borderSize;
-
-	private Color borderColor = Color.black;
-
+	private boolean addSignature = true;
 	private boolean autolevel = false;
-
-	private String outDirLabel = "test";
-	
-	
-	private boolean addSignature=true;
-	private String sigFile;
-	private String sigGravity = "SouthWest";
-	private String sigGeometry = "+20+20";
-	private String sigResize = "x10";
-	
-	 
-	
-
-	private String progressLabel;
-	private String errorLabel;
+	private boolean border = false;
+	private Color borderColor = Color.black;
+	private int borderSize;
 	private String dirLabel;
+	private String errorLabel;
 	private String numOfFiles;
-
+	private String outDirLabel = "test";
+	private String progressLabel;
 	private int progressValue;
-
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+	private boolean resize = true;
+	private int resizeWidth = 1300;
+	private String sigFile;
+	private String sigGeometry = "+20+20";
+	private String sigGravity = "SouthWest";
+	private String sigResize = "x10";
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
@@ -55,8 +41,52 @@ public class ViewModel {
 		return this.borderSize;
 	}
 
+	public String getDirLabel() {
+		return this.dirLabel;
+	}
+
+	public String getErrorLabel() {
+		return this.errorLabel;
+	}
+
+	public String getNumOfFiles() {
+		return this.numOfFiles;
+	}
+
+	public String getOutDirLabel() {
+		return outDirLabel;
+	}
+
+	public String getProgressLabel() {
+		return this.progressLabel;
+	}
+
+	public int getProgressValue() {
+		return this.progressValue;
+	}
+
 	public int getResizeWidth() {
 		return this.resizeWidth;
+	}
+
+	public String getSigFile() {
+		return sigFile;
+	}
+
+	public String getSigGeometry() {
+		return sigGeometry;
+	}
+
+	public String getSigGravity() {
+		return sigGravity;
+	}
+
+	public String getSigResize() {
+		return sigResize;
+	}
+
+	public boolean isAddSignature() {
+		return addSignature;
 	}
 
 	public boolean isAutolevel() {
@@ -77,6 +107,10 @@ public class ViewModel {
 
 	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(propertyName, listener);
+	}
+
+	public void setAddSignature(boolean addSignature) {
+		this.addSignature = addSignature;
 	}
 
 	public void setAutolevel(boolean autolevel) {
@@ -103,20 +137,22 @@ public class ViewModel {
 		propertyChangeSupport.firePropertyChange("borderSize", borderSizeOld, borderSize);
 	}
 
-	public void setResize(boolean resize) {
-		boolean resizeOld = this.resize;
-		this.resize = resize;
-		propertyChangeSupport.firePropertyChange("resize", resizeOld, resize);
+	public void setDirLabel(String dirLabel) {
+		String dirLabelOld = this.dirLabel;
+		this.dirLabel = dirLabel;
+		propertyChangeSupport.firePropertyChange("dirLabel", dirLabelOld, dirLabel);
 	}
 
-	public void setResizeWidth(int resizeWidth) {
-		int resizeWidthOld = this.resizeWidth;
-		this.resizeWidth = resizeWidth;
-		propertyChangeSupport.firePropertyChange("resizeWidth", resizeWidthOld, resizeWidth);
+	public void setErrorLabel(String errorLabel) {
+		String errorLabelOld = this.errorLabel;
+		this.errorLabel = errorLabel;
+		propertyChangeSupport.firePropertyChange("errorLabel", errorLabelOld, errorLabel);
 	}
 
-	public String getOutDirLabel() {
-		return outDirLabel;
+	public void setNumOfFiles(String numOfFiles) {
+		String numOfFilesOld = this.numOfFiles;
+		this.numOfFiles = numOfFiles;
+		propertyChangeSupport.firePropertyChange("numOfFiles", numOfFilesOld, numOfFiles);
 	}
 
 	public void setOutDirLabel(String outDirLabel) {
@@ -131,90 +167,38 @@ public class ViewModel {
 		propertyChangeSupport.firePropertyChange("progressLabel", progressLabelOld, progressLabel);
 	}
 
-	public String getProgressLabel() {
-		return this.progressLabel;
-	}
-
-	public void setErrorLabel(String errorLabel) {
-		String errorLabelOld = this.errorLabel;
-		this.errorLabel = errorLabel;
-		propertyChangeSupport.firePropertyChange("errorLabel", errorLabelOld, errorLabel);
-	}
-
-	public String getErrorLabel() {
-		return this.errorLabel;
-	}
-
-	public void setDirLabel(String dirLabel) {
-		String dirLabelOld = this.dirLabel;
-		this.dirLabel = dirLabel;
-		propertyChangeSupport.firePropertyChange("dirLabel", dirLabelOld, dirLabel);
-	}
-
-	public String getDirLabel() {
-		return this.dirLabel;
-	}
-
-	public void setNumOfFiles(String numOfFiles) {
-		String numOfFilesOld = this.numOfFiles;
-		this.numOfFiles = numOfFiles;
-		propertyChangeSupport.firePropertyChange("numOfFiles", numOfFilesOld, numOfFiles);
-	}
-
-	public String getNumOfFiles() {
-		return this.numOfFiles;
-	}
-
 	public void setProgressValue(int progressValue) {
 		int progressValueOld = this.progressValue;
 		this.progressValue = progressValue;
 		propertyChangeSupport.firePropertyChange("progressValue", progressValueOld, progressValue);
 	}
 
-	public int getProgressValue() {
-		return this.progressValue;
+	public void setResize(boolean resize) {
+		boolean resizeOld = this.resize;
+		this.resize = resize;
+		propertyChangeSupport.firePropertyChange("resize", resizeOld, resize);
 	}
 
-	public boolean isAddSignature() {
-		return addSignature;
-	}
-
-	public void setAddSignature(boolean addSignature) {
-		this.addSignature = addSignature;
-	}
-
-	public String getSigFile() {
-		return sigFile;
+	public void setResizeWidth(int resizeWidth) {
+		int resizeWidthOld = this.resizeWidth;
+		this.resizeWidth = resizeWidth;
+		propertyChangeSupport.firePropertyChange("resizeWidth", resizeWidthOld, resizeWidth);
 	}
 
 	public void setSigFile(String sigFile) {
 		this.sigFile = sigFile;
 	}
 
-	public String getSigGravity() {
-		return sigGravity;
+	public void setSigGeometry(String sigGeometry) {
+		this.sigGeometry = sigGeometry;
 	}
 
 	public void setSigGravity(String sigGravity) {
 		this.sigGravity = sigGravity;
 	}
 
-	public String getSigGeometry() {
-		return sigGeometry;
-	}
-
-	public void setSigGeometry(String sigGeometry) {
-		this.sigGeometry = sigGeometry;
-	}
-
-	public String getSigResize() {
-		return sigResize;
-	}
-
 	public void setSigResize(String sigResize) {
 		this.sigResize = sigResize;
 	}
-	
-	
 
 }

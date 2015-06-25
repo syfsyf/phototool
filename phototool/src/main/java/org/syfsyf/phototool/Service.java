@@ -120,19 +120,32 @@ public class Service {
 		viewModel.setResizeWidth(profile.getResizeWidth());
 		viewModel.setDirLabel(dataModel.getCwd().getAbsolutePath());
 		viewModel.setNumOfFiles("" + dataModel.getFiles().size());
+		viewModel.setAddSignature(profile.isAddSignature());
+		viewModel.setSigFile(profile.getSigFile());
+		viewModel.setSigGeometry(profile.getSigGeometry());
+		viewModel.setSigGravity(profile.getSigGravity());
+		viewModel.setSigResize(profile.getSigResize());
+		
+		//viewModel.setAddSignature(dataModel.get);
 
 	}
 
 	public void writeToDataModel(DataModel dataModel, ViewModel viewModel) {
 
 		Profile profile = dataModel.getProfile();
+		
 		profile.setAutolevel(viewModel.isAutolevel());
 		profile.setBorder(viewModel.isBorder());
 		profile.setBorderColor(viewModel.getBorderColor());
 		profile.setBorderSize(viewModel.getBorderSize());
 		profile.setResize(viewModel.isResize());
 		profile.setResizeWidth(viewModel.getResizeWidth());
-
+		profile.setAddSignature(viewModel.isAddSignature());
+		profile.setSigFile(viewModel.getSigFile());
+		profile.setSigGeometry(viewModel.getSigGeometry());
+		profile.setSigGravity(viewModel.getSigGravity());
+		profile.setSigResize(viewModel.getSigResize());
+		
 	}
 
 	public String computeOutDir(DataModel model) {

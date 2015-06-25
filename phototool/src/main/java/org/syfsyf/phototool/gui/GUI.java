@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
+import com.jgoodies.forms.layout.FormSpecs;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
@@ -21,7 +23,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.text.NumberFormatter;
 
-import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
@@ -33,6 +34,7 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.Color;
 import javax.swing.JSpinner;
 import java.awt.Dimension;
+import javax.swing.JTextField;
 
 public class GUI {
 
@@ -63,6 +65,14 @@ public class GUI {
 	private ViewModel viewModel;
 	private JPanel panel_4;
 	private JCheckBox chckbxDodajPodpis;
+	private JLabel lblNewLabel_2;
+	private JTextField sigFile;
+	private JLabel lblNewLabel_3;
+	private JTextField sigGravity;
+	private JLabel lblNewLabel_4;
+	private JTextField sigGeometry;
+	private JLabel lblNewLabel_5;
+	private JTextField sigResize;
 
 	/**
 	 * Launch the application.
@@ -100,7 +110,7 @@ public class GUI {
 	private void initialize() {
 		frmPhotoTool = new JFrame();
 		frmPhotoTool.setTitle("Photo Tool");
-		frmPhotoTool.setBounds(100, 100, 749, 306);
+		frmPhotoTool.setBounds(100, 100, 736, 464);
 		frmPhotoTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -117,13 +127,31 @@ public class GUI {
 		});
 		mnOProgramie.add(mntmOProgramie);
 		frmPhotoTool.getContentPane().setLayout(
-				new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-						ColumnSpec.decode("default:grow"), FormFactory.RELATED_GAP_COLSPEC, }, new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, }));
+				new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("fill:default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lblNewLabel = new JLabel("Katalog");
 		frmPhotoTool.getContentPane().add(lblNewLabel, "2, 2");
@@ -138,13 +166,14 @@ public class GUI {
 		frmPhotoTool.getContentPane().add(numOfFileLabel, "4, 4");
 
 		optionsPanel = new JPanel();
-		frmPhotoTool.getContentPane().add(optionsPanel, "4, 6, left, top");
-		optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		frmPhotoTool.getContentPane().add(optionsPanel, "4, 6, left, fill");
+		FlowLayout fl_optionsPanel = new FlowLayout(FlowLayout.LEFT, 5, 5);
+		optionsPanel.setLayout(fl_optionsPanel);
 
 		panel_3 = new JPanel();
 		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		optionsPanel.add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_3.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		resizeCheckBox = new JCheckBox("resizować?");
 		resizeCheckBox.setSelected(true);
@@ -160,7 +189,7 @@ public class GUI {
 		panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		optionsPanel.add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		borderCheckBox = new JCheckBox("ramka?");
 		borderCheckBox.setSelected(true);
@@ -181,24 +210,65 @@ public class GUI {
 		panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		optionsPanel.add(panel_1);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		autoLevelCheckBox = new JCheckBox("autoLevel?");
 		autoLevelCheckBox.setSelected(true);
 		panel_1.add(autoLevelCheckBox);
 		
 		panel_4 = new JPanel();
+		panel_4.setPreferredSize(new Dimension(500, 160));
 		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		optionsPanel.add(panel_4);
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
-				com.jgoodies.forms.layout.FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("87px"),},
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.PREF_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("pref:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,},
 			new RowSpec[] {
-				com.jgoodies.forms.layout.FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"),}));
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,}));
 		
 		chckbxDodajPodpis = new JCheckBox("dodaj podpis");
 		panel_4.add(chckbxDodajPodpis, "2, 2, left, top");
+		
+		lblNewLabel_2 = new JLabel("Plik z podpisem");
+		panel_4.add(lblNewLabel_2, "2, 4, right, default");
+		
+		sigFile = new JTextField();
+		panel_4.add(sigFile, "4, 4, fill, default");
+		sigFile.setColumns(10);
+		
+		lblNewLabel_3 = new JLabel("gravity");
+		panel_4.add(lblNewLabel_3, "2, 6, right, default");
+		
+		sigGravity = new JTextField();
+		panel_4.add(sigGravity, "4, 6, fill, default");
+		sigGravity.setColumns(10);
+		
+		lblNewLabel_4 = new JLabel("geometry");
+		panel_4.add(lblNewLabel_4, "2, 8, right, default");
+		
+		sigGeometry = new JTextField();
+		panel_4.add(sigGeometry, "4, 8, fill, default");
+		sigGeometry.setColumns(10);
+		
+		lblNewLabel_5 = new JLabel("resize");
+		panel_4.add(lblNewLabel_5, "2, 10, right, default");
+		
+		sigResize = new JTextField();
+		panel_4.add(sigResize, "4, 10, fill, default");
+		sigResize.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Out");
 		frmPhotoTool.getContentPane().add(lblNewLabel_1, "2, 8");
@@ -309,6 +379,21 @@ public class GUI {
 			}
 		}
 	}
+	public JTextField getSigFile() {
+		return sigFile;
+	}
+	public JTextField getSigGravity() {
+		return sigGravity;
+	}
+	public JTextField getSigGeometry() {
+		return sigGeometry;
+	}
+	public JTextField getSigResize() {
+		return sigResize;
+	}
+	public JCheckBox getChckbxDodajPodpis() {
+		return chckbxDodajPodpis;
+	}
 	protected BindingGroup initDataBindings() {
 		BeanProperty<ViewModel, Boolean> viewModelBeanProperty = BeanProperty.create("autolevel");
 		BeanProperty<JCheckBox, Boolean> jCheckBoxBeanProperty = BeanProperty.create("selected");
@@ -376,6 +461,30 @@ public class GUI {
 		AutoBinding<ViewModel, String, JProgressBar, Integer> autoBinding_14 = Bindings.createAutoBinding(UpdateStrategy.READ_ONCE, viewModel, viewModelBeanProperty_10, progressBar, jProgressBarBeanProperty_1);
 		autoBinding_14.bind();
 		//
+		BeanProperty<ViewModel, Boolean> viewModelBeanProperty_12 = BeanProperty.create("addSignature");
+		AutoBinding<ViewModel, Boolean, JCheckBox, Boolean> autoBinding_15 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_12, chckbxDodajPodpis, jCheckBoxBeanProperty);
+		autoBinding_15.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_13 = BeanProperty.create("sigFile");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<ViewModel, String, JTextField, String> autoBinding_16 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_13, sigFile, jTextFieldBeanProperty);
+		autoBinding_16.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_14 = BeanProperty.create("sigGravity");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
+		AutoBinding<ViewModel, String, JTextField, String> autoBinding_17 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_14, sigGravity, jTextFieldBeanProperty_1);
+		autoBinding_17.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_15 = BeanProperty.create("sigGeometry");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_2 = BeanProperty.create("text");
+		AutoBinding<ViewModel, String, JTextField, String> autoBinding_18 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_15, sigGeometry, jTextFieldBeanProperty_2);
+		autoBinding_18.bind();
+		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_16 = BeanProperty.create("sigResize");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_3 = BeanProperty.create("text");
+		AutoBinding<ViewModel, String, JTextField, String> autoBinding_19 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_16, sigResize, jTextFieldBeanProperty_3);
+		autoBinding_19.bind();
+		//
 		BindingGroup bindingGroup = new BindingGroup();
 		//
 		bindingGroup.addBinding(autoBinding);
@@ -393,6 +502,11 @@ public class GUI {
 		bindingGroup.addBinding(autoBinding_12);
 		bindingGroup.addBinding(autoBinding_13);
 		bindingGroup.addBinding(autoBinding_14);
+		bindingGroup.addBinding(autoBinding_15);
+		bindingGroup.addBinding(autoBinding_16);
+		bindingGroup.addBinding(autoBinding_17);
+		bindingGroup.addBinding(autoBinding_18);
+		bindingGroup.addBinding(autoBinding_19);
 		return bindingGroup;
 	}
 }
