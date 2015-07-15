@@ -125,6 +125,7 @@ public class Service {
 		viewModel.setSigGeometry(profile.getSigGeometry());
 		viewModel.setSigGravity(profile.getSigGravity());
 		viewModel.setSigResize(profile.getSigResize());
+		viewModel.setCustomParams(profile.getCustomParams());
 		
 		//viewModel.setAddSignature(dataModel.get);
 
@@ -145,6 +146,7 @@ public class Service {
 		profile.setSigGeometry(viewModel.getSigGeometry());
 		profile.setSigGravity(viewModel.getSigGravity());
 		profile.setSigResize(viewModel.getSigResize());
+		profile.setCustomParams(viewModel.getCustomParams());
 		
 	}
 
@@ -208,6 +210,11 @@ public class Service {
 			if (profile.isAutolevel()) {
 				builder.append(" -auto-level");
 			}
+			
+			if(profile.getCustomParams()!=null && !"".equals(profile.getCustomParams())){
+				builder.append(" "+profile.getCustomParams()+" ");
+			}
+			
 			File outFile = new File(outDir, f.getName());
 			builder.append(" \"" + outFile.getAbsolutePath() + "\"");
 			LOGGER.info("cmd:" + builder.toString());

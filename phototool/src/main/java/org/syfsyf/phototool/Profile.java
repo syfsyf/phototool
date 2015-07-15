@@ -21,6 +21,7 @@ public class Profile {
 	private String sigGravity = "SouthWest";
 	private String sigGeometry = "+20+20";
 	private String sigResize = "x10";
+	private String customParams="-quality  100%";
 
 	public Color getBorderColor() {
 		return borderColor;
@@ -118,4 +119,14 @@ public class Profile {
 		this.sigResize = sigResize;
 	}
 
+	public String getCustomParams() {
+		return customParams;
+	}
+
+	public void setCustomParams(String customParams) {
+		this.customParams = customParams;
+	}
+	
+	
+	
 }

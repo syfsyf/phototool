@@ -24,6 +24,7 @@ public class ViewModel {
 	private String sigGeometry = "+20+20";
 	private String sigGravity = "SouthWest";
 	private String sigResize = "x10";
+	private String customParams="";
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
@@ -200,5 +201,14 @@ public class ViewModel {
 	public void setSigResize(String sigResize) {
 		this.sigResize = sigResize;
 	}
+
+	public String getCustomParams() {
+		return customParams;
+	}
+
+	public void setCustomParams(String customParams) {
+		this.customParams = customParams;
+	}
+	
 
 }

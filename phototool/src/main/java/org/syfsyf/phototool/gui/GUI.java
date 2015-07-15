@@ -73,6 +73,9 @@ public class GUI {
 	private JTextField sigGeometry;
 	private JLabel lblNewLabel_5;
 	private JTextField sigResize;
+	private JPanel panel;
+	private JLabel lblDodatkoweParametry;
+	private JTextField customParams;
 
 	/**
 	 * Launch the application.
@@ -110,7 +113,7 @@ public class GUI {
 	private void initialize() {
 		frmPhotoTool = new JFrame();
 		frmPhotoTool.setTitle("Photo Tool");
-		frmPhotoTool.setBounds(100, 100, 736, 464);
+		frmPhotoTool.setBounds(100, 100, 879, 512);
 		frmPhotoTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -269,6 +272,25 @@ public class GUI {
 		sigResize = new JTextField();
 		panel_4.add(sigResize, "4, 10, fill, default");
 		sigResize.setColumns(10);
+		
+		panel = new JPanel();
+		panel.setPreferredSize(new Dimension(500, 50));
+		optionsPanel.add(panel);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		lblDodatkoweParametry = new JLabel("Dodatkowe parametry");
+		panel.add(lblDodatkoweParametry, "2, 2, right, default");
+		
+		customParams = new JTextField();
+		panel.add(customParams, "4, 2, fill, default");
+		customParams.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Out");
 		frmPhotoTool.getContentPane().add(lblNewLabel_1, "2, 8");
@@ -485,6 +507,11 @@ public class GUI {
 		AutoBinding<ViewModel, String, JTextField, String> autoBinding_19 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_16, sigResize, jTextFieldBeanProperty_3);
 		autoBinding_19.bind();
 		//
+		BeanProperty<ViewModel, String> viewModelBeanProperty_17 = BeanProperty.create("customParams");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_4 = BeanProperty.create("text");
+		AutoBinding<ViewModel, String, JTextField, String> autoBinding_20 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, viewModel, viewModelBeanProperty_17, customParams, jTextFieldBeanProperty_4);
+		autoBinding_20.bind();
+		//
 		BindingGroup bindingGroup = new BindingGroup();
 		//
 		bindingGroup.addBinding(autoBinding);
@@ -507,6 +534,7 @@ public class GUI {
 		bindingGroup.addBinding(autoBinding_17);
 		bindingGroup.addBinding(autoBinding_18);
 		bindingGroup.addBinding(autoBinding_19);
+		bindingGroup.addBinding(autoBinding_20);
 		return bindingGroup;
 	}
 }
