@@ -18,15 +18,34 @@ import org.syfsyf.phototool.gui.ViewModel;
 
 import com.thoughtworks.xstream.XStream;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Phototool.
+ */
 public class Phototool {
 
+	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(Phototool.class);
+	
+	/** The data model. */
 	private DataModel dataModel;
+	
+	/** The service. */
 	private Service service=new Service();
+	
+	/** The cwd. */
 	private File cwd;
+	
+	/** The out dir. */
 	private File outDir;
+	
+	/** The files. */
 	private List<File> files;
+	
+	/** The jobs. */
 	private List<Job> jobs = new ArrayList<>();
+	
+	/** The Constant X_STREAM. */
 	private static final XStream X_STREAM;
 	static {
 		X_STREAM = new XStream();
@@ -34,9 +53,18 @@ public class Phototool {
 		X_STREAM.processAnnotations(new Class[] { Profile.class });
 	}
 
+	/** The gui. */
 	private GUI gui;
+	
+	/** The profile. */
 	private Profile profile;
 
+	/**
+	 * Run.
+	 *
+	 * @param args the args
+	 * @throws Exception the exception
+	 */
 	public void run(String[] args) throws Exception {
 		
 		
@@ -49,6 +77,9 @@ public class Phototool {
 		});
 	}
 
+	/**
+	 * Run GUI.
+	 */
 	protected void runGUI() {
 		try {
 			gui = new GUI();
@@ -81,6 +112,9 @@ public class Phototool {
 		}
 	}
 
+	/**
+	 * On go.
+	 */
 	protected void onGo() {
 		
 		//createJobs(profile);
@@ -103,6 +137,11 @@ public class Phototool {
 	
 
 	
+	/**
+	 * Run jobs thread.
+	 *
+	 * @throws InterruptedException the interrupted exception
+	 */
 	public void runJobsThread() throws InterruptedException {
 
 		long start = System.currentTimeMillis();
@@ -146,6 +185,11 @@ public class Phototool {
 	
 	
 
+	/**
+	 * Run jobs.
+	 *
+	 * @throws Exception the exception
+	 */
 	private void runJobs() throws Exception {
 		/*
 		 * for(int i=0;i<5;i++){ jobs.get(i).run(); }

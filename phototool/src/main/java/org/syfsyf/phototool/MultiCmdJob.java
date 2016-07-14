@@ -4,16 +4,31 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultiCmdJob.
+ */
 public class MultiCmdJob extends AbstractJob {
 
+	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(MultiCmdJob.class);
+	
+	/** The cmds. */
 	private List<String> cmds;
 
+	/**
+	 * Instantiates a new multi cmd job.
+	 *
+	 * @param cmds the cmds
+	 */
 	public MultiCmdJob(List<String> cmds) {
 		super();
 		this.cmds = cmds;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		try {
@@ -29,6 +44,10 @@ public class MultiCmdJob extends AbstractJob {
 		}
 		setDone(true);
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder=new StringBuilder();

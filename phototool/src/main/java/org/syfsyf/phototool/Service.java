@@ -17,9 +17,16 @@ import org.syfsyf.phototool.gui.ViewModel;
 
 import com.thoughtworks.xstream.XStream;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Service.
+ */
 public class Service {
 
+	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(Service.class);
+	
+	/** The Constant X_STREAM. */
 	private static final XStream X_STREAM;
 	
 	static {
@@ -29,6 +36,12 @@ public class Service {
 		
 	}
 
+	/**
+	 * Creates the data model.
+	 *
+	 * @return the data model
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public DataModel createDataModel() throws FileNotFoundException {
 		LOGGER.info("creating data model");
 		DataModel dataModel = new DataModel();
@@ -43,14 +56,30 @@ public class Service {
 		return dataModel;
 	}
 
+	/**
+	 * Gets the profile file.
+	 *
+	 * @return the profile file
+	 */
 	private File getProfileFile() {
 		return new File(System.getProperty("user.home") + "/.phototool/profile.xml");
 	}
 	
+	/**
+	 * Gets the config file.
+	 *
+	 * @return the config file
+	 */
 	private File getConfigFile() {
 		return new File(System.getProperty("user.home") + "/.phototool/config.xml");
 	}
 
+	/**
+	 * Load profile.
+	 *
+	 * @return the profile
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	private Profile loadProfile() throws FileNotFoundException {
 
 		Profile profile = null;
@@ -64,6 +93,12 @@ public class Service {
 		return profile;
 	}
 
+	/**
+	 * Save profile.
+	 *
+	 * @param profile the profile
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	private void saveProfile(Profile profile) throws FileNotFoundException {
 
 		File file = getProfileFile();
@@ -71,6 +106,12 @@ public class Service {
 		X_STREAM.toXML(profile, new FileOutputStream(getProfileFile()));
 	}
 	
+	/**
+	 * Load config.
+	 *
+	 * @return the config
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	private Config loadConfig() throws FileNotFoundException {
 		
 		Config config = null;
@@ -84,6 +125,12 @@ public class Service {
 		return config;
 	}
 	
+	/**
+	 * Save config.
+	 *
+	 * @param config the config
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	private void saveConfig(Config config) throws FileNotFoundException {
 		
 		File file = getConfigFile();
@@ -91,6 +138,12 @@ public class Service {
 		X_STREAM.toXML(config, new FileOutputStream(getConfigFile()));
 	}
 
+	/**
+	 * Scan files.
+	 *
+	 * @param cwd the cwd
+	 * @return the list
+	 */
 	private List<File> scanFiles(File cwd) {
 		List<File> files = new ArrayList<>();
 
@@ -107,6 +160,12 @@ public class Service {
 		return files;
 	}
 
+	/**
+	 * Write to view model.
+	 *
+	 * @param viewModel the view model
+	 * @param dataModel the data model
+	 */
 	public void writeToViewModel(ViewModel viewModel, DataModel dataModel) {
 
 		Profile profile = dataModel.getProfile();
@@ -131,6 +190,12 @@ public class Service {
 
 	}
 
+	/**
+	 * Write to data model.
+	 *
+	 * @param dataModel the data model
+	 * @param viewModel the view model
+	 */
 	public void writeToDataModel(DataModel dataModel, ViewModel viewModel) {
 
 		Profile profile = dataModel.getProfile();
@@ -150,6 +215,12 @@ public class Service {
 		
 	}
 
+	/**
+	 * Compute out dir.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	public String computeOutDir(DataModel model) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("_out_");
@@ -168,10 +239,21 @@ public class Service {
 
 	}
 
+	/**
+	 * To hex color.
+	 *
+	 * @param color the color
+	 * @return the string
+	 */
 	public static String toHexColor(Color color) {
 		return String.format("\"#%1$02x%2$02x%3$02x\"", color.getRed(), color.getGreen(), color.getBlue());
 	}
 
+	/**
+	 * Creates the jobs.
+	 *
+	 * @param dataModel the data model
+	 */
 	public void createJobs(DataModel dataModel) {
 
 		dataModel.setJobs(new ArrayList<Job>());
@@ -240,6 +322,13 @@ public class Service {
 		}
 	}
 
+	/**
+	 * Process.
+	 *
+	 * @param dataModel the data model
+	 * @param viewModel the view model
+	 * @throws Exception the exception
+	 */
 	public void process(DataModel dataModel, ViewModel viewModel) throws Exception {
 
 		createJobs(dataModel);
@@ -249,6 +338,13 @@ public class Service {
 
 	}
 
+	/**
+	 * Run jobs.
+	 *
+	 * @param dataModel the data model
+	 * @param viewModel the view model
+	 * @throws InterruptedException the interrupted exception
+	 */
 	private void runJobs(DataModel dataModel, ViewModel viewModel) throws InterruptedException {
 		long start = System.currentTimeMillis();
 		ExecutorService executor = Executors.newFixedThreadPool(8);
@@ -273,6 +369,12 @@ public class Service {
 
 	}
 
+	/**
+	 * Gui update.
+	 *
+	 * @param dataModel the data model
+	 * @param viewModel the view model
+	 */
 	private void guiUpdate(DataModel dataModel, ViewModel viewModel) {
 
 		int count = 0;
@@ -294,6 +396,14 @@ public class Service {
 		// gui.getErrorLabel().setText("Błędów:" + errors);
 
 	}
+	
+	/**
+	 * Identify.
+	 *
+	 * @param file the file
+	 * @param identifyFullPath the identify full path
+	 * @return the IM identify
+	 */
 	public static IMIdentify identify(File file,String identifyFullPath){
 		
 		IMIdentify identify=new IMIdentify();
