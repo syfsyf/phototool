@@ -77,7 +77,11 @@ public class GUI {
 	private JLabel lblDodatkoweParametry;
 	private JTextField customParams;
 	private JPanel geoTagsPanel;
-	private JCheckBox addGeoTagOption;
+	private JCheckBox addGeoTagCheckBox;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -276,21 +280,41 @@ public class GUI {
 		sigResize.setColumns(10);
 		
 		geoTagsPanel = new JPanel();
-		geoTagsPanel.setPreferredSize(new Dimension(500, 60));
+		geoTagsPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		geoTagsPanel.setPreferredSize(new Dimension(500, 120));
 		optionsPanel.add(geoTagsPanel);
 		geoTagsPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
+				FormSpecs.PREF_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("fill:default"),}));
 		
-		addGeoTagOption = new JCheckBox("dodać geo tag?");
-		geoTagsPanel.add(addGeoTagOption, "2, 2");
+		addGeoTagCheckBox = new JCheckBox("dodać geo tag?");
+		geoTagsPanel.add(addGeoTagCheckBox, "2, 2");
+		
+		lblNewLabel_6 = new JLabel("New label");
+		geoTagsPanel.add(lblNewLabel_6, "2, 4, right, default");
+		
+		textField_2 = new JTextField();
+		geoTagsPanel.add(textField_2, "4, 4, fill, default");
+		textField_2.setColumns(15);
+		
+		lblNewLabel_7 = new JLabel("New label");
+		geoTagsPanel.add(lblNewLabel_7, "2, 6, right, default");
+		
+		textField_3 = new JTextField();
+		geoTagsPanel.add(textField_3, "4, 6, fill, default");
+		textField_3.setColumns(10);
 		
 		additionalParametersPanel = new JPanel();
+		additionalParametersPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		additionalParametersPanel.setPreferredSize(new Dimension(500, 50));
 		optionsPanel.add(additionalParametersPanel);
 		additionalParametersPanel.setLayout(new FormLayout(new ColumnSpec[] {
