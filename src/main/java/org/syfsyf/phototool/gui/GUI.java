@@ -73,9 +73,11 @@ public class GUI {
 	private JTextField sigGeometry;
 	private JLabel lblNewLabel_5;
 	private JTextField sigResize;
-	private JPanel panel;
+	private JPanel additionalParametersPanel;
 	private JLabel lblDodatkoweParametry;
 	private JTextField customParams;
+	private JPanel geoTagsPanel;
+	private JCheckBox addGeoTagOption;
 
 	/**
 	 * Launch the application.
@@ -113,7 +115,7 @@ public class GUI {
 	private void initialize() {
 		frmPhotoTool = new JFrame();
 		frmPhotoTool.setTitle("Photo Tool");
-		frmPhotoTool.setBounds(100, 100, 879, 512);
+		frmPhotoTool.setBounds(100, 100, 879, 663);
 		frmPhotoTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -273,10 +275,25 @@ public class GUI {
 		panel_4.add(sigResize, "4, 10, fill, default");
 		sigResize.setColumns(10);
 		
-		panel = new JPanel();
-		panel.setPreferredSize(new Dimension(500, 50));
-		optionsPanel.add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
+		geoTagsPanel = new JPanel();
+		geoTagsPanel.setPreferredSize(new Dimension(500, 60));
+		optionsPanel.add(geoTagsPanel);
+		geoTagsPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		addGeoTagOption = new JCheckBox("dodać geo tag?");
+		geoTagsPanel.add(addGeoTagOption, "2, 2");
+		
+		additionalParametersPanel = new JPanel();
+		additionalParametersPanel.setPreferredSize(new Dimension(500, 50));
+		optionsPanel.add(additionalParametersPanel);
+		additionalParametersPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -286,10 +303,10 @@ public class GUI {
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		lblDodatkoweParametry = new JLabel("Dodatkowe parametry");
-		panel.add(lblDodatkoweParametry, "2, 2, right, default");
+		additionalParametersPanel.add(lblDodatkoweParametry, "2, 2, right, default");
 		
 		customParams = new JTextField();
-		panel.add(customParams, "4, 2, fill, default");
+		additionalParametersPanel.add(customParams, "4, 2, fill, default");
 		customParams.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Out");
