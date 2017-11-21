@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 /**
  * The Class Execution.
  */
-class Execution {
+public class Execution {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(Execution.class);

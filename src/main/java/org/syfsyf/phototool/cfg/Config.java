@@ -19,6 +19,8 @@ public class Config {
 	/** The img magic identify. */
 	private String imgMagicIdentify="d:\\progs\\ImageMagick-6.9.0-Q16\\identify.exe";
 	
+	private String chromeExe="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+	
 	/**
 	 * Gets the img magic composite.
 	 *
@@ -73,10 +75,13 @@ public class Config {
 		this.imgMagicIdentify = imgMagicIdentify;
 	}
 	
-	
-	
-	
-
+		
+	public String getChromeExe() {
+		return chromeExe;
+	}
+	public void setChromeExe(String chromeExe) {
+		this.chromeExe = chromeExe;
+	}
 	
 	
 	

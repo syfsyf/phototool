@@ -33,39 +33,17 @@ public class Phototool {
 	private DataModel dataModel;
 	
 	/** The service. */
+	@Inject
 	private Service service;
-	
-	/** The cwd. */
-	private File cwd;
-	
-	/** The out dir. */
-	private File outDir;
-	
-	/** The files. */
-	private List<File> files;
 	
 	/** The jobs. */
 	private List<Job> jobs = new ArrayList<>();
 	
-	/** The Constant X_STREAM. */
-	private static final XStream X_STREAM;
-	static {
-		X_STREAM = new XStream();
-		X_STREAM.autodetectAnnotations(true);
-		X_STREAM.processAnnotations(new Class[] { Profile.class });
-	}
-
+	
 	/** The gui. */
-	private GUI gui;
-	
-	/** The profile. */
-	private Profile profile;
-	
 	@Inject
-	public void setService(Service service) {
-		this.service = service;
-	}
-
+	private GUI gui;
+		
 	/**
 	 * Run.
 	 *
@@ -75,7 +53,7 @@ public class Phototool {
 	public void run(String[] args) throws Exception {
 		
 		
-		dataModel=service.createDataModel();
+		dataModel=getService().createDataModel();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -88,8 +66,7 @@ public class Phototool {
 	 * Run GUI.
 	 */
 	protected void runGUI() {
-		try {
-			gui = new GUI();
+		try {			
 			gui.getRunButton().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -97,7 +74,7 @@ public class Phototool {
 				}
 			});
 			final ViewModel model = new ViewModel();			
-			service.writeToViewModel(model,dataModel);			
+			getService().writeToViewModel(model,dataModel);			
 			gui.setViewModel(model);
 			
 			model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -105,8 +82,8 @@ public class Phototool {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					LOGGER.debug("property changed!"+evt);
-					service.writeToDataModel(dataModel, model);
-					String outDirLabel=service.computeOutDir(dataModel);
+					getService().writeToDataModel(dataModel, model);
+					String outDirLabel=getService().computeOutDir(dataModel);
 					model.setOutDirLabel(outDirLabel);
 					
 				}
@@ -130,8 +107,8 @@ public class Phototool {
 			public void run() {
 				try {
 					ViewModel viewModel=gui.getViewModel();					
-					service.writeToDataModel(dataModel,viewModel);
-					service.process(dataModel, viewModel);
+					getService().writeToDataModel(dataModel,viewModel);
+					getService().process(dataModel, viewModel);
 					gui.getRunButton().setEnabled(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -189,26 +166,8 @@ public class Phototool {
 
 	}
 
-	
-	
-
-	/**
-	 * Run jobs.
-	 *
-	 * @throws Exception the exception
-	 */
-	private void runJobs() throws Exception {
-		/*
-		 * for(int i=0;i<5;i++){ jobs.get(i).run(); }
-		 */
-		long start = System.currentTimeMillis();
-		for (Job j : jobs) {
-			j.run();
-		}
-		long t = System.currentTimeMillis() - start;
-		LOGGER.info("EXEC TIME:" + t);
-		// EXEC TIME:55346
-
+	private Service getService() {
+		return service;
 	}
 
 	

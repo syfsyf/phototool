@@ -30,6 +30,10 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.Bindings;
+import org.picocontainer.annotations.Inject;
+import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.cfg.GeoPoints;
+import org.syfsyf.phototool.webgui.GeoPointsService;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import java.awt.Color;
 import javax.swing.JSpinner;
@@ -82,6 +86,13 @@ public class GUI {
 	private JLabel lblNewLabel_7;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JButton btnNewButton;
+	
+	@Inject
+	private GeoPointsService geoPointsService;
+	
+	@Inject	
+	private ConfigService configService;
 
 	/**
 	 * Launch the application.
@@ -287,7 +298,9 @@ public class GUI {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.PREF_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,},
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -312,6 +325,22 @@ public class GUI {
 		textField_3 = new JTextField();
 		geoTagsPanel.add(textField_3, "4, 6, fill, default");
 		textField_3.setColumns(10);
+		
+		btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+				GeoPoints geoPoints = configService.loadGeoPoints();
+				geoPointsService.manage(geoPoints);
+				}
+				catch (Exception ex) {
+					ex.printStackTrace();
+					throw new RuntimeException(ex);
+				}
+			}
+		});
+		geoTagsPanel.add(btnNewButton, "6, 6");
 		
 		additionalParametersPanel = new JPanel();
 		additionalParametersPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));

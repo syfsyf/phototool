@@ -13,8 +13,8 @@ public class Profile {
 		 
 
 	private boolean geoTag=false;
-	private String lat;
-	private String lng;
+	private GeoPoint geoPoint;
+	
 	
 	/** The autolevel. */
 	private boolean autolevel = false;
@@ -297,22 +297,10 @@ public class Profile {
 		this.geoTag = geoTag;
 	}
 
-	public String getLat() {
-		return lat;
+	public GeoPoint getGeoPoint() {
+		return geoPoint;
 	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getLng() {
-		return lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-	
-	
-	
+	public void setGeoPoint(GeoPoint geoPoint) {
+		this.geoPoint = geoPoint;
+	}	
 }

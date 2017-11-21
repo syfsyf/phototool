@@ -6,16 +6,16 @@ import java.io.FileOutputStream;
 
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.cfg.GeoPoint;
+import org.syfsyf.phototool.cfg.GeoPoints;
 import org.syfsyf.phototool.cfg.Profile;
 
 import com.thoughtworks.xstream.XStream;
 
 public class ConfigServiceImpl implements ConfigService{
-	
-			
+				
 	private XStream xstream;
-	
-	
+		
 	public ConfigServiceImpl() {
 		xstream=createXStream();
 	}
@@ -89,6 +89,37 @@ public class ConfigServiceImpl implements ConfigService{
 	 */
 	private File getConfigFile() {
 		return new File(System.getProperty("user.home") + "/.phototool/config.xml");
+	}
+
+	@Override
+	public GeoPoints loadGeoPoints() throws FileNotFoundException {
+		GeoPoints geoPoints = null;
+		File file = getGeoPointsFile();
+		if (!file.exists()) {
+			geoPoints = new GeoPoints();
+			GeoPoint point=new GeoPoint();
+			point.setName("Gromady");
+			point.setLat(50.014714);
+			point.setLng(19.96059600000001);
+			geoPoints.getGeoPoints().add(point);
+			saveGeoPoints(geoPoints);
+		} else {
+			geoPoints = (GeoPoints) getXstream().fromXML(file);
+		}
+		return geoPoints;
+	}
+
+	@Override
+	public void saveGeoPoints(GeoPoints geoPoints) throws FileNotFoundException {
+		
+		File file = getGeoPointsFile();
+		file.getParentFile().mkdirs();
+		getXstream().toXML(geoPoints, new FileOutputStream(getGeoPointsFile()));
+		
+	}
+
+	private File getGeoPointsFile() {
+		return new File(System.getProperty("user.home") + "/.phototool/geopoints.xml");
 	}
 
 }

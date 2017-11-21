@@ -10,6 +10,9 @@ public interface ConfigService {
 	Profile loadProfile() throws FileNotFoundException;
 	void saveProfile(Profile profile) throws FileNotFoundException;
 	
+	GeoPoints loadGeoPoints() throws FileNotFoundException;
+	void saveGeoPoints(GeoPoints geoPoints) throws FileNotFoundException;
+	
 	
 
 }
