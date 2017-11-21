@@ -1,4 +1,4 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.cfg;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 

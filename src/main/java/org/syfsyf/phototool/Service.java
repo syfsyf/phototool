@@ -3,7 +3,6 @@ package org.syfsyf.phototool;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+import org.picocontainer.annotations.Inject;
+import org.syfsyf.phototool.cfg.Config;
+import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.ViewModel;
-
-import com.thoughtworks.xstream.XStream;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -25,16 +26,9 @@ public class Service {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(Service.class);
-	
-	/** The Constant X_STREAM. */
-	private static final XStream X_STREAM;
-	
-	static {
-		X_STREAM = new XStream();
-		X_STREAM.autodetectAnnotations(true);
-		X_STREAM.processAnnotations(new Class[] { Profile.class,Config.class });
 		
-	}
+	@Inject
+	private ConfigService configService;
 
 	/**
 	 * Creates the data model.
@@ -47,95 +41,13 @@ public class Service {
 		DataModel dataModel = new DataModel();
 
 		dataModel.setCwd(new File(System.getProperty("user.dir")));
-		dataModel.setProfile(loadProfile());
-		dataModel.setConfig(loadConfig());
+		dataModel.setProfile(configService.loadProfile());
+		dataModel.setConfig(configService.loadConfig());
 		dataModel.setFiles(scanFiles(dataModel.getCwd()));
 
 		LOGGER.info("data model created:" + dataModel);
 
 		return dataModel;
-	}
-
-	/**
-	 * Gets the profile file.
-	 *
-	 * @return the profile file
-	 */
-	private File getProfileFile() {
-		return new File(System.getProperty("user.home") + "/.phototool/profile.xml");
-	}
-	
-	/**
-	 * Gets the config file.
-	 *
-	 * @return the config file
-	 */
-	private File getConfigFile() {
-		return new File(System.getProperty("user.home") + "/.phototool/config.xml");
-	}
-
-	/**
-	 * Load profile.
-	 *
-	 * @return the profile
-	 * @throws FileNotFoundException the file not found exception
-	 */
-	private Profile loadProfile() throws FileNotFoundException {
-
-		Profile profile = null;
-		File file = getProfileFile();
-		if (!file.exists()) {
-			profile = new Profile();
-			saveProfile(profile);
-		} else {
-			profile = (Profile) X_STREAM.fromXML(file);
-		}
-		return profile;
-	}
-
-	/**
-	 * Save profile.
-	 *
-	 * @param profile the profile
-	 * @throws FileNotFoundException the file not found exception
-	 */
-	private void saveProfile(Profile profile) throws FileNotFoundException {
-
-		File file = getProfileFile();
-		file.getParentFile().mkdirs();
-		X_STREAM.toXML(profile, new FileOutputStream(getProfileFile()));
-	}
-	
-	/**
-	 * Load config.
-	 *
-	 * @return the config
-	 * @throws FileNotFoundException the file not found exception
-	 */
-	private Config loadConfig() throws FileNotFoundException {
-		
-		Config config = null;
-		File file = getConfigFile();
-		if (!file.exists()) {
-			config = new Config();
-			saveConfig(config);
-		} else {
-			config = (Config) X_STREAM.fromXML(file);
-		}
-		return config;
-	}
-	
-	/**
-	 * Save config.
-	 *
-	 * @param config the config
-	 * @throws FileNotFoundException the file not found exception
-	 */
-	private void saveConfig(Config config) throws FileNotFoundException {
-		
-		File file = getConfigFile();
-		file.getParentFile().mkdirs();
-		X_STREAM.toXML(config, new FileOutputStream(getConfigFile()));
 	}
 
 	/**
@@ -332,7 +244,7 @@ public class Service {
 	public void process(DataModel dataModel, ViewModel viewModel) throws Exception {
 
 		createJobs(dataModel);
-		saveProfile(dataModel.getProfile());
+		configService.saveProfile(dataModel.getProfile());
 		new File(computeOutDir(dataModel)).mkdirs();
 		runJobs(dataModel, viewModel);
 

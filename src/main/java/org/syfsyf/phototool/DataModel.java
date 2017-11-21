@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.syfsyf.phototool.cfg.Config;
+import org.syfsyf.phototool.cfg.Profile;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class DataModel.

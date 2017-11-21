@@ -13,6 +13,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.picocontainer.annotations.Inject;
+import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.GUI;
 import org.syfsyf.phototool.gui.ViewModel;
 
@@ -31,7 +33,7 @@ public class Phototool {
 	private DataModel dataModel;
 	
 	/** The service. */
-	private Service service=new Service();
+	private Service service;
 	
 	/** The cwd. */
 	private File cwd;
@@ -58,6 +60,11 @@ public class Phototool {
 	
 	/** The profile. */
 	private Profile profile;
+	
+	@Inject
+	public void setService(Service service) {
+		this.service = service;
+	}
 
 	/**
 	 * Run.

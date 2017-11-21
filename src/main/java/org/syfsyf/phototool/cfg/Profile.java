@@ -1,4 +1,4 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.cfg;
 
 import java.awt.Color;
 
@@ -10,7 +10,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("profile")
 public class Profile {
+		 
 
+	private boolean geoTag=false;
+	private String lat;
+	private String lng;
+	
 	/** The autolevel. */
 	private boolean autolevel = false;
 	
@@ -282,6 +287,30 @@ public class Profile {
 	 */
 	public void setCustomParams(String customParams) {
 		this.customParams = customParams;
+	}
+
+	public boolean isGeoTag() {
+		return geoTag;
+	}
+
+	public void setGeoTag(boolean geoTag) {
+		this.geoTag = geoTag;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
 	
 	
