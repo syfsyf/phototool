@@ -102,9 +102,6 @@ public class DataModel {
 		this.profile = profile;
 	}
 
-	
-	
-	
 	/**
 	 * Gets the config.
 	 *

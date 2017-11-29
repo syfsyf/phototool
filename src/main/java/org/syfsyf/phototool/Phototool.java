@@ -17,6 +17,7 @@ import org.picocontainer.annotations.Inject;
 import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.GUI;
 import org.syfsyf.phototool.gui.ViewModel;
+import org.syfsyf.phototool.webgui.WebServer;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -39,6 +40,9 @@ public class Phototool {
 	/** The jobs. */
 	private List<Job> jobs = new ArrayList<>();
 	
+	@Inject
+	WebServer webServer;
+	
 	
 	/** The gui. */
 	@Inject
@@ -52,7 +56,7 @@ public class Phototool {
 	 */
 	public void run(String[] args) throws Exception {
 		
-		
+		/*
 		dataModel=getService().createDataModel();
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -60,6 +64,9 @@ public class Phototool {
 				runGUI();
 			}
 		});
+		*/		
+		webServer.start();
+		
 	}
 
 	/**

@@ -11,15 +11,17 @@ public class Config {
 
 	
 	/** The img magic composite. */
-	private String imgMagicComposite = "d:\\progs\\ImageMagick-6.9.0-Q16\\composite.exe";
+	private String imgMagicComposite = "d:\\progs\\ImageMagick-7.0.7-Q16-HDRI\\composite.exe";
 	
 	/** The img magic convert. */
-	private String imgMagicConvert = "d:\\progs\\ImageMagick-6.9.0-Q16\\convert.exe";
+	private String imgMagicConvert = "d:\\progs\\ImageMagick-7.0.7-Q16-HDRI\\convert.exe";
 
 	/** The img magic identify. */
-	private String imgMagicIdentify="d:\\progs\\ImageMagick-6.9.0-Q16\\identify.exe";
+	private String imgMagicIdentify="d:\\progs\\ImageMagick-7.0.7-Q16-HDRI\\identify.exe";
 	
 	private String chromeExe="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+	
+	private String exiftool="e:\\progs\\exiftool\\exiftool(-k).exe";
 	
 	/**
 	 * Gets the img magic composite.
@@ -83,6 +85,12 @@ public class Config {
 		this.chromeExe = chromeExe;
 	}
 	
+	public String getExiftool() {
+		return exiftool;
+	}
+	public void setExiftool(String exiftool) {
+		this.exiftool = exiftool;
+	}
 	
 	
 
