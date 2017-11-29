@@ -87,9 +87,7 @@ public class GUI {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JButton btnNewButton;
-	
-	@Inject
-	private GeoPointsService geoPointsService;
+		
 	
 	@Inject	
 	private ConfigService configService;
@@ -332,7 +330,7 @@ public class GUI {
 				
 				try {
 				GeoPoints geoPoints = configService.loadGeoPoints();
-				geoPointsService.manage(geoPoints);
+				//geoPointsService.manage(geoPoints);
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();

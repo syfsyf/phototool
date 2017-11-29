@@ -11,6 +11,7 @@ public class WebGui {
 
 	public static void main(String[] args) throws Exception {
 		get("/hello", (req, res) -> {
+			System.out.println( req.ip());
 			// res.header(header, value);
 			return readFile("select.html", "UTF-8");
 		});

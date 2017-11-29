@@ -1,2 +1,5 @@
 /target/
 /test files/
+/webapp/node_modules/
+/webapp/dist/
+/std-lib/
