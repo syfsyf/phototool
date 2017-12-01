@@ -22,10 +22,10 @@ import org.syfsyf.phototool.gui.ViewModel;
 /**
  * The Class Service.
  */
-public class Service {
+public class PhotoolFacade {
 
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(Service.class);
+	private static final Logger LOGGER = Logger.getLogger(PhotoolFacade.class);
 		
 	@Inject
 	private ConfigService configService;

@@ -44,7 +44,7 @@ public class Main {
 		MutablePicoContainer pico=new DefaultPicoContainer();
 		
 		pico.addComponent(ConfigServiceImpl.class);
-		pico.addComponent(Service.class);
+		pico.addComponent(PhotoolFacade.class);
 		pico.addComponent(GUI.class);		
 		pico.addComponent(Phototool.class);
 		pico.addComponent(WebServer.class);

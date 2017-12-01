@@ -35,7 +35,7 @@ public class Phototool {
 	
 	/** The service. */
 	@Inject
-	private Service service;
+	private PhotoolFacade service;
 	
 	/** The jobs. */
 	private List<Job> jobs = new ArrayList<>();
@@ -173,7 +173,7 @@ public class Phototool {
 
 	}
 
-	private Service getService() {
+	private PhotoolFacade getService() {
 		return service;
 	}
 

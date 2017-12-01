@@ -4,20 +4,17 @@ import {track, actions} from 'react-redux-form'
 
 
 const init = {
-	path:'my path',
-	list:['a','b']	
+	jobStart:false	
 }
 
 export default function reducer(state=init, action) {
 	
-  // console.log('state:',state);
-  console.log('action:',action);
-	
   switch(action.type) {
   
-  case ACTION.RECEIVE_PROFILE:
-	  console.log('ACTION.RECEIVE_PROFILE')	  
+  case ACTION.RECEIVE_JOB:	  	 
 	  return {...state,profile:action.payload}
+  case ACTION.JOB_START:
+      return {...state,jobStart:true}
     default:
       return state
   }

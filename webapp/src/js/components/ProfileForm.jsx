@@ -5,7 +5,11 @@ import { Control,    Form,    Errors,    combineForms,    actions, } from 'react
 
 class ProfileForm extends React.Component {
     
-    
+        
+    onSubmit(job){
+        console.log('submit')
+        this.props.startJob(job)
+    }
     
     render(){
         
@@ -13,23 +17,19 @@ class ProfileForm extends React.Component {
         if(!this.props.profile){
             return <div>Loading...</div>
         }
-        return <Form model="profile" onSubmit={(vals) => console.log(vals)}>
+        return <Form model="profile" onSubmit={(job)=>this.onSubmit(job)}>
             <div>
             <span>outDir</span>
             <Control.text  model=".outDirName"/>
-            </div>
-            <div>
-            <span>outDir</span>
-            <Control.text  model=".outDirName"/>
-            </div>
-            <button type="submit">Log In</button>
+            </div>                        
+            <button type="submit">GO</button>
         </Form>
                 
     }
 }
 
 ProfileForm.propTypes={
-        profile:PropTypes.object
+        profile:PropTypes.object        
 }
 
 export default ProfileForm;

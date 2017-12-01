@@ -30,10 +30,12 @@ public class WebServer {
 		
 		path("/api",()->{
 						
-			path("/profile",()->{				
-				get("/load",apiProfile::load,jsonService::toJson);
-				post("/save",apiProfile::save,jsonService::toJson);
-			});
+			//path("/profile",()->{				
+				//get("/load",apiProfile::load,jsonService::toJson);
+				get("/loadJob",apiProfile::loadJob,jsonService::toJson);
+				post("/runJob",apiProfile::runJob,jsonService::toJson);
+				//post("/save",apiProfile::save,jsonService::toJson);
+			//});
 			
 			after("/*",(req,res)->{
 				res.type("application/json");

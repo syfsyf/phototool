@@ -19,6 +19,9 @@ import * as ACTION from './actions';
 import { combineForms, modelReducer ,formReducer, createForms} from 'react-redux-form';
 
 const initialProfile={
+        
+        directory:'',
+        numberOfFiles:0,
         "geoTag": false,
         "geoPoint": null,
         "autolevel": false,
@@ -50,7 +53,7 @@ let reducers={
 const store = createStore( combineReducers(reducers),applyMiddleware(thunkMiddleware,logger))
 
 
-store.dispatch(ACTION.fetchProfile())
+store.dispatch(ACTION.fetchJob())
 
 render(
   <Provider store={store}>

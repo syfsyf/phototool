@@ -9,7 +9,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 import org.syfsyf.phototool.DataModel;
-import org.syfsyf.phototool.Service;
+import org.syfsyf.phototool.PhotoolFacade;
 import org.syfsyf.phototool.gui.ViewModel;
 
 public class CreateJobTests {
@@ -26,7 +26,7 @@ public class CreateJobTests {
 	@Test
 	public void test() throws Exception {
 		
-		Service service=new Service();
+		PhotoolFacade service=new PhotoolFacade();
 		
 		DataModel model = service.createDataModel();
 		model.getProfile().setAddSignature(true);

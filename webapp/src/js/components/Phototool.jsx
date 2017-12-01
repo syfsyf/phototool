@@ -12,7 +12,7 @@ class Phototool extends React.Component {
     render(){
         console.log('Phototool',this.props)        
         return <div>                        
-            <ProfileForm profile={this.props.forms}/>
+            <ProfileForm profile={this.props.forms} startJob={this.props.startJob}/>
         </div>;
     }
 }
