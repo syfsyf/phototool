@@ -4,10 +4,8 @@ import { Control,    Form,    Errors,    combineForms,    actions, } from 'react
 
 
 class ProfileForm extends React.Component {
-    
-        
-    onSubmit(job){
-        console.log('submit')
+            
+    onSubmit(job){        
         this.props.startJob(job)
     }
     
@@ -17,13 +15,38 @@ class ProfileForm extends React.Component {
         if(!this.props.profile){
             return <div>Loading...</div>
         }
-        return <Form model="profile" onSubmit={(job)=>this.onSubmit(job)}>
+        
+        let profile=this.props.profile.profile
+        
+        return <div>
             <div>
-            <span>outDir</span>
-            <Control.text  model=".outDirName"/>
-            </div>                        
-            <button type="submit">GO</button>
-        </Form>
+                  <span>katalog: </span>
+                  <span>{profile.directory.value}</span>
+            </div>
+            <div>
+                  <span>ilość plików: </span>
+                  <span>{profile.numberOfFiles.value}</span>
+            </div>
+            <Form model="profile" onSubmit={(job)=>this.onSubmit(job)}>                    
+                    <div>
+                        <span>outDir</span>
+                        <Control.text  model=".outDirName"/>
+                    </div>            
+                    <div>    
+                            <fieldset>
+                            <legend>
+                          <label>resizować?
+                          <Control.checkbox model=".resize"/>
+                                  </label>
+                                  </legend>                         
+                          szerokość:<Control.text disabled={!profile.resize.value}  className="smallInput" model=".resizeWidth"/>
+                           </fieldset>                                 
+                    </div>
+                                      
+                                  
+                <button type="submit">GO</button>
+            </Form>               
+        </div>
                 
     }
 }

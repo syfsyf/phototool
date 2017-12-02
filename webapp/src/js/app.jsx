@@ -18,8 +18,8 @@ import { combineForms, modelReducer ,formReducer, createForms} from 'react-redux
 
 const initialProfile={
         
-        directory:'',
-        numberOfFiles:0,
+        "directory":'xx',
+        "numberOfFiles":0,
         "geoTag": false,
         "geoPoint": null,
         "autolevel": false,

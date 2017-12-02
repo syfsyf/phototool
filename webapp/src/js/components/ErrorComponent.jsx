@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 
 class ErrorComponent extends React.Component {
               
-    render(){   
-        
-        console.log('render error',this.props)
+    render(){                   
         if(this.props.error && this.props.error.message){
             return <div>
                 error:{this.props.error.message}

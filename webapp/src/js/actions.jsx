@@ -63,8 +63,7 @@ function fetchPost(url,data,dispatch,onJson){
 export function fetchJob(){    
     return function(dispatch){                      
         dispatch(requestJob())
-        let onJson=json=>{
-            console.log('json',json)
+        let onJson=json=>{            
             dispatch(receiveJob(json))
             dispatch(actions.merge('profile',json))
         }
