@@ -1,5 +1,8 @@
 run dev server:
-	npm run start:dev
+	npm run dev
+	
+format src:
+	npm run format-src	
 
 # How to Build a Todo App Using React, Redux, and Immutable.js
 

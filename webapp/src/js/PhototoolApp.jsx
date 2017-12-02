@@ -1,18 +1,16 @@
-import { connect } from 'react-redux';
-import  Phototool from './components/Phototool';
-import * as ACTION from './actions';
- 
+import { connect } from "react-redux"
+import Phototool from "./components/Phototool"
+import * as ACTION from "./actions"
 
-const mapStateToProps = (state)=> {    
-    return state
-};
-const mapDispatchToProps=(dispatch)=> {
-    return {
-        startJob:job=> dispatch(ACTION.startJob(job))
-    }
+const mapStateToProps = state => {
+  return state
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    startJob: job => dispatch(ACTION.startJob(job))
+  }
 }
 
-const PhototoolApp = connect(mapStateToProps,mapDispatchToProps)(Phototool)
+const PhototoolApp = connect(mapStateToProps, mapDispatchToProps)(Phototool)
 
 export default PhototoolApp
-

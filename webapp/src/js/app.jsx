@@ -1,67 +1,61 @@
-require('file-loader?name=index.html!../html/index.html')
-require('file-loader?name=style.css!../css/style.css')
-require('file-loader?name=favicon.ico!../html/favicon.ico')
+require("file-loader?name=index.html!../html/index.html")
+require("file-loader?name=style.css!../css/style.css")
+require("file-loader?name=favicon.ico!../html/favicon.ico")
 
-import thunkMiddleware from 'redux-thunk'
-import React from 'react'
-import { render } from 'react-dom'
-import { createStore,applyMiddleware,combineReducers } from 'redux'
-import { Provider } from 'react-redux'
-import reducer from './reducer'
-import logger from 'redux-logger'
-import 'babel-polyfill'
-import reduxCatch from 'redux-catch'
-import PhototoolApp from './PhototoolApp'
-import * as ACTION from './actions';
+import thunkMiddleware from "redux-thunk"
+import React from "react"
+import { render } from "react-dom"
+import { createStore, applyMiddleware, combineReducers } from "redux"
+import { Provider } from "react-redux"
+import reducer from "./reducer"
+import logger from "redux-logger"
+import "babel-polyfill"
+import reduxCatch from "redux-catch"
+import PhototoolApp from "./PhototoolApp"
+import * as ACTION from "./actions"
 
-import { combineForms, modelReducer ,formReducer, createForms} from 'react-redux-form';
+import { combineForms, modelReducer, formReducer, createForms } from "react-redux-form"
 
-const initialProfile={
-        
-        "directory":'xx',
-        "numberOfFiles":0,
-        "geoTag": false,
-        "geoPoint": null,
-        "autolevel": false,
-        "border": false,
-        "borderColor": {
-          "value": -16777216,
-          "frgbvalue": null,
-          "fvalue": null,
-          "falpha": 0.0,
-          "cs": null
-        },
-        "borderSize": 20,
-        "outDirName": "init",
-        "resize": true,
-        "resizeWidth": 1300,
-        "addSignature": true,
-        "sigFile": null,
-        "sigGravity": "SouthWest",
-        "sigGeometry": "+20+20",
-        "sigResize": "x10",
-        "customParams": "-quality  100%"
+const initialProfile = {
+  directory: "xx",
+  numberOfFiles: 0,
+  geoTag: false,
+  geoPoint: null,
+  autolevel: false,
+  border: false,
+  borderColor: {
+    value: -16777216,
+    frgbvalue: null,
+    fvalue: null,
+    falpha: 0.0,
+    cs: null
+  },
+  borderSize: 20,
+  outDirName: "init",
+  resize: true,
+  resizeWidth: 1300,
+  addSignature: true,
+  sigFile: null,
+  sigGravity: "SouthWest",
+  sigGeometry: "+20+20",
+  sigResize: "x10",
+  customParams: "-quality  100%"
 }
-
 
 function errorHandler(error, getState, lastAction, dispatch) {
-    console.log('ERROR',error)
-    //console.error(error);
-    //console.debug('current state', getState());
-    //console.debug('last action was', lastAction);
-    // optionally dispatch an action due to the error using the dispatch parameter
-  }
-
-
-
-
-let reducers={
-        main:reducer,
-        ...createForms({profile:initialProfile})                
+  console.log("ERROR", error)
+  //console.error(error);
+  //console.debug('current state', getState());
+  //console.debug('last action was', lastAction);
+  // optionally dispatch an action due to the error using the dispatch parameter
 }
 
-const store = createStore( combineReducers(reducers),applyMiddleware(reduxCatch(errorHandler),thunkMiddleware,logger))
+let reducers = {
+  main: reducer,
+  ...createForms({ profile: initialProfile })
+}
 
+const store = createStore(combineReducers(reducers), applyMiddleware(reduxCatch(errorHandler), thunkMiddleware, logger))
 
 store.dispatch(ACTION.fetchJob())
 
@@ -69,6 +63,5 @@ render(
   <Provider store={store}>
     <PhototoolApp />
   </Provider>,
-  document.getElementById('app')
-);
-
+  document.getElementById("app")
+)
