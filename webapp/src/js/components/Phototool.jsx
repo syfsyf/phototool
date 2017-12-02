@@ -1,17 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ProfileForm from './ProfileForm'
+import ErrorComponent from './ErrorComponent'
 
 
 class Phototool extends React.Component {
-    
-    addItem(){
-                
-    }
-
-    render(){
-        console.log('Phototool',this.props)        
-        return <div>                        
+       
+    render(){               
+        return <div>
+            <ErrorComponent error={this.props.main.error}/>            
             <ProfileForm profile={this.props.forms} startJob={this.props.startJob}/>
         </div>;
     }

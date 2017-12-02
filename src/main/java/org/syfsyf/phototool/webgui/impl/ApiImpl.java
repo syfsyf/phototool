@@ -84,10 +84,13 @@ public class ApiImpl implements Api{
 		
 		dataModel.setProfile(profile);
 		
+		if("x".equals(dataModel.getProfile().getOutDirName())){
+			throw new Exception("bum");
+		}
 		
+		LOGGER.info("runJob");
 		
-					
-		return "OK"; 
+		return null; 
 	}
 	
 
