@@ -21,7 +21,7 @@ public class Config {
 	
 	private String chromeExe="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
 	
-	private String exiftool="e:\\progs\\exiftool\\exiftool(-k).exe";
+	private String exiftool="e:\\progs\\exiftool\\exiftool.exe";
 	
 	/**
 	 * Gets the img magic composite.

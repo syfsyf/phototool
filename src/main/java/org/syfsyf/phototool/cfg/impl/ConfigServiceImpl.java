@@ -73,13 +73,17 @@ public class ConfigServiceImpl implements ConfigService{
 		
 	}
 	
+	private String getPhototoolDir(){
+		return System.getProperty("user.home") + "/.phototool2";
+	}
+	
 	/**
 	 * Gets the profile file.
 	 *
 	 * @return the profile file
 	 */
 	private File getProfileFile() {
-		return new File(System.getProperty("user.home") + "/.phototool/profile.xml");
+		return new File(getPhototoolDir()+"/profile.xml");
 	}
 	
 	/**
@@ -88,7 +92,7 @@ public class ConfigServiceImpl implements ConfigService{
 	 * @return the config file
 	 */
 	private File getConfigFile() {
-		return new File(System.getProperty("user.home") + "/.phototool/config.xml");
+		return new File(getPhototoolDir()+"/config.xml");
 	}
 
 	@Override
@@ -119,7 +123,7 @@ public class ConfigServiceImpl implements ConfigService{
 	}
 
 	private File getGeoPointsFile() {
-		return new File(System.getProperty("user.home") + "/.phototool/geopoints.xml");
+		return new File(getPhototoolDir()+"/geopoints.xml");
 	}
 
 }

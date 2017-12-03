@@ -16,10 +16,6 @@ const GooleMapComponent = compose(
   withGoogleMap,
   lifecycle({
     componentWillMount() {
-      
-
-      
-
       const refs = {}
 
       this.setState({
@@ -70,14 +66,14 @@ const GooleMapComponent = compose(
             event.preventDefault()
           }
         },
-        onMarkerDragEnd: () => {          
+        onMarkerDragEnd: () => {
           let pos = refs.marker.getPosition()
           console.log("POS", pos.lat())
           this.props.onPointChanged(pos.lat(), pos.lng())
         },
-        onMapDblClick:(event)=>{
-            console.log('DBL',event)     
-            this.props.onPointChanged(event.latLng.lat(), event.latLng.lng())            
+        onMapDblClick: event => {
+          console.log("DBL", event)
+          this.props.onPointChanged(event.latLng.lat(), event.latLng.lng())
         }
       })
     }
@@ -91,7 +87,7 @@ const GooleMapComponent = compose(
       ref={props.onMapMounted}
       onBoundsChanged={props.onBoundsChanged}
       onDblClick={props.onMapDblClick}
-      options={{disableDoubleClickZoom:true}}    
+      options={{ disableDoubleClickZoom: true, fullscreenControl: false, streetViewControl: false }}
     >
       <SearchBox
         ref={props.onSearchBoxMounted}
@@ -129,7 +125,6 @@ const GooleMapComponent = compose(
 })
 
 class GeoTagComponent extends React.PureComponent {
-  
   onPointChanged(lat, lng) {
     console.log("CHANGED", lat)
     this.props.onPointChanged(lat, lng)

@@ -35,6 +35,7 @@ public class PhotoolFacade {
 	 *
 	 * @return the data model
 	 * @throws FileNotFoundException the file not found exception
+	 * @deprecated
 	 */
 	public DataModel createDataModel() throws FileNotFoundException {
 		LOGGER.info("creating data model");
@@ -47,6 +48,19 @@ public class PhotoolFacade {
 
 		LOGGER.info("data model created:" + dataModel);
 
+		return dataModel;
+	}
+	public DataModel createDataModel(File imagesDir) throws FileNotFoundException {
+		LOGGER.info("creating data model");
+		DataModel dataModel = new DataModel();
+		
+		dataModel.setCwd(imagesDir);
+		dataModel.setProfile(configService.loadProfile());
+		dataModel.setConfig(configService.loadConfig());
+		dataModel.setFiles(scanFiles(dataModel.getCwd()));
+		
+		LOGGER.info("data model created:" + dataModel);
+		
 		return dataModel;
 	}
 
@@ -160,6 +174,12 @@ public class PhotoolFacade {
 	public static String toHexColor(Color color) {
 		return String.format("\"#%1$02x%2$02x%3$02x\"", color.getRed(), color.getGreen(), color.getBlue());
 	}
+	
+	String doubleToString(Double d){
+		
+		String res=Double.toString(d);
+		return res.replaceAll("\\,", ".");
+	}
 
 	/**
 	 * Creates the jobs.
@@ -182,7 +202,23 @@ public class PhotoolFacade {
 			List<String> cmds = new ArrayList<String>();
 			Job job = new MultiCmdJob(cmds);
 
-			StringBuilder builder = new StringBuilder();
+			StringBuilder builder;
+			
+			if(profile.isGeoTag()){
+				builder = new StringBuilder();
+				builder.append(config.getExiftool());
+				String lat=doubleToString(profile.getGeoPoint().getLat());
+				String lng=doubleToString(profile.getGeoPoint().getLng());
+				builder.append(String.format(" -GPSLatitude=%s -GPSLongitude=%s ",lat,lng));
+				builder.append(" \"");
+				builder.append(f.getAbsolutePath());
+				builder.append("\"");
+				cmds.add(builder.toString());
+				
+			}
+			
+			
+			builder = new StringBuilder();
 			builder.append(config.getImgMagicConvert());
 			builder.append(" \"");
 			builder.append(f.getAbsolutePath());
@@ -217,6 +253,8 @@ public class PhotoolFacade {
 
 			if (profile.isAddSignature()) {
 				
+				
+				
 				builder = new StringBuilder();
 				builder.append(config.getImgMagicComposite());
 				builder.append(" -gravity "+profile.getSigGravity()  +" -geometry "+profile.getSigGeometry()+" ");
@@ -234,6 +272,7 @@ public class PhotoolFacade {
 		}
 	}
 
+	
 	/**
 	 * Process.
 	 *
@@ -243,9 +282,8 @@ public class PhotoolFacade {
 	 */
 	public void process(DataModel dataModel, ViewModel viewModel) throws Exception {
 
-		createJobs(dataModel);
-		configService.saveProfile(dataModel.getProfile());
 		new File(computeOutDir(dataModel)).mkdirs();
+		createJobs(dataModel);				
 		runJobs(dataModel, viewModel);
 
 	}
