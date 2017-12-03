@@ -65,7 +65,7 @@ export function fetchJob() {
   return function(dispatch) {
     dispatch(requestJob())
     let onJson = json => {
-      dispatch(receiveJob(json))
+      //dispatch(receiveJob(json))
       dispatch(actions.merge("profile", json))
     }
     return fetchGet("/api/loadJob", dispatch, onJson)

@@ -9,9 +9,10 @@ import org.syfsyf.phototool.DataModel;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.PhotoolFacade;
 import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.cfg.GeoPoints;
 import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.webgui.Api;
-import org.syfsyf.phototool.webgui.JobDto;
+import org.syfsyf.phototool.webgui.ApiDto;
 
 import spark.Request;
 import spark.Response;
@@ -50,10 +51,12 @@ public class ApiImpl implements Api{
 		
 		DataModel dataModel = getDataModel(request);
 			
-		JobDto dto=new JobDto();
+		ApiDto dto=new ApiDto();
 		
 		dto.setDirectory(dataModel.getCwd().getAbsolutePath());
 		dto.setNumberOfFiles(dataModel.getFiles().size());
+		GeoPoints geoPoints = configService.loadGeoPoints();
+		dto.setGeoPoints(geoPoints.getGeoPoints());
 					 		
 		BeanUtils.copyProperties(dto, dataModel.getProfile());
 		
@@ -76,11 +79,13 @@ public class ApiImpl implements Api{
 	@Override
 	public Object runJob(Request request, Response response) throws Exception {
 		
-		JobDto jobDto = jsonService.fromJson(request.body(), JobDto.class);
+		ApiDto jobDto = jsonService.fromJson(request.body(), ApiDto.class);
 		DataModel dataModel = getDataModel(request);
 		
 		Profile profile=new Profile();
 		BeanUtils.copyProperties(profile, jobDto);
+		
+		configService.saveProfile(profile);
 		
 		dataModel.setProfile(profile);
 		

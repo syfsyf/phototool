@@ -17,7 +17,7 @@ import * as ACTION from "./actions"
 import { combineForms, modelReducer, formReducer, createForms } from "react-redux-form"
 
 const initialProfile = {
-  directory: "xx",
+  /*directory: "xx",
   numberOfFiles: 0,
   geoTag: false,
   geoPoint: null,
@@ -39,7 +39,7 @@ const initialProfile = {
   sigGravity: "SouthWest",
   sigGeometry: "+20+20",
   sigResize: "x10",
-  customParams: "-quality  100%"
+  customParams: "-quality  100%"*/
 }
 
 function errorHandler(error, getState, lastAction, dispatch) {
