@@ -9,7 +9,7 @@ public class JsonServiceImpl implements JsonService {
 	
 	public JsonServiceImpl() {
 		gson=new GsonBuilder()		
-				.serializeNulls()
+				//.serializeNulls()				
 				.setPrettyPrinting()
 				.create();
 	}

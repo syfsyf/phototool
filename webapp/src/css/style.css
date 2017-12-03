@@ -2,3 +2,8 @@
 .smallInput{
 	width:50px
 }
+
+form  span {	
+	margin-right:5px;
+	margin-left:15px;
+}

@@ -15,6 +15,9 @@ public class Profile {
 	private boolean geoTag=false;
 	private GeoPoint geoPoint;
 	
+	private boolean addGeoTagToSourceFile=true;
+	private boolean addGeoTagToConvertedFile=true;
+	
 	
 	/** The autolevel. */
 	private boolean autolevel = false;
@@ -302,5 +305,24 @@ public class Profile {
 	}
 	public void setGeoPoint(GeoPoint geoPoint) {
 		this.geoPoint = geoPoint;
-	}	
+	}
+
+	public boolean isAddGeoTagToSourceFile() {
+		return addGeoTagToSourceFile;
+	}
+
+	public void setAddGeoTagToSourceFile(boolean addGeoTagToSourceFile) {
+		this.addGeoTagToSourceFile = addGeoTagToSourceFile;
+	}
+
+	public boolean isAddGeoTagToConvertedFile() {
+		return addGeoTagToConvertedFile;
+	}
+
+	public void setAddGeoTagToConvertedFile(boolean addGeoTagToConvertedFile) {
+		this.addGeoTagToConvertedFile = addGeoTagToConvertedFile;
+	}
+	
+	
+	
 }

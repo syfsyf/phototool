@@ -58,13 +58,31 @@ class ProfileForm extends React.Component {
             <fieldset>
               <legend>
                 <label>
-                  resizować?
-                  <Control.checkbox model=".resize" />
+                  dodaj podpis?
+                  <Control.checkbox model=".addSignature" />
                 </label>
               </legend>
-              szerokość:<Control.text disabled={!profile.resize.value} className="smallInput" model=".resizeWidth" />
+                  <span>Plik z podpisem</span> <Control.text disabled={!profile.addSignature.value}  model=".sigFile" />
+                  <span>gravity</span> <Control.text disabled={!profile.addSignature.value}  model=".sigGravity" />
+                  <span>geometry</span> <Control.text disabled={!profile.addSignature.value}  model=".sigGeometry" />
+                  <span>resize</span> <Control.text disabled={!profile.addSignature.value}  model=".sigResize" />
+                  
+              
             </fieldset>
           </div>
+                  
+                  <div>
+                  <fieldset>
+                    <legend>
+                      <label>
+                        resizować?
+                        <Control.checkbox model=".resize" />
+                      </label>
+                    </legend>
+                    szerokość:<Control.text disabled={!profile.resize.value} className="smallInput" model=".resizeWidth" />
+                  </fieldset>
+                </div>       
+                  
           <div>
             <label>
               autolevel
@@ -79,8 +97,18 @@ class ProfileForm extends React.Component {
                   <Control.checkbox model=".geoTag" />
                 </label>
               </legend>
-              lat:<Control.text  parser={this.toNumber} model=".geoPoint.lat" />, 
-              lng: <Control.text parser={this.toNumber} model=".geoPoint.lng" />
+              lat:<Control.text  disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lat" />, 
+              lng: <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lng" />
+              <label>
+                  dodać geoTag do źródłowego pliku?
+                  <Control.checkbox model=".addGeoTagToSourceFile" />
+              </label>
+                          
+              <label>
+                  dodać geoTag do konwertowanego pliku?
+                  <Control.checkbox model=".addGeoTagToConvertedFile" />
+              </label>
+                  
               {showGeoTag ? (
                 <GeoTagComponent
                   point={point}

@@ -61,6 +61,7 @@ const GooleMapComponent = compose(
             point: nextCenter,
             markers: nextMarkers
           })
+          this.props.onPointChanged(nextCenter.lat(), nextCenter.lng())
           return false
           // refs.map.fitBounds(bounds);
         },
@@ -69,11 +70,14 @@ const GooleMapComponent = compose(
             event.preventDefault()
           }
         },
-        onMarkerDragEnd: () => {
-          //console.log('DRAG END',evnet)
+        onMarkerDragEnd: () => {          
           let pos = refs.marker.getPosition()
           console.log("POS", pos.lat())
           this.props.onPointChanged(pos.lat(), pos.lng())
+        },
+        onMapDblClick:(event)=>{
+            console.log('DBL',event)     
+            this.props.onPointChanged(event.latLng.lat(), event.latLng.lng())            
         }
       })
     }
@@ -86,6 +90,8 @@ const GooleMapComponent = compose(
       center={props.point}
       ref={props.onMapMounted}
       onBoundsChanged={props.onBoundsChanged}
+      onDblClick={props.onMapDblClick}
+      options={{disableDoubleClickZoom:true}}    
     >
       <SearchBox
         ref={props.onSearchBoxMounted}
