@@ -28,6 +28,8 @@ public class Profile {
 	/** The border color. */
 	private Color borderColor = Color.black;
 	
+	private String borderColorHex="#000";
+	
 	/** The border size. */
 	private int borderSize = 20;
 
@@ -321,6 +323,14 @@ public class Profile {
 
 	public void setAddGeoTagToConvertedFile(boolean addGeoTagToConvertedFile) {
 		this.addGeoTagToConvertedFile = addGeoTagToConvertedFile;
+	}
+
+	public String getBorderColorHex() {
+		return borderColorHex;
+	}
+
+	public void setBorderColorHex(String borderColorHex) {
+		this.borderColorHex = borderColorHex;
 	}
 	
 	

@@ -7,3 +7,7 @@ form  span {
 	margin-right:3px;
 	margin-left:12px;
 }
+
+td {
+	vertical-align: top
+}
