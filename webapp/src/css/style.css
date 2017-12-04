@@ -2,8 +2,11 @@
 .smallInput{
 	width:50px
 }
+.longInput{
+	width:300px;
+}
 
-form  span {	
+form  span {
 	margin-right:3px;
 	margin-left:12px;
 }

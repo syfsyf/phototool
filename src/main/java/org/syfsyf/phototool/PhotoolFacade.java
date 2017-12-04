@@ -86,61 +86,9 @@ public class PhotoolFacade {
 		return files;
 	}
 
-	/**
-	 * Write to view model.
-	 *
-	 * @param viewModel the view model
-	 * @param dataModel the data model
-	 */
-	public void writeToViewModel(ViewModel viewModel, DataModel dataModel) {
+	
 
-		Profile profile = dataModel.getProfile();
-		viewModel.setAutolevel(profile.isAutolevel());
-		viewModel.setBorder(profile.isBorder());
-		viewModel.setBorderColor(profile.getBorderColor());
-		viewModel.setBorderSize(profile.getBorderSize());
-		String outDirLabel = computeOutDir(dataModel);
-		viewModel.setOutDirLabel(outDirLabel);
-		viewModel.setResize(profile.isResize());
-		viewModel.setResizeWidth(profile.getResizeWidth());
-		viewModel.setDirLabel(dataModel.getCwd().getAbsolutePath());
-		viewModel.setNumOfFiles("" + dataModel.getFiles().size());
-		viewModel.setAddSignature(profile.isAddSignature());
-		viewModel.setSigFile(profile.getSigFile());
-		viewModel.setSigGeometry(profile.getSigGeometry());
-		viewModel.setSigGravity(profile.getSigGravity());
-		viewModel.setSigResize(profile.getSigResize());
-		viewModel.setCustomParams(profile.getCustomParams());
-		
-		//viewModel.setAddSignature(dataModel.get);
-
-	}
-
-	/**
-	 * Write to data model.
-	 *
-	 * @param dataModel the data model
-	 * @param viewModel the view model
-	 */
-	public void writeToDataModel(DataModel dataModel, ViewModel viewModel) {
-
-		Profile profile = dataModel.getProfile();
-		
-		profile.setAutolevel(viewModel.isAutolevel());
-		profile.setBorder(viewModel.isBorder());
-		profile.setBorderColor(viewModel.getBorderColor());
-		profile.setBorderSize(viewModel.getBorderSize());
-		profile.setResize(viewModel.isResize());
-		profile.setResizeWidth(viewModel.getResizeWidth());
-		profile.setAddSignature(viewModel.isAddSignature());
-		profile.setSigFile(viewModel.getSigFile());
-		profile.setSigGeometry(viewModel.getSigGeometry());
-		profile.setSigGravity(viewModel.getSigGravity());
-		profile.setSigResize(viewModel.getSigResize());
-		profile.setCustomParams(viewModel.getCustomParams());
-		
-	}
-
+	
 	/**
 	 * Compute out dir.
 	 *

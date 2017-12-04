@@ -1,4 +1,4 @@
-import _ from "lodash"
+import get from "lodash"
 import { compose, withProps, lifecycle } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 

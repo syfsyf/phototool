@@ -1,5 +1,6 @@
 package org.syfsyf.phototool.webgui.impl;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -11,6 +12,7 @@ import org.syfsyf.phototool.PhotoolFacade;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.GeoPoints;
 import org.syfsyf.phototool.cfg.Profile;
+import org.syfsyf.phototool.gui.ViewModel;
 import org.syfsyf.phototool.webgui.Api;
 import org.syfsyf.phototool.webgui.ApiDto;
 
@@ -23,6 +25,7 @@ public class ApiImpl implements Api{
 	private static final Logger LOGGER = Logger.getLogger(ApiImpl.class);
 	
 	private static final String DATA_MODEL="dataModel";
+	private static final String VIEW_MODEL="viewModel";
 	
 	@Inject
 	ConfigService configService;
@@ -75,12 +78,27 @@ public class ApiImpl implements Api{
 		session.attribute(DATA_MODEL, dataModel);
 		return dataModel;		
 	}
-
+	
+	protected ViewModel getViewModel(Request request) throws FileNotFoundException{
+		
+		Session session = request.session();
+		ViewModel viewModel=session.attribute(VIEW_MODEL);
+		if(viewModel!=null){
+			return viewModel;
+		}
+		viewModel= new ViewModel();
+		viewModel.setProgressLabel("utworzone w sessji");
+		session.attribute(VIEW_MODEL, viewModel);
+		return viewModel;		
+	}
+	
 	@Override
 	public Object runJob(Request request, Response response) throws Exception {
 		
 		ApiDto jobDto = jsonService.fromJson(request.body(), ApiDto.class);
-		DataModel dataModel = getDataModel(request);
+				
+		DataModel dataModel = photoolFacade.createDataModel(new File(jobDto.getDirectory()));
+		request.attribute(DATA_MODEL, dataModel);
 		
 		Profile profile=new Profile();
 		BeanUtils.copyProperties(profile, jobDto);
@@ -89,13 +107,20 @@ public class ApiImpl implements Api{
 		
 		dataModel.setProfile(profile);
 		
-		if("x".equals(dataModel.getProfile().getOutDirName())){
-			throw new Exception("bum");
-		}
+		
+		ViewModel viewModel=getViewModel(request);
 		
 		LOGGER.info("runJob");
 		
+		photoolFacade.process(dataModel, viewModel);
+		
 		return null; 
+	}
+	
+	@Override
+	public Object getProcessStatus(Request request, Response response) throws Exception {
+		return getViewModel(request); 
+			
 	}
 	
 

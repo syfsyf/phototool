@@ -7,11 +7,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.InetAddress;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.MimeTypes;
 import org.picocontainer.annotations.Inject;
 import org.syfsyf.phototool.Helper;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.webgui.impl.ApiImpl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,6 +23,8 @@ import spark.Response;
 import spark.Route;
 
 public class WebServer {
+	
+	private static final Logger LOGGER = Logger.getLogger(WebServer.class);
 	
 	@Inject
 	ConfigService configService;
@@ -33,10 +37,15 @@ public class WebServer {
 		staticFiles.location("/public");
 			
 		before((req,res)->{
+			
 			InetAddress address=InetAddress.getByName(req.ip());
 			if(!address.isLoopbackAddress()){
 				halt(401,"You are not welcome here");
 			}
+			req.headers().forEach(e->{
+				LOGGER.info(e+":"+req.headers(e));
+				});			
+			req.session();
 		});
 		
 		path("/api",()->{
@@ -45,6 +54,7 @@ public class WebServer {
 				//get("/load",apiProfile::load,jsonService::toJson);
 				get("/loadJob",apiProfile::loadJob,jsonService::toJson);
 				post("/runJob",apiProfile::runJob,jsonService::toJson);
+				get("/processStatus",apiProfile::getProcessStatus,jsonService::toJson);
 				//post("/save",apiProfile::save,jsonService::toJson);
 			//});
 				
@@ -54,7 +64,9 @@ public class WebServer {
 				res.type(MimeTypes.Type.APPLICATION_JSON.asString());
 			});
 			
-			exception(Exception.class,(exc,req,res)->{				
+			exception(Exception.class,(exc,req,res)->{		
+				
+				LOGGER.error(exc);
 				ErrorDto errorDto=new ErrorDto();				
 				res.status(500);
 				errorDto.setMessage(exc.getMessage());												

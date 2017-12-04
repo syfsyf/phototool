@@ -40,13 +40,10 @@ public class TestPhototool {
 		this.sample = new File(sampleDir);
 		FileUtils.deleteDirectory(sample);
 		sample.mkdirs();
-		
-		
-						
+								
 		File srcDir=new File("src/test/resources/sample");
 		FileUtils.copyDirectory(srcDir, sample);
-		
-		
+				
 				
 	}
 	

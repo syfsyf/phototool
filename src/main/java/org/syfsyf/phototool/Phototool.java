@@ -70,65 +70,6 @@ public class Phototool {
 	}
 
 	/**
-	 * Run GUI.
-	 */
-	protected void runGUI() {
-		try {			
-			gui.getRunButton().addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					onGo();
-				}
-			});
-			final ViewModel model = new ViewModel();			
-			getService().writeToViewModel(model,dataModel);			
-			gui.setViewModel(model);
-			
-			model.addPropertyChangeListener(new PropertyChangeListener() {
-				
-				@Override
-				public void propertyChange(PropertyChangeEvent evt) {
-					LOGGER.debug("property changed!"+evt);
-					getService().writeToDataModel(dataModel, model);
-					String outDirLabel=getService().computeOutDir(dataModel);
-					model.setOutDirLabel(outDirLabel);
-					
-				}
-			});
-			
-			gui.getFrmPhotoTool().setVisible(true);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * On go.
-	 */
-	protected void onGo() {
-		
-		//createJobs(profile);
-		gui.getRunButton().setEnabled(false);
-		Thread queryThread = new Thread() {
-			public void run() {
-				try {
-					ViewModel viewModel=gui.getViewModel();					
-					getService().writeToDataModel(dataModel,viewModel);
-					getService().process(dataModel, viewModel);
-					gui.getRunButton().setEnabled(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		queryThread.start();
-	}
-
-	
-
-	
-	/**
 	 * Run jobs thread.
 	 *
 	 * @throws InterruptedException the interrupted exception

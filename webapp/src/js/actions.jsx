@@ -47,7 +47,10 @@ function fetchErrorHandle(response, dispatch, onJson) {
 }
 
 function fetchGet(url, dispatch, onJson) {
-  return fetch(url).then(response => {
+  return fetch(url,{
+    method: "GET",
+    credentials: 'include'
+  }).then(response => {
     return fetchErrorHandle(response, dispatch, onJson)
   })
 }
@@ -55,6 +58,7 @@ function fetchGet(url, dispatch, onJson) {
 function fetchPost(url, data, dispatch, onJson) {
   return fetch(url, {
     method: "POST",
+    credentials:'include', 
     body: JSON.stringify(data)
   }).then(response => {
     return fetchErrorHandle(response, dispatch, onJson)

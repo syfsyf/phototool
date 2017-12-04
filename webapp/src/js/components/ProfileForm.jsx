@@ -46,10 +46,7 @@ class ProfileForm extends React.Component {
 
     return (
       <div>
-        <div>
-          <span>katalog: </span>
-          <span>{profile.directory.value}</span>
-        </div>
+
         <div>
           <span>ilość plików: </span>
           <span>{profile.numberOfFiles.value}</span>
@@ -59,6 +56,11 @@ class ProfileForm extends React.Component {
           onSubmit={job => this.onSubmit(job)}
           getDispatch={dispatch => (this.formDispatch = dispatch)}
         >
+        <div>
+          <label>katalog
+              <Control.text className="longInput" model=".directory" />
+          </label>
+        </div>
           <table>
             <tbody>
               <tr>
@@ -152,7 +154,7 @@ class ProfileForm extends React.Component {
               Dodatkowe parametry
               <Control.text model=".customParams" />
             </label>
-          </div>    
+          </div>
           <div>
             <label>
               autolevel
