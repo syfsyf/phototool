@@ -148,6 +148,12 @@ class ProfileForm extends React.Component {
             </fieldset>
           </div>
           <div>
+              <label>
+              Dodatkowe parametry
+              <Control.text model=".customParams" />
+            </label>
+          </div>    
+          <div>
             <label>
               autolevel
               <Control.checkbox model=".autolevel" />
