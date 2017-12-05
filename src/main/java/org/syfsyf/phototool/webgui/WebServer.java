@@ -43,11 +43,7 @@ public class WebServer {
 			InetAddress address=InetAddress.getByName(req.ip());
 			if(!address.isLoopbackAddress()){
 				halt(401,"You are not welcome here");
-			}
-			req.headers().forEach(e->{
-				LOGGER.info(e+":"+req.headers(e));
-				});			
-			req.session();
+			}			
 		});
 		
 		path("/api",()->{

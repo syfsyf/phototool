@@ -23,7 +23,7 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>${basedir}/scripts/calculate-version.sh</executable>
+							<executable>${basedir}/build_web_app.bat</executable>
 						</configuration>
 					</execution>
 				</executions>
