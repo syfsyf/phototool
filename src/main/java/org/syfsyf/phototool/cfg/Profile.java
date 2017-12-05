@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Profile.
  */

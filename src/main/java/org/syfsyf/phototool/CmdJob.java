@@ -3,7 +3,6 @@ package org.syfsyf.phototool;
 import org.apache.log4j.Logger;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CmdJob.
  */

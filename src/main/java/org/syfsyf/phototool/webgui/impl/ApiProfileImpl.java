@@ -18,10 +18,7 @@ public class ApiProfileImpl implements ApiProfile{
 	}
 
 	@Override
-	public Object save(Request request, Response response) throws Exception {
-		
-		// request.body()
-		// TODO Auto-generated method stub
+	public Object save(Request request, Response response) throws Exception {				
 		return null;
 	}
 	

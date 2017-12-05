@@ -18,7 +18,6 @@ import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.JobsStatusDto;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Service.
  */
@@ -37,6 +36,7 @@ public class PhotoolFacade {
 	 * @throws FileNotFoundException the file not found exception
 	 * @deprecated
 	 */
+	@Deprecated
 	public DataModel createDataModel() throws FileNotFoundException {
 		LOGGER.info("creating data model");
 		DataModel dataModel = new DataModel();
@@ -226,9 +226,10 @@ public class PhotoolFacade {
 	 *
 	 * @param dataModel the data model
 	 * @param viewModel the view model
+	 * @throws InterruptedException 
 	 * @throws Exception the exception
 	 */
-	public void process(DataModel dataModel, JobsStatusDto viewModel) throws Exception {
+	public void process(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException  {
 
 		new File(computeOutDir(dataModel)).mkdirs();
 		createJobs(dataModel);				
@@ -288,11 +289,6 @@ public class PhotoolFacade {
 		viewModel.setProgressValue(count);
 		viewModel.setProgressLabel("" + count + "/" + dataModel.getJobs().size());
 		viewModel.setErrorLabel("Błędow:" + errors);
-
-		// gui.getProgressBar().setValue(count);
-		// gui.getProgresLabel().setText("" + count + "/" + jobs.size());
-		// gui.getErrorLabel().setText("Błędów:" + errors);
-
 	}
 	
 	/**
@@ -316,7 +312,7 @@ public class PhotoolFacade {
 			
 		} catch (IOException e) {			
 			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
+			throw new PhototoolRuntimeException(e.getMessage());
 		}		
 		return identify;
 	}

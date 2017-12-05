@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import org.picocontainer.annotations.Inject;
 import org.syfsyf.phototool.webgui.WebServer;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Phototool.
  */
@@ -18,10 +18,7 @@ public class Phototool {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(Phototool.class);
-	
-	/** The data model. */
-	private DataModel dataModel;
-	
+		
 	/** The service. */
 	@Inject
 	private PhotoolFacade service;
@@ -41,19 +38,8 @@ public class Phototool {
 	 * @param args the args
 	 * @throws Exception the exception
 	 */
-	public void run(String[] args) throws Exception {
-		
-		/*
-		dataModel=getService().createDataModel();
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				runGUI();
-			}
-		});
-		*/		
-		webServer.start();
-		
+	public void run(String[] args) throws Exception {					
+		webServer.start();		
 	}
 
 	/**
@@ -80,7 +66,7 @@ public class Phototool {
 					count++;
 				}
 			}
-			System.out.println("" + count + "/" + jobs.size());
+			LOGGER.debug("" + count + "/" + jobs.size());			
 			Thread.sleep(500);
 
 		}
@@ -99,13 +85,5 @@ public class Phototool {
 		}
 		System.out.println("" + count + "/" + jobs.size());
 
-	}
-
-	private PhotoolFacade getService() {
-		return service;
-	}
-
-	
-
-	
+	}	
 }

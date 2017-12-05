@@ -1,10 +1,15 @@
 package org.syfsyf.phototool.webgui;
 
-import static spark.Spark.*;
+import static spark.Spark.after;
+import static spark.Spark.before;
+import static spark.Spark.exception;
+import static spark.Spark.get;
+import static spark.Spark.halt;
+import static spark.Spark.path;
+import static spark.Spark.post;
+import static spark.Spark.staticFiles;
+import static spark.Spark.webSocket;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.InetAddress;
 
 import org.apache.log4j.Logger;
@@ -13,14 +18,6 @@ import org.picocontainer.annotations.Inject;
 import org.syfsyf.phototool.Helper;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.cfg.ConfigService;
-import org.syfsyf.phototool.webgui.impl.ApiImpl;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import spark.Request;
-import spark.Response;
-import spark.Route;
 
 public class WebServer {
 	

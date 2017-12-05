@@ -2,16 +2,13 @@ package org.syfsyf.phototool;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AbstractJob.
  */
 public abstract class AbstractJob implements Job {
 
-	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(AbstractJob.class);
+	
 	
 	/** The error. */
 	private String error;

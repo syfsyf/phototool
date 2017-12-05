@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Execution.
  */
@@ -149,19 +148,19 @@ public class Execution {
 		Process p = Runtime.getRuntime().exec(cmd);
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		List<String> inputLines = new ArrayList<>();
+		List<String> lines = new ArrayList<>();
 		while ((line = input.readLine()) != null) {
-			inputLines.add(line);
+			lines.add(line);
 		}
-		setInputLines(inputLines);
+		setInputLines(lines);
 		input.close();
 
 		input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-		List<String> errorLines = new ArrayList<>();
+		List<String> erros = new ArrayList<>();
 		while ((line = input.readLine()) != null) {
-			errorLines.add(line);
+			erros.add(line);
 		}
-		setErrorLines(errorLines);
+		setErrorLines(erros);
 		input.close();
 		setExitStatus(p.exitValue());
 	}

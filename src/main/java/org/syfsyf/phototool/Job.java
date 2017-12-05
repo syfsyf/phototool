@@ -1,6 +1,5 @@
 package org.syfsyf.phototool;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface Job.
  */

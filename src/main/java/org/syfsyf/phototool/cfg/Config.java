@@ -2,7 +2,6 @@ package org.syfsyf.phototool.cfg;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Config.
  */

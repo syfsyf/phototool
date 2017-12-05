@@ -2,14 +2,11 @@ package org.syfsyf.phototool;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.Profile;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DataModel.
  */
@@ -130,8 +127,8 @@ public class DataModel {
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 
-		sb.append("Cwd :  " + this.cwd == null ? "" : this.cwd + ",");		
-		sb.append("Files :  " + this.files == null ? "" : this.files.size() + ",");
+		sb.append("Cwd :  " + (this.cwd == null ? "" : this.cwd) + ",");		
+		sb.append("Files :  " + (this.files == null ? "" : this.files.size()) + ",");
 				
 		return "DataModel [" + sb.toString() + "]";
 	}

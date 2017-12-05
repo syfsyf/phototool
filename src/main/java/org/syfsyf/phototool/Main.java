@@ -12,7 +12,6 @@ import org.syfsyf.phototool.webgui.impl.ApiImpl;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Main.
  */

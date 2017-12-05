@@ -1,16 +1,16 @@
 package org.syfsyf.phototool.webgui.impl;
 
-import static spark.Spark.*;
+import static spark.Spark.before;
+import static spark.Spark.get;
+import static spark.Spark.halt;
+import static spark.Spark.post;
+import static spark.Spark.staticFiles;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.net.InetAddress;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.syfsyf.phototool.AbstractJob;
 import org.syfsyf.phototool.Execution;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
