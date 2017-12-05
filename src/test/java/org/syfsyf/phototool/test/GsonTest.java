@@ -10,7 +10,7 @@ import org.picocontainer.MutablePicoContainer;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.Main;
 import org.syfsyf.phototool.cfg.Profile;
-import org.syfsyf.phototool.gui.ViewModel;
+import org.syfsyf.phototool.gui.JobsStatusDto;
 
 public class GsonTest {
 	
@@ -39,7 +39,7 @@ public class GsonTest {
 	
 	@Test 
 	public void testViewModelJson(){
-		ViewModel viewModel = new ViewModel();
+		JobsStatusDto viewModel = new JobsStatusDto();
 		System.out.println(jsonService.toJson(viewModel));
 	
 		

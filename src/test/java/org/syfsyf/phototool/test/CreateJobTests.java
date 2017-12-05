@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.syfsyf.phototool.DataModel;
 import org.syfsyf.phototool.PhotoolFacade;
-import org.syfsyf.phototool.gui.ViewModel;
+import org.syfsyf.phototool.gui.JobsStatusDto;
 
 public class CreateJobTests {
 
@@ -38,7 +38,7 @@ public class CreateJobTests {
 		service.createJobs(model);
 		assertNotNull( model.getJobs());		
 		System.out.println(model.getJobs());
-		service.process(model, new ViewModel());
+		service.process(model, new JobsStatusDto());
 		
 		
 		

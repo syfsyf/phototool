@@ -1,11 +1,5 @@
 package org.syfsyf.phototool;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -14,12 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.picocontainer.annotations.Inject;
-import org.syfsyf.phototool.cfg.Profile;
-import org.syfsyf.phototool.gui.GUI;
-import org.syfsyf.phototool.gui.ViewModel;
 import org.syfsyf.phototool.webgui.WebServer;
-
-import com.thoughtworks.xstream.XStream;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -44,9 +33,7 @@ public class Phototool {
 	WebServer webServer;
 	
 	
-	/** The gui. */
-	@Inject
-	private GUI gui;
+	
 		
 	/**
 	 * Run.

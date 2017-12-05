@@ -2,11 +2,13 @@ package org.syfsyf.phototool.gui;
 
 
 
-public class ViewModel {
+public class JobsStatusDto {
 	
 	private String errorLabel="";	
 	private String progressLabel="";
 	private int progressValue=0;
+	
+	
 	
 	
 	public String getErrorLabel() {

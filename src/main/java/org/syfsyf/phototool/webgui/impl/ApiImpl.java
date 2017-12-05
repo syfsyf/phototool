@@ -12,7 +12,7 @@ import org.syfsyf.phototool.PhotoolFacade;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.GeoPoints;
 import org.syfsyf.phototool.cfg.Profile;
-import org.syfsyf.phototool.gui.ViewModel;
+import org.syfsyf.phototool.gui.JobsStatusDto;
 import org.syfsyf.phototool.webgui.Api;
 import org.syfsyf.phototool.webgui.ApiDto;
 
@@ -79,14 +79,14 @@ public class ApiImpl implements Api{
 		return dataModel;		
 	}
 	
-	protected ViewModel getViewModel(Request request) throws FileNotFoundException{
+	protected JobsStatusDto getViewModel(Request request) throws FileNotFoundException{
 		
 		Session session = request.session();
-		ViewModel viewModel=session.attribute(VIEW_MODEL);
+		JobsStatusDto viewModel=session.attribute(VIEW_MODEL);
 		if(viewModel!=null){
 			return viewModel;
 		}
-		viewModel= new ViewModel();
+		viewModel= new JobsStatusDto();
 		viewModel.setProgressLabel("utworzone w sessji");
 		session.attribute(VIEW_MODEL, viewModel);
 		return viewModel;		
@@ -108,7 +108,7 @@ public class ApiImpl implements Api{
 		dataModel.setProfile(profile);
 		
 		
-		ViewModel viewModel=getViewModel(request);
+		JobsStatusDto viewModel=getViewModel(request);
 		
 		LOGGER.info("runJob");
 		

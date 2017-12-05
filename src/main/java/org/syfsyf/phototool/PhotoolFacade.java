@@ -16,7 +16,7 @@ import org.picocontainer.annotations.Inject;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.Profile;
-import org.syfsyf.phototool.gui.ViewModel;
+import org.syfsyf.phototool.gui.JobsStatusDto;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -228,7 +228,7 @@ public class PhotoolFacade {
 	 * @param viewModel the view model
 	 * @throws Exception the exception
 	 */
-	public void process(DataModel dataModel, ViewModel viewModel) throws Exception {
+	public void process(DataModel dataModel, JobsStatusDto viewModel) throws Exception {
 
 		new File(computeOutDir(dataModel)).mkdirs();
 		createJobs(dataModel);				
@@ -243,7 +243,7 @@ public class PhotoolFacade {
 	 * @param viewModel the view model
 	 * @throws InterruptedException the interrupted exception
 	 */
-	private void runJobs(DataModel dataModel, ViewModel viewModel) throws InterruptedException {
+	private void runJobs(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException {
 		long start = System.currentTimeMillis();
 		ExecutorService executor = Executors.newFixedThreadPool(8);
 		for (Job j : dataModel.getJobs()) {
@@ -273,7 +273,7 @@ public class PhotoolFacade {
 	 * @param dataModel the data model
 	 * @param viewModel the view model
 	 */
-	private void guiUpdate(DataModel dataModel, ViewModel viewModel) {
+	private void guiUpdate(DataModel dataModel, JobsStatusDto viewModel) {
 
 		int count = 0;
 		int errors = 0;

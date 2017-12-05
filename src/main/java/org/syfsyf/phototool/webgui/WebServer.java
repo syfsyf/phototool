@@ -35,6 +35,8 @@ public class WebServer {
 
 	public void start() {
 		staticFiles.location("/public");
+		
+		webSocket("/echo", EchoWebSocket.class);
 			
 		before((req,res)->{
 			

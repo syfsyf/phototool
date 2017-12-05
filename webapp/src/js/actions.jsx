@@ -47,9 +47,9 @@ function fetchErrorHandle(response, dispatch, onJson) {
 }
 
 function fetchGet(url, dispatch, onJson) {
-  return fetch(url,{
+  return fetch(url, {
     method: "GET",
-    credentials: 'include'
+    credentials: "include"
   }).then(response => {
     return fetchErrorHandle(response, dispatch, onJson)
   })
@@ -58,7 +58,7 @@ function fetchGet(url, dispatch, onJson) {
 function fetchPost(url, data, dispatch, onJson) {
   return fetch(url, {
     method: "POST",
-    credentials:'include', 
+    credentials: "include",
     body: JSON.stringify(data)
   }).then(response => {
     return fetchErrorHandle(response, dispatch, onJson)
@@ -99,5 +99,24 @@ export function startJob(job) {
       dispatch(jobStartedOk())
     }
     fetchPost("/api/runJob", job, dispatch, onJson)
+  }
+}
+
+export const REQUEST_STATUS = "REQUEST_STATUS"
+export function requestStatus() {
+  return { type: REQUEST_STATUS }
+}
+
+export const RECEIVE_STATUS = "RECEIVE_STATUS"
+export function receiveStatus(status) {
+  return { type: RECEIVE_STATUS, payload: status }
+}
+export function fetchStatus() {
+  return function(dispatch) {
+    dispatch(requestStatus())
+    let onJson = json => {
+      dispatch(receiveStatus(json))
+    }
+    return fetchGet("/api/processStatus", dispatch, onJson)
   }
 }

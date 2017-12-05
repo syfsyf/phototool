@@ -6,7 +6,6 @@ import org.apache.log4j.BasicConfigurator;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 import org.syfsyf.phototool.cfg.impl.ConfigServiceImpl;
-import org.syfsyf.phototool.gui.GUI;
 import org.syfsyf.phototool.webgui.WebServer;
 import org.syfsyf.phototool.webgui.impl.ApiImpl;
 
@@ -44,8 +43,7 @@ public class Main {
 		MutablePicoContainer pico=new DefaultPicoContainer();
 		
 		pico.addComponent(ConfigServiceImpl.class);
-		pico.addComponent(PhotoolFacade.class);
-		pico.addComponent(GUI.class);		
+		pico.addComponent(PhotoolFacade.class);		
 		pico.addComponent(Phototool.class);
 		pico.addComponent(WebServer.class);
 		pico.addComponent(JsonServiceImpl.class);

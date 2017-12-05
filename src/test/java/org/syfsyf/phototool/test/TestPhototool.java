@@ -12,7 +12,7 @@ import org.syfsyf.phototool.DataModel;
 import org.syfsyf.phototool.Main;
 import org.syfsyf.phototool.PhotoolFacade;
 import org.syfsyf.phototool.cfg.Profile;
-import org.syfsyf.phototool.gui.ViewModel;
+import org.syfsyf.phototool.gui.JobsStatusDto;
 
 public class TestPhototool {
 	
@@ -66,7 +66,7 @@ public class TestPhototool {
 		LOGGER.info("jobs:"+dataModel.getJobs().size());
 		
 		
-		ViewModel viewModel=new ViewModel();
+		JobsStatusDto viewModel=new JobsStatusDto();
 		phototoolFacade.process(dataModel, viewModel);
 
 	}

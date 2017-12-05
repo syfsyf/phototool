@@ -46,7 +46,6 @@ class ProfileForm extends React.Component {
 
     return (
       <div>
-
         <div>
           <span>ilość plików: </span>
           <span>{profile.numberOfFiles.value}</span>
@@ -56,11 +55,12 @@ class ProfileForm extends React.Component {
           onSubmit={job => this.onSubmit(job)}
           getDispatch={dispatch => (this.formDispatch = dispatch)}
         >
-        <div>
-          <label>katalog
+          <div>
+            <label>
+              katalog
               <Control.text className="longInput" model=".directory" />
-          </label>
-        </div>
+            </label>
+          </div>
           <table>
             <tbody>
               <tr>
@@ -106,9 +106,12 @@ class ProfileForm extends React.Component {
                       </label>
                     </legend>
                     <span>Plik z podpisem</span>
-                    <Control.text disabled={!profile.addSignature.value} model=".sigFile" /><br/>
-                    <span>gravity</span> <Control.text disabled={!profile.addSignature.value} model=".sigGravity" /><br/>
-                    <span>geometry</span> <Control.text disabled={!profile.addSignature.value} model=".sigGeometry" /><br/>
+                    <Control.text disabled={!profile.addSignature.value} model=".sigFile" />
+                    <br />
+                    <span>gravity</span> <Control.text disabled={!profile.addSignature.value} model=".sigGravity" />
+                    <br />
+                    <span>geometry</span> <Control.text disabled={!profile.addSignature.value} model=".sigGeometry" />
+                    <br />
                     <span>resize</span> <Control.text disabled={!profile.addSignature.value} model=".sigResize" />
                   </fieldset>
                 </td>
@@ -150,7 +153,7 @@ class ProfileForm extends React.Component {
             </fieldset>
           </div>
           <div>
-              <label>
+            <label>
               Dodatkowe parametry
               <Control.text model=".customParams" />
             </label>

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config webpack.dev.js",
     "format-src": "prettier --write \"src/js/**/*.jsx\""
   },
   "keywords": [],
@@ -38,6 +38,7 @@
     "babel-preset-react": "^6.24.1",
     "file-loader": "^1.1.5",
     "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.9.5"
+    "webpack-dev-server": "^2.9.5",
+    "webpack-merge": "^4.1.1"
   }
 }
