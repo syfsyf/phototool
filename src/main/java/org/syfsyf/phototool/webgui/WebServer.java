@@ -9,6 +9,7 @@ import static spark.Spark.path;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 import static spark.Spark.webSocket;
+import static spark.Spark.port;
 
 import java.net.InetAddress;
 
@@ -75,6 +76,11 @@ public class WebServer {
 			
 			
 		});
+	}
+	
+	public String getServerMainUrl(){
+		
+		return "http://localhost:"+port();
 	}
 	
 	

@@ -35,16 +35,14 @@ public class TestPhototool {
 	
 
 	protected void prepareSampleDir() throws IOException{
-		
+
 		final String sampleDir="sample";
 		this.sample = new File(sampleDir);
 		FileUtils.deleteDirectory(sample);
 		sample.mkdirs();
-								
-		File srcDir=new File("src/test/resources/sample");
+
+		File srcDir=new File("test_samples/sample");
 		FileUtils.copyDirectory(srcDir, sample);
-				
-				
 	}
 	
 	@Test
@@ -58,7 +56,7 @@ public class TestPhototool {
 		Profile profile = dataModel.getProfile();
 		profile.setResizeWidth(250);
 		profile.setAddSignature(true);
-		profile.setSigFile(new File("src/test/resources/sig/sig.png").getAbsolutePath());
+		profile.setSigFile(new File("test_samples/sig/sig.png").getAbsolutePath());
 		profile.setSigResize("x35");
 		
 		phototoolFacade.createJobs(dataModel);

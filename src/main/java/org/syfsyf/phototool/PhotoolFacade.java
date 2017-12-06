@@ -3,6 +3,7 @@ package org.syfsyf.phototool;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,10 +73,22 @@ public class PhotoolFacade {
 	 */
 	private List<File> scanFiles(File cwd) {
 		List<File> files = new ArrayList<>();
+		
+		FilenameFilter filter=new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
+		cwd.listFiles(filter);
+		
 
 		for (File file : cwd.listFiles()) {
 			if (!file.isFile())
 				continue;
+			
 			String ext = FilenameUtils.getExtension(file.getName().toLowerCase());
 
 			if (!"jpg".equals(ext) && !"png".equals(ext)) {
@@ -181,7 +194,7 @@ public class PhotoolFacade {
 			}
 			if (profile.isBorder()) {
 				int s = profile.getBorderSize();
-				builder.append(" -bordercolor " + toHexColor(profile.getBorderColor()));
+				builder.append(" -bordercolor " + profile.getBorderColorHex());
 				builder.append(" -border " + s + "x" + s);
 
 			}

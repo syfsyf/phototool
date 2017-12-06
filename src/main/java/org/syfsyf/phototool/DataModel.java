@@ -16,10 +16,10 @@ public class DataModel {
 	private File cwd;	
 	
 	/** The files. */
-	private List<File> files = new ArrayList<File>();
+	private List<File> files = new ArrayList<>();
 	
 	/** The jobs. */
-	private List<Job> jobs = new ArrayList<Job>();
+	private List<Job> jobs = new ArrayList<>();
 	
 	/** The profile. */
 	private Profile profile;

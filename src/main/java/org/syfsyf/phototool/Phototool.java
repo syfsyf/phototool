@@ -6,8 +6,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
+
 import org.apache.log4j.Logger;
 import org.picocontainer.annotations.Inject;
+import org.syfsyf.phototool.cfg.Config;
+import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.webgui.WebServer;
 
 
@@ -29,9 +33,10 @@ public class Phototool {
 	@Inject
 	WebServer webServer;
 	
-	
-	
-		
+	@Inject
+	ConfigService configService;
+
+			
 	/**
 	 * Run.
 	 *
@@ -39,7 +44,21 @@ public class Phototool {
 	 * @throws Exception the exception
 	 */
 	public void run(String[] args) throws Exception {					
-		webServer.start();		
+		webServer.start();
+		
+		Config config = configService.loadConfig();
+		
+		
+		try {
+			String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
+			Execution exe = new Execution(cmd);
+			exe.run();
+
+		} catch (Exception e) {
+			LOGGER.error(e);
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			//throw new RuntimeException(e);
+		}		
 	}
 
 	/**
