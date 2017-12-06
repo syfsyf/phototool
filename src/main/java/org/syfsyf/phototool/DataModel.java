@@ -13,17 +13,17 @@ import org.syfsyf.phototool.cfg.Profile;
 public class DataModel {
 
 	/** The cwd. */
-	private File cwd;	
-	
+	private File cwd;
+
 	/** The files. */
 	private List<File> files = new ArrayList<>();
-	
+
 	/** The jobs. */
 	private List<Job> jobs = new ArrayList<>();
-	
+
 	/** The profile. */
 	private Profile profile;
-	
+
 	/** The config. */
 	private Config config;
 
@@ -39,7 +39,8 @@ public class DataModel {
 	/**
 	 * Sets the cwd.
 	 *
-	 * @param cwd the new cwd
+	 * @param cwd
+	 *            the new cwd
 	 */
 	public void setCwd(File cwd) {
 		this.cwd = cwd;
@@ -57,7 +58,8 @@ public class DataModel {
 	/**
 	 * Sets the files.
 	 *
-	 * @param files the new files
+	 * @param files
+	 *            the new files
 	 */
 	public void setFiles(List<File> files) {
 		this.files = files;
@@ -75,7 +77,8 @@ public class DataModel {
 	/**
 	 * Sets the jobs.
 	 *
-	 * @param jobs the new jobs
+	 * @param jobs
+	 *            the new jobs
 	 */
 	public void setJobs(List<Job> jobs) {
 		this.jobs = jobs;
@@ -93,7 +96,8 @@ public class DataModel {
 	/**
 	 * Sets the profile.
 	 *
-	 * @param profile the new profile
+	 * @param profile
+	 *            the new profile
 	 */
 	public void setProfile(Profile profile) {
 		this.profile = profile;
@@ -111,7 +115,8 @@ public class DataModel {
 	/**
 	 * Sets the config.
 	 *
-	 * @param config the new config
+	 * @param config
+	 *            the new config
 	 */
 	public void setConfig(Config config) {
 		this.config = config;
@@ -127,10 +132,10 @@ public class DataModel {
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 
-		sb.append("Cwd :  " + (this.cwd == null ? "" : this.cwd) + ",");		
+		sb.append("Cwd :  " + (this.cwd == null ? "" : this.cwd) + ",");
 		sb.append("Files :  " + (this.files == null ? "" : this.files.size()) + ",");
-				
+
 		return "DataModel [" + sb.toString() + "]";
 	}
-	
+
 }

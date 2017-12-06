@@ -7,20 +7,19 @@ import org.syfsyf.phototool.webgui.ApiProfile;
 import spark.Request;
 import spark.Response;
 
-public class ApiProfileImpl implements ApiProfile{
+public class ApiProfileImpl implements ApiProfile {
 
 	@Inject
 	ConfigService configService;
-	
+
 	@Override
 	public Object load(Request request, Response response) throws Exception {
 		return configService.loadProfile();
 	}
 
 	@Override
-	public Object save(Request request, Response response) throws Exception {				
+	public Object save(Request request, Response response) throws Exception {
 		return null;
 	}
-	
 
 }

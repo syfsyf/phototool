@@ -62,53 +62,43 @@ public class GeoPointsServiceImpl implements GeoPointsService {
 	public GeoPointsServiceImpl(ConfigService configService) throws FileNotFoundException {
 
 		this.configService = configService;
-		
-		
-		
-		
 
 		config = configService.loadConfig();
-		
+
 		staticFiles.location("/public");
-		
-		//init();
-		
-		before((req,res)->{
-			InetAddress address=InetAddress.getByName(req.ip());
-			if(!address.isLoopbackAddress()){
-				halt(401,"You are not welcome here");
+
+		// init();
+
+		before((req, res) -> {
+			InetAddress address = InetAddress.getByName(req.ip());
+			if (!address.isLoopbackAddress()) {
+				halt(401, "You are not welcome here");
 			}
 		});
-		
-		
-		
-		
 
-		/*get("/geoPointsService", (req, res) -> {
-			// res.header(header, value);
-			InetAddress address=InetAddress.getByName(req.ip());
-			LOGGER.info("ip: " + req.ip());
-			
-			if(address.isLoopbackAddress()){
-				LOGGER.info("local");
-			}
-			
-
-			InputStream select = getClass().getClassLoader().getResourceAsStream("select.html");
-			StringWriter writer = new StringWriter();
-			IOUtils.copy(select, writer, "UTF-8");
-			return writer.toString();
-		});*/
+		/*
+		 * get("/geoPointsService", (req, res) -> { // res.header(header,
+		 * value); InetAddress address=InetAddress.getByName(req.ip());
+		 * LOGGER.info("ip: " + req.ip());
+		 * 
+		 * if(address.isLoopbackAddress()){ LOGGER.info("local"); }
+		 * 
+		 * 
+		 * InputStream select =
+		 * getClass().getClassLoader().getResourceAsStream("select.html");
+		 * StringWriter writer = new StringWriter(); IOUtils.copy(select,
+		 * writer, "UTF-8"); return writer.toString(); });
+		 */
 
 		get("/geoPointsService/list", (req, res) -> {
 			LOGGER.info("/geoPointsService/list");
-			res.type("application/json");						
+			res.type("application/json");
 			return configService.loadGeoPoints();
 
 		}, JSON_TRANSFORMER);
-		
-		post("/geoPointsService/save",(req,res)->{
-			//req.body();
+
+		post("/geoPointsService/save", (req, res) -> {
+			// req.body();
 			return "";
 		});
 	}

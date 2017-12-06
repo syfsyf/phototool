@@ -20,105 +20,103 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 
-public class ApiImpl implements Api{
+public class ApiImpl implements Api {
 
 	private static final Logger LOGGER = Logger.getLogger(ApiImpl.class);
-	
-	private static final String DATA_MODEL="dataModel";
-	private static final String VIEW_MODEL="viewModel";
-	
+
+	private static final String DATA_MODEL = "dataModel";
+	private static final String VIEW_MODEL = "viewModel";
+
 	@Inject
 	ConfigService configService;
-	
+
 	@Inject
 	PhotoolFacade photoolFacade;
-	
-	@Inject 
+
+	@Inject
 	JsonService jsonService;
-	
+
 	@Override
 	public Object load(Request request, Response response) throws Exception {
 		return configService.loadProfile();
 	}
 
 	@Override
-	public Object save(Request request, Response response) throws Exception {				
+	public Object save(Request request, Response response) throws Exception {
 		return null;
 	}
 
 	@Override
 	public Object loadJob(Request request, Response response) throws Exception {
-		
+
 		DataModel dataModel = getDataModel(request);
-			
-		ApiDto dto=new ApiDto();
-		
+
+		ApiDto dto = new ApiDto();
+
 		dto.setDirectory(dataModel.getCwd().getAbsolutePath());
 		dto.setNumberOfFiles(dataModel.getFiles().size());
 		GeoPoints geoPoints = configService.loadGeoPoints();
 		dto.setGeoPoints(geoPoints.getGeoPoints());
-					 		
+
 		BeanUtils.copyProperties(dto, dataModel.getProfile());
-		
+
 		return dto;
 	}
-	
-	protected DataModel getDataModel(Request request) throws FileNotFoundException{
-		
+
+	protected DataModel getDataModel(Request request) throws FileNotFoundException {
+
 		Session session = request.session();
-		DataModel dataModel=session.attribute(DATA_MODEL);
-		if(dataModel!=null){
+		DataModel dataModel = session.attribute(DATA_MODEL);
+		if (dataModel != null) {
 			return dataModel;
 		}
-		
+
 		dataModel = photoolFacade.createDataModel();
 		session.attribute(DATA_MODEL, dataModel);
-		return dataModel;		
+		return dataModel;
 	}
-	
-	protected JobsStatusDto getViewModel(Request request) throws FileNotFoundException{
-		
+
+	protected JobsStatusDto getViewModel(Request request) throws FileNotFoundException {
+
 		Session session = request.session();
-		JobsStatusDto viewModel=session.attribute(VIEW_MODEL);
-		if(viewModel!=null){
+		JobsStatusDto viewModel = session.attribute(VIEW_MODEL);
+		if (viewModel != null) {
 			return viewModel;
 		}
-		viewModel= new JobsStatusDto();
+		viewModel = new JobsStatusDto();
 		viewModel.setProgressLabel("utworzone w sessji");
 		session.attribute(VIEW_MODEL, viewModel);
-		return viewModel;		
+		return viewModel;
 	}
-	
+
 	@Override
 	public Object runJob(Request request, Response response) throws Exception {
-		
+
 		ApiDto jobDto = jsonService.fromJson(request.body(), ApiDto.class);
-				
+
 		DataModel dataModel = photoolFacade.createDataModel(new File(jobDto.getDirectory()));
 		request.attribute(DATA_MODEL, dataModel);
-		
-		Profile profile=new Profile();
+
+		Profile profile = new Profile();
 		BeanUtils.copyProperties(profile, jobDto);
-		
+
 		configService.saveProfile(profile);
-		
+
 		dataModel.setProfile(profile);
-		
-		
-		JobsStatusDto viewModel=getViewModel(request);
-		
+
+		JobsStatusDto viewModel = getViewModel(request);
+
 		LOGGER.info("runJob");
-		
+
 		photoolFacade.process(dataModel, viewModel);
-		
-		return null; 
+
+		return null;
 	}
-	
+
 	@Override
 	public Object getProcessStatus(Request request, Response response) throws Exception {
-		return getViewModel(request); 
-			
+		return getViewModel(request);
+
 	}
-	
 
 }

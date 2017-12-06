@@ -18,20 +18,21 @@ public class Execution {
 
 	/** The cmd. */
 	private String cmd;
-	
+
 	/** The exit status. */
 	private int exitStatus;
-	
+
 	/** The input lines. */
 	private List<String> inputLines;
-	
+
 	/** The error lines. */
 	private List<String> errorLines;
 
 	/**
 	 * Instantiates a new execution.
 	 *
-	 * @param cmd the cmd
+	 * @param cmd
+	 *            the cmd
 	 */
 	public Execution(String cmd) {
 		super();
@@ -50,7 +51,8 @@ public class Execution {
 	/**
 	 * Sets the cmd.
 	 *
-	 * @param cmd the new cmd
+	 * @param cmd
+	 *            the new cmd
 	 */
 	public void setCmd(String cmd) {
 		this.cmd = cmd;
@@ -68,7 +70,8 @@ public class Execution {
 	/**
 	 * Sets the exit status.
 	 *
-	 * @param exitStatus the new exit status
+	 * @param exitStatus
+	 *            the new exit status
 	 */
 	public void setExitStatus(int exitStatus) {
 		this.exitStatus = exitStatus;
@@ -86,7 +89,8 @@ public class Execution {
 	/**
 	 * Sets the input lines.
 	 *
-	 * @param inputLines the new input lines
+	 * @param inputLines
+	 *            the new input lines
 	 */
 	public void setInputLines(List<String> inputLines) {
 		this.inputLines = inputLines;
@@ -104,13 +108,16 @@ public class Execution {
 	/**
 	 * Sets the error lines.
 	 *
-	 * @param errorLines the new error lines
+	 * @param errorLines
+	 *            the new error lines
 	 */
 	public void setErrorLines(List<String> errorLines) {
 		this.errorLines = errorLines;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -138,12 +145,13 @@ public class Execution {
 	/**
 	 * Run.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void run() throws IOException {
 		String line;
-		
-		LOGGER.debug("executing:"+cmd);
+
+		LOGGER.debug("executing:" + cmd);
 
 		Process p = Runtime.getRuntime().exec(cmd);
 

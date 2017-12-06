@@ -26,7 +26,7 @@ public class PhotoolFacade {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(PhotoolFacade.class);
-		
+
 	@Inject
 	private ConfigService configService;
 
@@ -34,7 +34,8 @@ public class PhotoolFacade {
 	 * Creates the data model.
 	 *
 	 * @return the data model
-	 * @throws FileNotFoundException the file not found exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
 	 * @deprecated
 	 */
 	@Deprecated
@@ -51,31 +52,33 @@ public class PhotoolFacade {
 
 		return dataModel;
 	}
+
 	public DataModel createDataModel(File imagesDir) throws FileNotFoundException {
 		LOGGER.info("creating data model");
 		DataModel dataModel = new DataModel();
-		
+
 		dataModel.setCwd(imagesDir);
 		dataModel.setProfile(configService.loadProfile());
 		dataModel.setConfig(configService.loadConfig());
 		dataModel.setFiles(scanFiles(dataModel.getCwd()));
-		
+
 		LOGGER.info("data model created:" + dataModel);
-		
+
 		return dataModel;
 	}
 
 	/**
 	 * Scan files.
 	 *
-	 * @param cwd the cwd
+	 * @param cwd
+	 *            the cwd
 	 * @return the list
 	 */
 	private List<File> scanFiles(File cwd) {
 		List<File> files = new ArrayList<>();
-		
-		FilenameFilter filter=new FilenameFilter() {
-			
+
+		FilenameFilter filter = new FilenameFilter() {
+
 			@Override
 			public boolean accept(File dir, String name) {
 				// TODO Auto-generated method stub
@@ -83,12 +86,11 @@ public class PhotoolFacade {
 			}
 		};
 		cwd.listFiles(filter);
-		
 
 		for (File file : cwd.listFiles()) {
 			if (!file.isFile())
 				continue;
-			
+
 			String ext = FilenameUtils.getExtension(file.getName().toLowerCase());
 
 			if (!"jpg".equals(ext) && !"png".equals(ext)) {
@@ -99,13 +101,11 @@ public class PhotoolFacade {
 		return files;
 	}
 
-	
-
-	
 	/**
 	 * Compute out dir.
 	 *
-	 * @param model the model
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	public String computeOutDir(DataModel model) {
@@ -129,23 +129,25 @@ public class PhotoolFacade {
 	/**
 	 * To hex color.
 	 *
-	 * @param color the color
+	 * @param color
+	 *            the color
 	 * @return the string
 	 */
 	public static String toHexColor(Color color) {
 		return String.format("\"#%1$02x%2$02x%3$02x\"", color.getRed(), color.getGreen(), color.getBlue());
 	}
-	
-	String doubleToString(Double d){
-		
-		String res=Double.toString(d);
+
+	String doubleToString(Double d) {
+
+		String res = Double.toString(d);
 		return res.replaceAll("\\,", ".");
 	}
 
 	/**
 	 * Creates the jobs.
 	 *
-	 * @param dataModel the data model
+	 * @param dataModel
+	 *            the data model
 	 */
 	public void createJobs(DataModel dataModel) {
 
@@ -156,29 +158,28 @@ public class PhotoolFacade {
 		Profile profile = dataModel.getProfile();
 		Config config = dataModel.getConfig();
 		for (File f : dataModel.getFiles()) {
-			
-			IMIdentify identify=identify(f, config.getImgMagicIdentify());
-			LOGGER.debug("identify:"+identify);
-			
+
+			IMIdentify identify = identify(f, config.getImgMagicIdentify());
+			LOGGER.debug("identify:" + identify);
+
 			List<String> cmds = new ArrayList<String>();
 			Job job = new MultiCmdJob(cmds);
 
 			StringBuilder builder;
-			
-			if(profile.isGeoTag()){
+
+			if (profile.isGeoTag()) {
 				builder = new StringBuilder();
 				builder.append(config.getExiftool());
-				String lat=doubleToString(profile.getGeoPoint().getLat());
-				String lng=doubleToString(profile.getGeoPoint().getLng());
-				builder.append(String.format(" -GPSLatitude=%s -GPSLongitude=%s ",lat,lng));
+				String lat = doubleToString(profile.getGeoPoint().getLat());
+				String lng = doubleToString(profile.getGeoPoint().getLng());
+				builder.append(String.format(" -GPSLatitude=%s -GPSLongitude=%s ", lat, lng));
 				builder.append(" \"");
 				builder.append(f.getAbsolutePath());
 				builder.append("\"");
 				cmds.add(builder.toString());
-				
+
 			}
-			
-			
+
 			builder = new StringBuilder();
 			builder.append(config.getImgMagicConvert());
 			builder.append(" \"");
@@ -201,11 +202,11 @@ public class PhotoolFacade {
 			if (profile.isAutolevel()) {
 				builder.append(" -auto-level");
 			}
-			
-			if(profile.getCustomParams()!=null && !"".equals(profile.getCustomParams())){
-				builder.append(" "+profile.getCustomParams()+" ");
+
+			if (profile.getCustomParams() != null && !"".equals(profile.getCustomParams())) {
+				builder.append(" " + profile.getCustomParams() + " ");
 			}
-			
+
 			File outFile = new File(outDir, f.getName());
 			builder.append(" \"" + outFile.getAbsolutePath() + "\"");
 			LOGGER.info("cmd:" + builder.toString());
@@ -213,14 +214,12 @@ public class PhotoolFacade {
 			cmds.add(builder.toString());
 
 			if (profile.isAddSignature()) {
-				
-				
-				
+
 				builder = new StringBuilder();
 				builder.append(config.getImgMagicComposite());
-				builder.append(" -gravity "+profile.getSigGravity()  +" -geometry "+profile.getSigGeometry()+" ");
-				
-				builder.append("( \""+profile.getSigFile()+"\" -resize \""+profile.getSigResize()+"\" ) ");				
+				builder.append(" -gravity " + profile.getSigGravity() + " -geometry " + profile.getSigGeometry() + " ");
+
+				builder.append("( \"" + profile.getSigFile() + "\" -resize \"" + profile.getSigResize() + "\" ) ");
 				builder.append("\"" + outFile.getAbsolutePath() + "\" ");
 				builder.append("\"" + outFile.getAbsolutePath() + "\"");
 
@@ -233,19 +232,21 @@ public class PhotoolFacade {
 		}
 	}
 
-	
 	/**
 	 * Process.
 	 *
-	 * @param dataModel the data model
-	 * @param viewModel the view model
-	 * @throws InterruptedException 
-	 * @throws Exception the exception
+	 * @param dataModel
+	 *            the data model
+	 * @param viewModel
+	 *            the view model
+	 * @throws InterruptedException
+	 * @throws Exception
+	 *             the exception
 	 */
-	public void process(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException  {
+	public void process(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException {
 
 		new File(computeOutDir(dataModel)).mkdirs();
-		createJobs(dataModel);				
+		createJobs(dataModel);
 		runJobs(dataModel, viewModel);
 
 	}
@@ -253,9 +254,12 @@ public class PhotoolFacade {
 	/**
 	 * Run jobs.
 	 *
-	 * @param dataModel the data model
-	 * @param viewModel the view model
-	 * @throws InterruptedException the interrupted exception
+	 * @param dataModel
+	 *            the data model
+	 * @param viewModel
+	 *            the view model
+	 * @throws InterruptedException
+	 *             the interrupted exception
 	 */
 	private void runJobs(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException {
 		long start = System.currentTimeMillis();
@@ -284,8 +288,10 @@ public class PhotoolFacade {
 	/**
 	 * Gui update.
 	 *
-	 * @param dataModel the data model
-	 * @param viewModel the view model
+	 * @param dataModel
+	 *            the data model
+	 * @param viewModel
+	 *            the view model
 	 */
 	private void guiUpdate(DataModel dataModel, JobsStatusDto viewModel) {
 
@@ -303,30 +309,33 @@ public class PhotoolFacade {
 		viewModel.setProgressLabel("" + count + "/" + dataModel.getJobs().size());
 		viewModel.setErrorLabel("Błędow:" + errors);
 	}
-	
+
 	/**
 	 * Identify.
 	 *
-	 * @param file the file
-	 * @param identifyFullPath the identify full path
+	 * @param file
+	 *            the file
+	 * @param identifyFullPath
+	 *            the identify full path
 	 * @return the IM identify
 	 */
-	public static IMIdentify identify(File file,String identifyFullPath){
-		
-		IMIdentify identify=new IMIdentify();
-		
-		Execution execution=new Execution("\""+identifyFullPath+"\" -format \"%w %h\" \""+file.getAbsolutePath()+"\"");
+	public static IMIdentify identify(File file, String identifyFullPath) {
+
+		IMIdentify identify = new IMIdentify();
+
+		Execution execution = new Execution(
+				"\"" + identifyFullPath + "\" -format \"%w %h\" \"" + file.getAbsolutePath() + "\"");
 		try {
 			execution.run();
 			String l = execution.getInputLines().get(0);
 			String[] tmp = l.split(" ");
 			identify.setWidth(Integer.valueOf(tmp[0]));
 			identify.setHeight(Integer.valueOf(tmp[1]));
-			
-		} catch (IOException e) {			
+
+		} catch (IOException e) {
 			e.printStackTrace();
 			throw new PhototoolRuntimeException(e.getMessage());
-		}		
+		}
 		return identify;
 	}
 }

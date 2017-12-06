@@ -14,7 +14,6 @@ import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.webgui.WebServer;
 
-
 /**
  * The Class Phototool.
  */
@@ -22,33 +21,33 @@ public class Phototool {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(Phototool.class);
-		
+
 	/** The service. */
 	@Inject
 	private PhotoolFacade service;
-	
+
 	/** The jobs. */
 	private List<Job> jobs = new ArrayList<>();
-	
+
 	@Inject
 	WebServer webServer;
-	
+
 	@Inject
 	ConfigService configService;
 
-			
 	/**
 	 * Run.
 	 *
-	 * @param args the args
-	 * @throws Exception the exception
+	 * @param args
+	 *            the args
+	 * @throws Exception
+	 *             the exception
 	 */
-	public void run(String[] args) throws Exception {					
+	public void run(String[] args) throws Exception {
 		webServer.start();
-		
+
 		Config config = configService.loadConfig();
-		
-		
+
 		try {
 			String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
 			Execution exe = new Execution(cmd);
@@ -57,14 +56,15 @@ public class Phototool {
 		} catch (Exception e) {
 			LOGGER.error(e);
 			JOptionPane.showMessageDialog(null, e.getMessage());
-			//throw new RuntimeException(e);
-		}		
+			// throw new RuntimeException(e);
+		}
 	}
 
 	/**
 	 * Run jobs thread.
 	 *
-	 * @throws InterruptedException the interrupted exception
+	 * @throws InterruptedException
+	 *             the interrupted exception
 	 */
 	public void runJobsThread() throws InterruptedException {
 
@@ -85,7 +85,7 @@ public class Phototool {
 					count++;
 				}
 			}
-			LOGGER.debug("" + count + "/" + jobs.size());			
+			LOGGER.debug("" + count + "/" + jobs.size());
 			Thread.sleep(500);
 
 		}
@@ -104,5 +104,5 @@ public class Phototool {
 		}
 		System.out.println("" + count + "/" + jobs.size());
 
-	}	
+	}
 }

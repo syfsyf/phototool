@@ -11,21 +11,24 @@ public class MultiCmdJob extends AbstractJob {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(MultiCmdJob.class);
-	
+
 	/** The cmds. */
 	private List<String> cmds;
 
 	/**
 	 * Instantiates a new multi cmd job.
 	 *
-	 * @param cmds the cmds
+	 * @param cmds
+	 *            the cmds
 	 */
 	public MultiCmdJob(List<String> cmds) {
 		super();
 		this.cmds = cmds;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
@@ -43,16 +46,18 @@ public class MultiCmdJob extends AbstractJob {
 		}
 		setDone(true);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder=new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		builder.append("MultiCmdJob\n");
-		if(cmds!=null){
-			for(String cmd:cmds){
+		if (cmds != null) {
+			for (String cmd : cmds) {
 				builder.append("\t");
 				builder.append(cmd);
 				builder.append("\n");

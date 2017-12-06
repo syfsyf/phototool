@@ -9,55 +9,53 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("profile")
 public class Profile {
-		 
 
-	private boolean geoTag=false;
+	private boolean geoTag = false;
 	private GeoPoint geoPoint;
-	
-	private boolean addGeoTagToSourceFile=true;
-	private boolean addGeoTagToConvertedFile=true;
-	
-	
+
+	private boolean addGeoTagToSourceFile = true;
+	private boolean addGeoTagToConvertedFile = true;
+
 	/** The autolevel. */
 	private boolean autolevel = false;
-	
+
 	/** The border. */
 	private boolean border = false;
-	
+
 	/** The border color. */
 	private Color borderColor = Color.black;
-	
-	private String borderColorHex="#000";
-	
+
+	private String borderColorHex = "#000";
+
 	/** The border size. */
 	private int borderSize = 20;
 
 	/** The out dir name. */
 	private String outDirName = "__resize_";
-	
+
 	/** The resize. */
 	private boolean resize = true;
-	
+
 	/** The resize width. */
 	private int resizeWidth = 1300;
 
 	/** The add signature. */
-	private boolean addSignature=true;
-	
+	private boolean addSignature = true;
+
 	/** The sig file. */
 	private String sigFile;
-	
+
 	/** The sig gravity. */
 	private String sigGravity = "SouthWest";
-	
+
 	/** The sig geometry. */
 	private String sigGeometry = "+20+20";
-	
+
 	/** The sig resize. */
 	private String sigResize = "x10";
-	
+
 	/** The custom params. */
-	private String customParams="-quality  100%";
+	private String customParams = "-quality  100%";
 
 	/**
 	 * Gets the border color.
@@ -125,7 +123,8 @@ public class Profile {
 	/**
 	 * Sets the autolevel.
 	 *
-	 * @param autolevel the new autolevel
+	 * @param autolevel
+	 *            the new autolevel
 	 */
 	public void setAutolevel(boolean autolevel) {
 		this.autolevel = autolevel;
@@ -134,7 +133,8 @@ public class Profile {
 	/**
 	 * Sets the border.
 	 *
-	 * @param border the new border
+	 * @param border
+	 *            the new border
 	 */
 	public void setBorder(boolean border) {
 		this.border = border;
@@ -143,7 +143,8 @@ public class Profile {
 	/**
 	 * Sets the border color.
 	 *
-	 * @param borderColor the new border color
+	 * @param borderColor
+	 *            the new border color
 	 */
 	public void setBorderColor(Color borderColor) {
 		this.borderColor = borderColor;
@@ -152,7 +153,8 @@ public class Profile {
 	/**
 	 * Sets the border size.
 	 *
-	 * @param borderSize the new border size
+	 * @param borderSize
+	 *            the new border size
 	 */
 	public void setBorderSize(int borderSize) {
 		this.borderSize = borderSize;
@@ -161,7 +163,8 @@ public class Profile {
 	/**
 	 * Sets the out dir name.
 	 *
-	 * @param outDirName the new out dir name
+	 * @param outDirName
+	 *            the new out dir name
 	 */
 	public void setOutDirName(String outDirName) {
 		this.outDirName = outDirName;
@@ -170,7 +173,8 @@ public class Profile {
 	/**
 	 * Sets the resize.
 	 *
-	 * @param resize the new resize
+	 * @param resize
+	 *            the new resize
 	 */
 	public void setResize(boolean resize) {
 		this.resize = resize;
@@ -179,7 +183,8 @@ public class Profile {
 	/**
 	 * Sets the resize width.
 	 *
-	 * @param resizeWidth the new resize width
+	 * @param resizeWidth
+	 *            the new resize width
 	 */
 	public void setResizeWidth(int resizeWidth) {
 		this.resizeWidth = resizeWidth;
@@ -197,7 +202,8 @@ public class Profile {
 	/**
 	 * Sets the adds the signature.
 	 *
-	 * @param addSignature the new adds the signature
+	 * @param addSignature
+	 *            the new adds the signature
 	 */
 	public void setAddSignature(boolean addSignature) {
 		this.addSignature = addSignature;
@@ -215,7 +221,8 @@ public class Profile {
 	/**
 	 * Sets the sig file.
 	 *
-	 * @param signatureFile the new sig file
+	 * @param signatureFile
+	 *            the new sig file
 	 */
 	public void setSigFile(String signatureFile) {
 		this.sigFile = signatureFile;
@@ -233,7 +240,8 @@ public class Profile {
 	/**
 	 * Sets the sig gravity.
 	 *
-	 * @param gravity the new sig gravity
+	 * @param gravity
+	 *            the new sig gravity
 	 */
 	public void setSigGravity(String gravity) {
 		this.sigGravity = gravity;
@@ -251,7 +259,8 @@ public class Profile {
 	/**
 	 * Sets the sig geometry.
 	 *
-	 * @param sigGeometry the new sig geometry
+	 * @param sigGeometry
+	 *            the new sig geometry
 	 */
 	public void setSigGeometry(String sigGeometry) {
 		this.sigGeometry = sigGeometry;
@@ -269,7 +278,8 @@ public class Profile {
 	/**
 	 * Sets the sig resize.
 	 *
-	 * @param sigResize the new sig resize
+	 * @param sigResize
+	 *            the new sig resize
 	 */
 	public void setSigResize(String sigResize) {
 		this.sigResize = sigResize;
@@ -287,7 +297,8 @@ public class Profile {
 	/**
 	 * Sets the custom params.
 	 *
-	 * @param customParams the new custom params
+	 * @param customParams
+	 *            the new custom params
 	 */
 	public void setCustomParams(String customParams) {
 		this.customParams = customParams;
@@ -304,6 +315,7 @@ public class Profile {
 	public GeoPoint getGeoPoint() {
 		return geoPoint;
 	}
+
 	public void setGeoPoint(GeoPoint geoPoint) {
 		this.geoPoint = geoPoint;
 	}
@@ -331,7 +343,5 @@ public class Profile {
 	public void setBorderColorHex(String borderColorHex) {
 		this.borderColorHex = borderColorHex;
 	}
-	
-	
-	
+
 }
