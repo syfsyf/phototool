@@ -6,7 +6,6 @@ class ErrorComponent extends React.Component {
     if (this.props.error && this.props.error.message) {
       return <div className="error">error:{this.props.error.message}</div>
     }
-
     return <div />
   }
 }

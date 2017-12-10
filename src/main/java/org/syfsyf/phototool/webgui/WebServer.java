@@ -37,13 +37,15 @@ public class WebServer {
 
 		// webSocket("/echo", EchoWebSocket.class);
 
-		before((req, res) -> {
+		before("/*",(req, res) -> {
 
 			InetAddress address = InetAddress.getByName(req.ip());
 			if (!address.isLoopbackAddress()) {
 				halt(401, "You are not welcome here");
 			}
+			LOGGER.info("Session id:"+ req.session().id());
 		});
+
 
 		path("/api", () -> {
 

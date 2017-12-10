@@ -13,8 +13,6 @@ class ProfileForm extends React.Component {
   }
 
   onPointChanged(lat, lng) {
-    console.log(this.props)
-    console.log(lat, lng)
     this.formDispatch(actions.change("profile.geoPoint.lat", lat))
     this.formDispatch(actions.change("profile.geoPoint.lng", lng))
   }
