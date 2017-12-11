@@ -239,10 +239,16 @@ public class PhotoolFacade {
      */
     public void process(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException {
 
-        new File(computeOutDir(dataModel)).mkdirs();
-        createJobs(dataModel);
-        runJobs(dataModel, viewModel);
-
+        Runnable runnable = () -> {
+            new File(computeOutDir(dataModel)).mkdirs();
+            createJobs(dataModel);
+            try {
+                runJobs(dataModel, viewModel);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+        new Thread(runnable).start();
     }
 
     /**
@@ -263,7 +269,7 @@ public class PhotoolFacade {
 
         while (!executor.isTerminated()) {
 
-            guiUpdate(dataModel, viewModel);
+            statusModelUpdate(dataModel, viewModel);
             Thread.sleep(500);
         }
 
@@ -272,7 +278,8 @@ public class PhotoolFacade {
         long t = System.currentTimeMillis() - start;
         LOGGER.info("EXEC TIME:" + t);
 
-        guiUpdate(dataModel, viewModel);
+        statusModelUpdate(dataModel, viewModel);
+        viewModel.setProcessStatus(viewModel.getProcessStatus()+" czas:" + (t/1000.0));
 
     }
 
@@ -282,7 +289,7 @@ public class PhotoolFacade {
      * @param dataModel the data model
      * @param viewModel the view model
      */
-    private void guiUpdate(DataModel dataModel, JobsStatusDto viewModel) {
+    private void statusModelUpdate(DataModel dataModel, JobsStatusDto viewModel) {
 
         int count = 0;
         int errors = 0;
@@ -295,8 +302,9 @@ public class PhotoolFacade {
             }
         }
         viewModel.setProgressValue(count);
-        viewModel.setProgressLabel("" + count + "/" + dataModel.getJobs().size());
+        viewModel.setProcessStatus("" + count + "/" + dataModel.getJobs().size());
         viewModel.setErrorLabel("Błędow:" + errors);
+        viewModel.setJobStarted(!(count==dataModel.getJobs().size()));
     }
 
     /**

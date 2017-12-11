@@ -8,7 +8,7 @@ class Phototool extends React.Component {
     this.pullStatus()
   }
   pullStatus() {
-    if (this.props.main.jobStart) {
+    if (this.props.main.jobStarted) {
       this.props.fetchStatus()
     }
     setTimeout(() => {
@@ -21,8 +21,13 @@ class Phototool extends React.Component {
     return (
       <div>
         <ErrorComponent error={this.props.main.error} />
-        <ProfileForm profile={this.props.forms} startJob={this.props.startJob} />
-        <div>status:{this.props.main.processStatus.progressLabel}</div>
+        <ProfileForm
+          profile={this.props.forms}
+          main={this.props.main}
+          startJob={this.props.startJob}
+          jobStarted={this.props.jobStarted}          
+        />
+        <div>status:{this.props.processStatus}</div>
       </div>
     )
   }

@@ -125,7 +125,7 @@ class ProfileForm extends React.Component {
                   </fieldset>
                 </td>
                 <td>
-                  <fieldset style={{width:'370px'}}>
+                  <fieldset style={{ width: "370px" }}>
                     <legend>
                       <label>
                         geoTag?
@@ -133,9 +133,19 @@ class ProfileForm extends React.Component {
                       </label>
                     </legend>
                     <span>lat</span>
-                    <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lat" className="geoInput"/>
+                    <Control.text
+                      disabled={!profile.geoTag.value}
+                      parser={this.toNumber}
+                      model=".geoPoint.lat"
+                      className="geoInput"
+                    />
                     <span>lng</span>
-                    <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lng" className="geoInput"/>
+                    <Control.text
+                      disabled={!profile.geoTag.value}
+                      parser={this.toNumber}
+                      model=".geoPoint.lng"
+                      className="geoInput"
+                    />
                     {showAdditionalGeoTag ? (
                       <div>
                         <label>
@@ -160,7 +170,9 @@ class ProfileForm extends React.Component {
               </tr>
             </tbody>
           </table>
-          <button type="submit">GO</button>
+          <button disabled={this.props.jobStarted} type="submit">
+            GO
+          </button>
         </Form>
       </div>
     )

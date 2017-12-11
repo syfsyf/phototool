@@ -83,7 +83,7 @@ public class ApiImpl implements Api {
             return viewModel;
         }
         viewModel = new JobsStatusDto();
-        viewModel.setProgressLabel("utworzone w sessji");
+        viewModel.setProcessStatus("utworzone w sessji");
         session.attribute(VIEW_MODEL, viewModel);
         return viewModel;
     }
@@ -104,6 +104,9 @@ public class ApiImpl implements Api {
         dataModel.setProfile(profile);
 
         JobsStatusDto viewModel = getViewModel(request);
+
+        viewModel.setProcessStatus("-");
+        viewModel.setJobStarted(true);
 
         LOGGER.info("runJob");
 

@@ -3,8 +3,10 @@ package org.syfsyf.phototool.gui;
 public class JobsStatusDto {
 
     private String errorLabel = "";
-    private String progressLabel = "";
+    private String processStatus = "";
     private int progressValue = 0;
+
+    private boolean jobStarted;
 
     public String getErrorLabel() {
         return errorLabel;
@@ -14,12 +16,12 @@ public class JobsStatusDto {
         this.errorLabel = errorLabel;
     }
 
-    public String getProgressLabel() {
-        return progressLabel;
+    public String getProcessStatus() {
+        return processStatus;
     }
 
-    public void setProgressLabel(String progressLabel) {
-        this.progressLabel = progressLabel;
+    public void setProcessStatus(String processStatus) {
+        this.processStatus = processStatus;
     }
 
     public int getProgressValue() {
@@ -30,4 +32,11 @@ public class JobsStatusDto {
         this.progressValue = progressValue;
     }
 
+    public boolean isJobStarted() {
+        return jobStarted;
+    }
+
+    public void setJobStarted(boolean jobStarted) {
+        this.jobStarted = jobStarted;
+    }
 }

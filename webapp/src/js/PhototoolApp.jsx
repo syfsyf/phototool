@@ -3,7 +3,13 @@ import Phototool from "./components/Phototool"
 import * as ACTION from "./actions"
 
 const mapStateToProps = state => {
-  return state
+  console.log("mapStateToProps", state)
+  return {
+    main: state.main,
+    forms: state.forms,
+    jobStarted: state.main.jobStarted,
+    processStatus: state.main.processStatus
+  }
 }
 const mapDispatchToProps = dispatch => {
   return {
