@@ -1,4 +1,4 @@
-edycja gui w eclipse + windowbuilder.
+edycja gui w intelij + atom
 
 potrzebne są:
 	
