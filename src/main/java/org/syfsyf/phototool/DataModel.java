@@ -1,141 +1,146 @@
 package org.syfsyf.phototool;
 
+import org.syfsyf.phototool.cfg.Config;
+import org.syfsyf.phototool.cfg.Profile;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.syfsyf.phototool.cfg.Config;
-import org.syfsyf.phototool.cfg.Profile;
 
 /**
  * The Class DataModel.
  */
 public class DataModel {
 
-	/** The cwd. */
-	private File cwd;
+    /**
+     * The cwd.
+     */
+    private File cwd;
 
-	/** The files. */
-	private List<File> files = new ArrayList<>();
+    /**
+     * The files.
+     */
+    private List<File> files = new ArrayList<>();
 
-	/** The jobs. */
-	private List<Job> jobs = new ArrayList<>();
+    /**
+     * The jobs.
+     */
+    private List<Job> jobs = new ArrayList<>();
 
-	/** The profile. */
-	private Profile profile;
+    /**
+     * The profile.
+     */
+    private Profile profile;
 
-	/** The config. */
-	private Config config;
+    /**
+     * The config.
+     */
+    private Config config;
 
-	/**
-	 * Gets the cwd.
-	 *
-	 * @return the cwd
-	 */
-	public File getCwd() {
-		return cwd;
-	}
+    /**
+     * Gets the cwd.
+     *
+     * @return the cwd
+     */
+    public File getCwd() {
+        return cwd;
+    }
 
-	/**
-	 * Sets the cwd.
-	 *
-	 * @param cwd
-	 *            the new cwd
-	 */
-	public void setCwd(File cwd) {
-		this.cwd = cwd;
-	}
+    /**
+     * Sets the cwd.
+     *
+     * @param cwd the new cwd
+     */
+    public void setCwd(File cwd) {
+        this.cwd = cwd;
+    }
 
-	/**
-	 * Gets the files.
-	 *
-	 * @return the files
-	 */
-	public List<File> getFiles() {
-		return files;
-	}
+    /**
+     * Gets the files.
+     *
+     * @return the files
+     */
+    public List<File> getFiles() {
+        return files;
+    }
 
-	/**
-	 * Sets the files.
-	 *
-	 * @param files
-	 *            the new files
-	 */
-	public void setFiles(List<File> files) {
-		this.files = files;
-	}
+    /**
+     * Sets the files.
+     *
+     * @param files the new files
+     */
+    public void setFiles(List<File> files) {
+        this.files = files;
+    }
 
-	/**
-	 * Gets the jobs.
-	 *
-	 * @return the jobs
-	 */
-	public List<Job> getJobs() {
-		return jobs;
-	}
+    /**
+     * Gets the jobs.
+     *
+     * @return the jobs
+     */
+    public List<Job> getJobs() {
+        return jobs;
+    }
 
-	/**
-	 * Sets the jobs.
-	 *
-	 * @param jobs
-	 *            the new jobs
-	 */
-	public void setJobs(List<Job> jobs) {
-		this.jobs = jobs;
-	}
+    /**
+     * Sets the jobs.
+     *
+     * @param jobs the new jobs
+     */
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
 
-	/**
-	 * Gets the profile.
-	 *
-	 * @return the profile
-	 */
-	public Profile getProfile() {
-		return profile;
-	}
+    /**
+     * Gets the profile.
+     *
+     * @return the profile
+     */
+    public Profile getProfile() {
+        return profile;
+    }
 
-	/**
-	 * Sets the profile.
-	 *
-	 * @param profile
-	 *            the new profile
-	 */
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
+    /**
+     * Sets the profile.
+     *
+     * @param profile the new profile
+     */
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 
-	/**
-	 * Gets the config.
-	 *
-	 * @return the config
-	 */
-	public Config getConfig() {
-		return config;
-	}
+    /**
+     * Gets the config.
+     *
+     * @return the config
+     */
+    public Config getConfig() {
+        return config;
+    }
 
-	/**
-	 * Sets the config.
-	 *
-	 * @param config
-	 *            the new config
-	 */
-	public void setConfig(Config config) {
-		this.config = config;
-	}
+    /**
+     * Sets the config.
+     *
+     * @param config the new config
+     */
+    public void setConfig(Config config) {
+        this.config = config;
+    }
 
-	/**
-	 * toString method for DataModel.
-	 *
-	 * @return the string
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder();
+    /**
+     * toString method for DataModel.
+     *
+     * @return the string
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
 
-		sb.append("Cwd :  " + (this.cwd == null ? "" : this.cwd) + ",");
-		sb.append("Files :  " + (this.files == null ? "" : this.files.size()) + ",");
+        sb.append("Cwd :  " + (this.cwd == null ? "" : this.cwd) + ",");
+        sb.append("Files :  " + (this.files == null ? "" : this.files.size()) + ",");
 
-		return "DataModel [" + sb.toString() + "]";
-	}
+        return "DataModel [" + sb.toString() + "]";
+    }
 
 }

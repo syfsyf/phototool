@@ -1,8 +1,5 @@
 package org.syfsyf.phototool.webgui.impl;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.picocontainer.annotations.Inject;
@@ -15,108 +12,110 @@ import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.JobsStatusDto;
 import org.syfsyf.phototool.webgui.Api;
 import org.syfsyf.phototool.webgui.ApiDto;
-
 import spark.Request;
 import spark.Response;
 import spark.Session;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class ApiImpl implements Api {
 
-	private static final Logger LOGGER = Logger.getLogger(ApiImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ApiImpl.class);
 
-	private static final String DATA_MODEL = "dataModel";
-	private static final String VIEW_MODEL = "viewModel";
+    private static final String DATA_MODEL = "dataModel";
+    private static final String VIEW_MODEL = "viewModel";
 
-	@Inject
-	ConfigService configService;
+    @Inject
+    ConfigService configService;
 
-	@Inject
-	PhotoolFacade photoolFacade;
+    @Inject
+    PhotoolFacade photoolFacade;
 
-	@Inject
-	JsonService jsonService;
+    @Inject
+    JsonService jsonService;
 
-	@Override
-	public Object load(Request request, Response response) throws Exception {
-		return configService.loadProfile();
-	}
+    @Override
+    public Object load(Request request, Response response) throws Exception {
+        return configService.loadProfile();
+    }
 
-	@Override
-	public Object save(Request request, Response response) throws Exception {
-		return null;
-	}
+    @Override
+    public Object save(Request request, Response response) throws Exception {
+        return null;
+    }
 
-	@Override
-	public Object loadJob(Request request, Response response) throws Exception {
+    @Override
+    public Object loadJob(Request request, Response response) throws Exception {
 
-		DataModel dataModel = getDataModel(request);
+        DataModel dataModel = getDataModel(request);
 
-		ApiDto dto = new ApiDto();
+        ApiDto dto = new ApiDto();
 
-		dto.setDirectory(dataModel.getCwd().getAbsolutePath());
-		dto.setNumberOfFiles(dataModel.getFiles().size());
-		GeoPoints geoPoints = configService.loadGeoPoints();
-		dto.setGeoPoints(geoPoints.getGeoPoints());
+        dto.setDirectory(dataModel.getCwd().getAbsolutePath());
+        dto.setNumberOfFiles(dataModel.getFiles().size());
+        GeoPoints geoPoints = configService.loadGeoPoints();
+        dto.setGeoPoints(geoPoints.getGeoPoints());
 
-		BeanUtils.copyProperties(dto, dataModel.getProfile());
+        BeanUtils.copyProperties(dto, dataModel.getProfile());
 
-		return dto;
-	}
+        return dto;
+    }
 
-	protected DataModel getDataModel(Request request) throws FileNotFoundException {
+    protected DataModel getDataModel(Request request) throws FileNotFoundException {
 
-		Session session = request.session();
-		DataModel dataModel = session.attribute(DATA_MODEL);
-		if (dataModel != null) {
-			return dataModel;
-		}
+        Session session = request.session();
+        DataModel dataModel = session.attribute(DATA_MODEL);
+        if (dataModel != null) {
+            return dataModel;
+        }
 
-		dataModel = photoolFacade.createDataModel();
-		session.attribute(DATA_MODEL, dataModel);
-		return dataModel;
-	}
+        dataModel = photoolFacade.createDataModel();
+        session.attribute(DATA_MODEL, dataModel);
+        return dataModel;
+    }
 
-	protected JobsStatusDto getViewModel(Request request) throws FileNotFoundException {
+    protected JobsStatusDto getViewModel(Request request) throws FileNotFoundException {
 
-		Session session = request.session();
-		JobsStatusDto viewModel = session.attribute(VIEW_MODEL);
-		if (viewModel != null) {
-			return viewModel;
-		}
-		viewModel = new JobsStatusDto();
-		viewModel.setProgressLabel("utworzone w sessji");
-		session.attribute(VIEW_MODEL, viewModel);
-		return viewModel;
-	}
+        Session session = request.session();
+        JobsStatusDto viewModel = session.attribute(VIEW_MODEL);
+        if (viewModel != null) {
+            return viewModel;
+        }
+        viewModel = new JobsStatusDto();
+        viewModel.setProgressLabel("utworzone w sessji");
+        session.attribute(VIEW_MODEL, viewModel);
+        return viewModel;
+    }
 
-	@Override
-	public Object runJob(Request request, Response response) throws Exception {
+    @Override
+    public Object runJob(Request request, Response response) throws Exception {
 
-		ApiDto jobDto = jsonService.fromJson(request.body(), ApiDto.class);
+        ApiDto jobDto = jsonService.fromJson(request.body(), ApiDto.class);
 
-		DataModel dataModel = photoolFacade.createDataModel(new File(jobDto.getDirectory()));
-		request.attribute(DATA_MODEL, dataModel);
+        DataModel dataModel = photoolFacade.createDataModel(new File(jobDto.getDirectory()));
+        request.attribute(DATA_MODEL, dataModel);
 
-		Profile profile = new Profile();
-		BeanUtils.copyProperties(profile, jobDto);
+        Profile profile = new Profile();
+        BeanUtils.copyProperties(profile, jobDto);
 
-		configService.saveProfile(profile);
+        configService.saveProfile(profile);
 
-		dataModel.setProfile(profile);
+        dataModel.setProfile(profile);
 
-		JobsStatusDto viewModel = getViewModel(request);
+        JobsStatusDto viewModel = getViewModel(request);
 
-		LOGGER.info("runJob");
+        LOGGER.info("runJob");
 
-		photoolFacade.process(dataModel, viewModel);
+        photoolFacade.process(dataModel, viewModel);
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public Object getProcessStatus(Request request, Response response) throws Exception {
-		return getViewModel(request);
+    @Override
+    public Object getProcessStatus(Request request, Response response) throws Exception {
+        return getViewModel(request);
 
-	}
+    }
 
 }

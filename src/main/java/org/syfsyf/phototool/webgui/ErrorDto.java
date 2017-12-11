@@ -2,23 +2,23 @@ package org.syfsyf.phototool.webgui;
 
 public class ErrorDto {
 
-	private String message;
-	private String details;
+    private String message;
+    private String details;
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public String getDetails() {
-		return details;
-	}
+    public String getDetails() {
+        return details;
+    }
 
-	public void setDetails(String details) {
-		this.details = details;
-	}
+    public void setDetails(String details) {
+        this.details = details;
+    }
 
 }

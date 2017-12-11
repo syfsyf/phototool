@@ -5,32 +5,32 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("geopoint")
 public class GeoPoint {
 
-	private String name;
-	private Double lat;
-	private Double lng;
+    private String name;
+    private Double lat;
+    private Double lng;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Double getLat() {
-		return lat;
-	}
+    public Double getLat() {
+        return lat;
+    }
 
-	public void setLat(Double lat) {
-		this.lat = lat;
-	}
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
 
-	public Double getLng() {
-		return lng;
-	}
+    public Double getLng() {
+        return lng;
+    }
 
-	public void setLng(Double lng) {
-		this.lng = lng;
-	}
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
 
 }

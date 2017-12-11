@@ -12,34 +12,32 @@ import org.syfsyf.phototool.webgui.impl.ApiImpl;
  */
 public class Main {
 
-	/**
-	 * The main method.
-	 *
-	 * @param args
-	 *            the arguments
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static void main(String[] args) throws Exception {
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws Exception the exception
+     */
+    public static void main(String[] args) throws Exception {
 
-		BasicConfigurator.configure();
-		MutablePicoContainer pico = createPicoContainer();
-		Phototool phototool = pico.getComponent(Phototool.class);
-		phototool.run(args);
+        BasicConfigurator.configure();
+        MutablePicoContainer pico = createPicoContainer();
+        Phototool phototool = pico.getComponent(Phototool.class);
+        phototool.run(args);
 
-	}
+    }
 
-	public static MutablePicoContainer createPicoContainer() {
+    public static MutablePicoContainer createPicoContainer() {
 
-		MutablePicoContainer pico = new DefaultPicoContainer();
+        MutablePicoContainer pico = new DefaultPicoContainer();
 
-		pico.addComponent(ConfigServiceImpl.class);
-		pico.addComponent(PhotoolFacade.class);
-		pico.addComponent(Phototool.class);
-		pico.addComponent(WebServer.class);
-		pico.addComponent(JsonServiceImpl.class);
-		pico.addComponent(ApiImpl.class);
+        pico.addComponent(ConfigServiceImpl.class);
+        pico.addComponent(PhotoolFacade.class);
+        pico.addComponent(Phototool.class);
+        pico.addComponent(WebServer.class);
+        pico.addComponent(JsonServiceImpl.class);
+        pico.addComponent(ApiImpl.class);
 
-		return pico;
-	}
+        return pico;
+    }
 }

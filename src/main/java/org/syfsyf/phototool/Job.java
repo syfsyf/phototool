@@ -5,18 +5,18 @@ package org.syfsyf.phototool;
  */
 public interface Job extends Runnable {
 
-	/**
-	 * Checks if is done.
-	 *
-	 * @return true, if is done
-	 */
-	boolean isDone();
+    /**
+     * Checks if is done.
+     *
+     * @return true, if is done
+     */
+    boolean isDone();
 
-	/**
-	 * Gets the error.
-	 *
-	 * @return the error
-	 */
-	String getError();
+    /**
+     * Gets the error.
+     *
+     * @return the error
+     */
+    String getError();
 
 }

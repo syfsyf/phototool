@@ -5,22 +5,22 @@ import com.google.gson.GsonBuilder;
 
 public class JsonServiceImpl implements JsonService {
 
-	private Gson gson;
+    private Gson gson;
 
-	public JsonServiceImpl() {
-		gson = new GsonBuilder()
-				// .serializeNulls()
-				.setPrettyPrinting().create();
-	}
+    public JsonServiceImpl() {
+        gson = new GsonBuilder()
+                // .serializeNulls()
+                .setPrettyPrinting().create();
+    }
 
-	@Override
-	public String toJson(Object object) {
-		return gson.toJson(object);
-	}
+    @Override
+    public String toJson(Object object) {
+        return gson.toJson(object);
+    }
 
-	@Override
-	public <T> T fromJson(String json, Class<T> clazz) {
-		return gson.fromJson(json, clazz);
-	}
+    @Override
+    public <T> T fromJson(String json, Class<T> clazz) {
+        return gson.fromJson(json, clazz);
+    }
 
 }

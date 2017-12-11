@@ -1,18 +1,5 @@
 package org.syfsyf.phototool.webgui;
 
-import static spark.Spark.after;
-import static spark.Spark.before;
-import static spark.Spark.exception;
-import static spark.Spark.get;
-import static spark.Spark.halt;
-import static spark.Spark.path;
-import static spark.Spark.post;
-import static spark.Spark.staticFiles;
-import static spark.Spark.webSocket;
-import static spark.Spark.port;
-
-import java.net.InetAddress;
-
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.MimeTypes;
 import org.picocontainer.annotations.Inject;
@@ -20,60 +7,64 @@ import org.syfsyf.phototool.Helper;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.cfg.ConfigService;
 
+import java.net.InetAddress;
+
+import static spark.Spark.*;
+
 public class WebServer {
 
-	private static final Logger LOGGER = Logger.getLogger(WebServer.class);
+    private static final Logger LOGGER = Logger.getLogger(WebServer.class);
 
-	@Inject
-	ConfigService configService;
+    @Inject
+    ConfigService configService;
 
-	@Inject
-	JsonService jsonService;
-	@Inject
-	Api apiProfile;
+    @Inject
+    JsonService jsonService;
+    @Inject
+    Api apiProfile;
 
-	public void start() {
-		staticFiles.location("/public");
+    public void start() {
+        staticFiles.location("/public");
 
-		// webSocket("/echo", EchoWebSocket.class);
+        // webSocket("/echo", EchoWebSocket.class);
 
-		before("/*",(req, res) -> {
+        before("/*", (req, res) -> {
 
-			InetAddress address = InetAddress.getByName(req.ip());
-			if (!address.isLoopbackAddress()) {
-				halt(401, "You are not welcome here");
-			}
-			LOGGER.info("Session id:"+ req.session().id());
-		});
+            InetAddress address = InetAddress.getByName(req.ip());
+            if (!address.isLoopbackAddress()) {
+                halt(401, "You are not welcome here");
+            }
+            LOGGER.info("Session id:" + req.session().id());
+        });
 
 
-		path("/api", () -> {
+        path("/api", () -> {
 
-			get("/loadJob", apiProfile::loadJob, jsonService::toJson);
-			post("/runJob", apiProfile::runJob, jsonService::toJson);
-			get("/processStatus", apiProfile::getProcessStatus, jsonService::toJson);
+            get("/loadJob", apiProfile::loadJob, jsonService::toJson);
+            post("/runJob", apiProfile::runJob, jsonService::toJson);
+            get("/processStatus", apiProfile::getProcessStatus, jsonService::toJson);
 
-			after("/*", (req, res) -> {
-				res.type(MimeTypes.Type.APPLICATION_JSON.asString());
-			});
+            after("/*", (req, res) -> {
+                res.type(MimeTypes.Type.APPLICATION_JSON.asString());
+            });
 
-			exception(Exception.class, (exc, req, res) -> {
+            exception(Exception.class, (exc, req, res) -> {
 
-				LOGGER.error(exc);
-				ErrorDto errorDto = new ErrorDto();
-				res.status(500);
-				errorDto.setMessage(exc.getMessage());
-				errorDto.setDetails(Helper.stacktrace(exc));
-				res.type(MimeTypes.Type.APPLICATION_JSON.asString());
-				res.body(jsonService.toJson(errorDto));
+                LOGGER.error(exc);
+                ErrorDto errorDto = new ErrorDto();
+                res.status(500);
+                errorDto.setMessage(exc.getMessage());
+                errorDto.setDetails(Helper.stacktrace(exc));
+                res.type(MimeTypes.Type.APPLICATION_JSON.asString());
+                res.body(jsonService.toJson(errorDto));
 
-			});
-		});
-	}
+            });
+        });
+    }
 
-	public String getServerMainUrl() {
+    public String getServerMainUrl() {
 
-		return "http://localhost:" + port();
-	}
+        return "http://localhost:" + port();
+    }
 
 }
