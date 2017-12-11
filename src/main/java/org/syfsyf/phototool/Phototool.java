@@ -49,17 +49,23 @@ public class Phototool {
     public void run(String[] args) throws Exception {
         webServer.start();
 
-        Config config = configService.loadConfig();
 
-        try {
-            String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
-            Execution exe = new Execution(cmd);
-            exe.run();
+        boolean isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().
+                getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
 
-        } catch (Exception e) {
-            LOGGER.error(e);
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            // throw new RuntimeException(e);
+        if(!isDebug) {
+            Config config = configService.loadConfig();
+
+            try {
+                String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
+                Execution exe = new Execution(cmd);
+                exe.run();
+
+            } catch (Exception e) {
+                LOGGER.error(e);
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                // throw new RuntimeException(e);
+            }
         }
     }
 

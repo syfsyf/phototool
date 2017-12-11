@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Control, Form, Errors, combineForms, actions } from "react-redux-form"
 import GeoTagComponent from "./GeoTagComponent"
-import { ChromePicker } from "react-color"
+import { ChromePicker, GithubPicker, TwitterPicker } from "react-color"
 
 class ProfileForm extends React.Component {
   onSubmit(job) {
@@ -73,6 +73,35 @@ class ProfileForm extends React.Component {
                     <span>szerokość</span>
                     <Control.text disabled={!profile.resize.value} className="smallInput" model=".resizeWidth" />
                   </fieldset>
+                  <br />
+                  <fieldset>
+                    <legend>
+                      <label>
+                        dodaj podpis?
+                        <Control.checkbox model=".addSignature" />
+                      </label>
+                    </legend>
+                    <span>Plik z podpisem</span>
+                    <Control.text disabled={!profile.addSignature.value} model=".sigFile" />
+                    <br />
+                    <span>gravity</span> <Control.text disabled={!profile.addSignature.value} model=".sigGravity" />
+                    <br />
+                    <span>geometry</span> <Control.text disabled={!profile.addSignature.value} model=".sigGeometry" />
+                    <br />
+                    <span>resize</span> <Control.text disabled={!profile.addSignature.value} model=".sigResize" />
+                  </fieldset>
+                  <div>
+                    <label>
+                      Dodatkowe parametry
+                      <Control.text model=".customParams" />
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      autolevel
+                      <Control.checkbox model=".autolevel" />
+                    </label>
+                  </div>
                 </td>
                 <td>
                   <fieldset>
@@ -96,72 +125,41 @@ class ProfileForm extends React.Component {
                   </fieldset>
                 </td>
                 <td>
-                  <fieldset>
+                  <fieldset style={{width:'370px'}}>
                     <legend>
                       <label>
-                        dodaj podpis?
-                        <Control.checkbox model=".addSignature" />
+                        geoTag?
+                        <Control.checkbox model=".geoTag" />
                       </label>
                     </legend>
-                    <span>Plik z podpisem</span>
-                    <Control.text disabled={!profile.addSignature.value} model=".sigFile" />
-                    <br />
-                    <span>gravity</span> <Control.text disabled={!profile.addSignature.value} model=".sigGravity" />
-                    <br />
-                    <span>geometry</span> <Control.text disabled={!profile.addSignature.value} model=".sigGeometry" />
-                    <br />
-                    <span>resize</span> <Control.text disabled={!profile.addSignature.value} model=".sigResize" />
+                    <span>lat</span>
+                    <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lat" className="geoInput"/>
+                    <span>lng</span>
+                    <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lng" className="geoInput"/>
+                    {showAdditionalGeoTag ? (
+                      <div>
+                        <label>
+                          <span>dodać geoTag do źródłowego pliku?</span>
+                          <Control.checkbox model=".addGeoTagToSourceFile" disabled={!profile.geoTag.value} />
+                        </label>
+                        <label>
+                          <span>dodać geoTag do konwertowanego pliku?</span>
+                          <Control.checkbox model=".addGeoTagToConvertedFile" disabled={!profile.geoTag.value} />
+                        </label>
+                      </div>
+                    ) : null}
+                    {showGeoTag ? (
+                      <GeoTagComponent
+                        point={point}
+                        points={profile.geoPoints.value}
+                        onPointChanged={(lat, lng) => this.onPointChanged(lat, lng)}
+                      />
+                    ) : null}
                   </fieldset>
                 </td>
               </tr>
             </tbody>
           </table>
-
-          <div>
-            <fieldset>
-              <legend>
-                <label>
-                  geoTag?
-                  <Control.checkbox model=".geoTag" />
-                </label>
-              </legend>
-              <span>lat</span>
-              <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lat" />
-              <span>lng</span>
-              <Control.text disabled={!profile.geoTag.value} parser={this.toNumber} model=".geoPoint.lng" />
-              {showAdditionalGeoTag ? (
-                <div>
-                  <label>
-                    <span>dodać geoTag do źródłowego pliku?</span>
-                    <Control.checkbox model=".addGeoTagToSourceFile" disabled={!profile.geoTag.value} />
-                  </label>
-                  <label>
-                    <span>dodać geoTag do konwertowanego pliku?</span>
-                    <Control.checkbox model=".addGeoTagToConvertedFile" disabled={!profile.geoTag.value} />
-                  </label>
-                </div>
-              ) : null}
-              {showGeoTag ? (
-                <GeoTagComponent
-                  point={point}
-                  points={profile.geoPoints.value}
-                  onPointChanged={(lat, lng) => this.onPointChanged(lat, lng)}
-                />
-              ) : null}
-            </fieldset>
-          </div>
-          <div>
-            <label>
-              Dodatkowe parametry
-              <Control.text model=".customParams" />
-            </label>
-          </div>
-          <div>
-            <label>
-              autolevel
-              <Control.checkbox model=".autolevel" />
-            </label>
-          </div>
           <button type="submit">GO</button>
         </Form>
       </div>

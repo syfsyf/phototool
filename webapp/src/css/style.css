@@ -21,3 +21,14 @@ td {
 	padding:15px;
 	font-size: 15pt;
 }
+
+table, tr, td {
+	/*border: 1px solid #eee;*/
+	border-collapse: collapse;
+}
+fieldset{
+	border: 1px solid #ddd;
+}
+.geoInput {
+	width:100px;
+}

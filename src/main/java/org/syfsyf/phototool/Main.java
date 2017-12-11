@@ -25,6 +25,7 @@ public class Main {
         Phototool phototool = pico.getComponent(Phototool.class);
         phototool.run(args);
 
+
     }
 
     public static MutablePicoContainer createPicoContainer() {
