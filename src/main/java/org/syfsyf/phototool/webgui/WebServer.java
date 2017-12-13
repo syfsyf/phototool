@@ -60,6 +60,11 @@ public class WebServer {
 
             });
         });
+
+
+    }
+    public void stopServer(){
+        stop();
     }
 
     public String getServerMainUrl() {

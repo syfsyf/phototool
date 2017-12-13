@@ -50,6 +50,7 @@ public class Phototool {
         webServer.start();
 
 
+
         boolean isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().
                 getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
 
@@ -60,7 +61,8 @@ public class Phototool {
                 String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
                 Execution exe = new Execution(cmd);
                 exe.run();
-
+                // wait to close browser window
+                webServer.stopServer();
             } catch (Exception e) {
                 LOGGER.error(e);
                 JOptionPane.showMessageDialog(null, e.getMessage());
