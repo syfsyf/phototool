@@ -70,49 +70,4 @@ public class Phototool {
             }
         }
     }
-
-    /**
-     * Run jobs thread.
-     *
-     * @throws InterruptedException the interrupted exception
-     */
-    public void runJobsThread() throws InterruptedException {
-
-        long start = System.currentTimeMillis();
-        ExecutorService executor = Executors.newFixedThreadPool(8);
-        for (Job j : jobs) {
-            executor.execute(j);
-        }
-        // This will make the executor accept no new threads
-        // and finish all existing threads in the queue
-        executor.shutdown();
-        // Wait until all threads are finish
-        while (!executor.isTerminated()) {
-
-            int count = 0;
-            for (Job j : jobs) {
-                if (j.isDone()) {
-                    count++;
-                }
-            }
-            LOGGER.debug("" + count + "/" + jobs.size());
-            Thread.sleep(500);
-
-        }
-
-        executor.awaitTermination(1, TimeUnit.DAYS);
-
-        // System.out.println("Finished all threads");
-        long t = System.currentTimeMillis() - start;
-        LOGGER.info("EXEC TIME:" + t);
-
-        int count = 0;
-        for (Job j : jobs) {
-            if (j.isDone()) {
-                count++;
-            }
-        }
-        System.out.println("" + count + "/" + jobs.size());
-
-    }
 }
