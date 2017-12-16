@@ -1,7 +1,8 @@
 package org.syfsyf.phototool;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.picocontainer.annotations.Inject;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.webgui.WebServer;
@@ -9,9 +10,6 @@ import org.syfsyf.phototool.webgui.WebServer;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The Class Phototool.
@@ -21,7 +19,7 @@ public class Phototool {
     /**
      * The Constant LOGGER.
      */
-    private static final Logger LOGGER = Logger.getLogger(Phototool.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Phototool.class);
 
     /**
      * The service.
@@ -58,13 +56,15 @@ public class Phototool {
             Config config = configService.loadConfig();
 
             try {
+                //String cmd = config.getChromeExe() + " --user-data-dir=\"%temp%/random_name\" --app=" + webServer.getServerMainUrl();
+                //String cmd = config.getChromeExe() + " --user-data-dir=\"%temp%/random_name\" " + webServer.getServerMainUrl();
                 String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
                 Execution exe = new Execution(cmd);
                 exe.run();
                 // wait to close browser window
-                webServer.stopServer();
+                //webServer.stopServer();
             } catch (Exception e) {
-                LOGGER.error(e);
+                LOGGER.error("",e);
                 JOptionPane.showMessageDialog(null, e.getMessage());
                 // throw new RuntimeException(e);
             }

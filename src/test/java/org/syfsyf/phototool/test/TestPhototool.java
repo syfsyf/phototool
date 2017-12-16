@@ -1,10 +1,11 @@
 package org.syfsyf.phototool.test;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.picocontainer.MutablePicoContainer;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.DataModel;
 import org.syfsyf.phototool.Main;
 import org.syfsyf.phototool.PhotoolFacade;
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class TestPhototool {
 
 
-    private static final Logger LOGGER = Logger.getLogger(TestPhototool.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestPhototool.class);
 
 
     private File sample;
