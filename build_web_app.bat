@@ -1,3 +1,4 @@
 cd webapp
-npm run build
+call npm install
+call npm run build
 cd ..
