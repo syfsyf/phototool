@@ -242,7 +242,8 @@ public class PhotoolFacade {
     public void process(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException {
 
         Runnable runnable = () -> {
-            new File(computeOutDir(dataModel)).mkdirs();
+            if(dataModel.getProfile().isResize())
+                new File(computeOutDir(dataModel)).mkdirs();
             createJobs(dataModel);
             try {
                 runJobs(dataModel, viewModel);
