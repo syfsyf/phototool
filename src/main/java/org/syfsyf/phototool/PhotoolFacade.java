@@ -157,8 +157,7 @@ public class PhotoolFacade {
         Config config = dataModel.getConfig();
         for (File f : dataModel.getFiles()) {
 
-            IMIdentify identify = identify(f, config.getImgMagicIdentify());
-            LOGGER.debug("identify:" + identify);
+
 
             List<String> cmds = new ArrayList<String>();
             Job job = new MultiCmdJob(cmds);
@@ -175,54 +174,56 @@ public class PhotoolFacade {
                 builder.append(f.getAbsolutePath());
                 builder.append("\"");
                 cmds.add(builder.toString());
-
             }
 
-            builder = new StringBuilder();
-            builder.append(config.getImgMagicConvert());
-            builder.append(" \"");
-            builder.append(f.getAbsolutePath());
-            builder.append("\"");
-
             if (profile.isResize()) {
+
+                builder = new StringBuilder();
+                builder.append(config.getImgMagicConvert());
+                builder.append(" \"");
+                builder.append(f.getAbsolutePath());
+                builder.append("\"");
+
+
                 int w = profile.getResizeWidth();
                 if (profile.isBorder()) {
                     w -= profile.getBorderSize() * 2;
                 }
                 builder.append(" -resize " + w + "x" + w);
-            }
-            if (profile.isBorder()) {
-                int s = profile.getBorderSize();
-                builder.append(" -bordercolor " + profile.getBorderColorHex());
-                builder.append(" -border " + s + "x" + s);
 
-            }
-            if (profile.isAutolevel()) {
-                builder.append(" -auto-level");
-            }
+                if (profile.isBorder()) {
+                    int s = profile.getBorderSize();
+                    builder.append(" -bordercolor " + profile.getBorderColorHex());
+                    builder.append(" -border " + s + "x" + s);
 
-            if (profile.getCustomParams() != null && !"".equals(profile.getCustomParams())) {
-                builder.append(" " + profile.getCustomParams() + " ");
-            }
+                }
+                if (profile.isAutolevel()) {
+                    builder.append(" -auto-level");
+                }
 
-            File outFile = new File(outDir, f.getName());
-            builder.append(" \"" + outFile.getAbsolutePath() + "\"");
-            LOGGER.info("cmd:" + builder.toString());
+                if (profile.getCustomParams() != null && !"".equals(profile.getCustomParams())) {
+                    builder.append(" " + profile.getCustomParams() + " ");
+                }
 
-            cmds.add(builder.toString());
-
-            if (profile.isAddSignature()) {
-
-                builder = new StringBuilder();
-                builder.append(config.getImgMagicComposite());
-                builder.append(" -gravity " + profile.getSigGravity() + " -geometry " + profile.getSigGeometry() + " ");
-
-                builder.append("( \"" + profile.getSigFile() + "\" -resize \"" + profile.getSigResize() + "\" ) ");
-                builder.append("\"" + outFile.getAbsolutePath() + "\" ");
-                builder.append("\"" + outFile.getAbsolutePath() + "\"");
+                File outFile = new File(outDir, f.getName());
+                builder.append(" \"" + outFile.getAbsolutePath() + "\"");
+                LOGGER.info("cmd:" + builder.toString());
 
                 cmds.add(builder.toString());
 
+                if (profile.isAddSignature()) {
+
+                    builder = new StringBuilder();
+                    builder.append(config.getImgMagicComposite());
+                    builder.append(" -gravity " + profile.getSigGravity() + " -geometry " + profile.getSigGeometry() + " ");
+
+                    builder.append("( \"" + profile.getSigFile() + "\" -resize \"" + profile.getSigResize() + "\" ) ");
+                    builder.append("\"" + outFile.getAbsolutePath() + "\" ");
+                    builder.append("\"" + outFile.getAbsolutePath() + "\"");
+
+                    cmds.add(builder.toString());
+
+                }
             }
 
             dataModel.getJobs().add(job);

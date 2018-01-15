@@ -59,7 +59,11 @@ public class TestPhototool {
         profile.setSigFile(new File("test_samples/sig/sig.png").getAbsolutePath());
         profile.setSigResize("x35");
 
+        profile.setResize(false);
+
         phototoolFacade.createJobs(dataModel);
+
+
 
         LOGGER.info("jobs:" + dataModel.getJobs().size());
 
