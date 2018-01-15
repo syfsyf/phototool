@@ -1,7 +1,8 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.jobs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.syfsyf.phototool.Execution;
 
 /**
  * The Class CmdJob.

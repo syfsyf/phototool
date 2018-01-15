@@ -1,4 +1,7 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.jobs;
+
+import org.syfsyf.phototool.Execution;
+import org.syfsyf.phototool.jobs.Job;
 
 import java.io.IOException;
 
@@ -16,6 +19,9 @@ public abstract class AbstractJob implements Job {
      * The done.
      */
     private boolean done = false;
+
+
+    private boolean paralel=true;
 
     /**
      * Run cmd.
@@ -68,4 +74,12 @@ public abstract class AbstractJob implements Job {
         this.done = done;
     }
 
+    @Override
+    public boolean isParalel() {
+        return paralel;
+    }
+
+    public void setParalel(boolean paralel) {
+        this.paralel = paralel;
+    }
 }

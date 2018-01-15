@@ -4,6 +4,8 @@ import org.apache.log4j.BasicConfigurator;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 import org.syfsyf.phototool.cfg.impl.ConfigServiceImpl;
+import org.syfsyf.phototool.imagemagic.ImageMagicTool;
+import org.syfsyf.phototool.jobs.JobsCreatorImpl;
 import org.syfsyf.phototool.webgui.WebServer;
 import org.syfsyf.phototool.webgui.impl.ApiImpl;
 
@@ -38,6 +40,8 @@ public class Main {
         pico.addComponent(WebServer.class);
         pico.addComponent(JsonServiceImpl.class);
         pico.addComponent(ApiImpl.class);
+        pico.addComponent(JobsCreatorImpl.class);
+        pico.addComponent(ImageMagicTool.class);
 
         return pico;
     }

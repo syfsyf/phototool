@@ -1,4 +1,4 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.imagemagic;
 
 /**
  * The Class IMIdentify.

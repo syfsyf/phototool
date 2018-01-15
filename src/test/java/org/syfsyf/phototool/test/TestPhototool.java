@@ -13,6 +13,7 @@ import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.JobsStatusDto;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class TestPhototool {
@@ -28,13 +29,14 @@ public class TestPhototool {
 
     @Before
     public void before() {
+        LOGGER.info("before");
         this.container = Main.createPicoContainer();
         this.phototoolFacade = container.getComponent(PhotoolFacade.class);
 
     }
 
-
-    protected void prepareSampleDir() throws IOException {
+    @Before
+    public void prepareSampleDir() throws IOException {
 
         final String sampleDir = "sample";
         this.sample = new File(sampleDir);
@@ -48,10 +50,8 @@ public class TestPhototool {
     @Test
     public void test1() throws Exception {
 
-        prepareSampleDir();
-        DataModel dataModel = phototoolFacade.createDataModel(sample);
 
-        System.out.println(dataModel.getFiles().size());
+        DataModel dataModel = phototoolFacade.createDataModel(sample);
 
         Profile profile = dataModel.getProfile();
         profile.setResizeWidth(250);
@@ -68,6 +68,20 @@ public class TestPhototool {
         phototoolFacade.process(dataModel, viewModel);
 
     }
+    @Test
+    public void testResizeOption() throws Exception {
+
+        DataModel dataModel = phototoolFacade.createDataModel(sample);
+
+        Profile profile = dataModel.getProfile();
+        System.out.println("resize:"+profile.isResize());
+        //profile.setResize(false);
+        phototoolFacade.createJobs(dataModel);
+        JobsStatusDto viewModel = new JobsStatusDto();
+        phototoolFacade.processAndWait(dataModel, viewModel);
+
+    }
+
 
 
 }

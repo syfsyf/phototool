@@ -8,6 +8,10 @@ import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.JobsStatusDto;
+import org.syfsyf.phototool.imagemagic.IMIdentify;
+import org.syfsyf.phototool.jobs.Job;
+import org.syfsyf.phototool.jobs.JobsCreator;
+import org.syfsyf.phototool.jobs.MultiCmdJob;
 
 import java.awt.*;
 import java.io.File;
@@ -32,6 +36,9 @@ public class PhotoolFacade {
 
     @Inject
     private ConfigService configService;
+
+    @Inject
+    private JobsCreator jobsCreator;
 
     /**
      * Creates the data model.
@@ -147,9 +154,12 @@ public class PhotoolFacade {
      *
      * @param dataModel the data model
      */
-    public void createJobs(DataModel dataModel) {
+    public void createJobs(DataModel dataModel) throws Exception {
 
-        dataModel.setJobs(new ArrayList<Job>());
+        List<Job> jobs = jobsCreator.create(dataModel);
+        dataModel.setJobs(jobs);
+
+       /* dataModel.setJobs(new ArrayList<Job>());
 
         String outDir = computeOutDir(dataModel);
 
@@ -227,7 +237,7 @@ public class PhotoolFacade {
 
             dataModel.getJobs().add(job);
 
-        }
+        }*/
     }
 
     /**
@@ -250,6 +260,13 @@ public class PhotoolFacade {
             }
         };
         new Thread(runnable).start();
+    }
+
+    public void processAndWait(DataModel dataModel, JobsStatusDto viewModel) throws InterruptedException {
+
+        new File(computeOutDir(dataModel)).mkdirs();
+        createJobs(dataModel);
+        runJobs(dataModel, viewModel);
     }
 
     /**

@@ -5,6 +5,7 @@ import org.picocontainer.annotations.Inject;
 import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.jobs.Job;
 import org.syfsyf.phototool.webgui.WebServer;
 
 import javax.swing.*;

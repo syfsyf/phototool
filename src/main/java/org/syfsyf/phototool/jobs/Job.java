@@ -1,4 +1,4 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.jobs;
 
 /**
  * The Interface Job.
@@ -18,5 +18,8 @@ public interface Job extends Runnable {
      * @return the error
      */
     String getError();
+
+
+    boolean isParalel();
 
 }
