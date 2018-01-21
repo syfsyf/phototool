@@ -169,7 +169,7 @@ public class PhotoolFacade {
                 builder.append(config.getExiftool());
                 String lat = doubleToString(profile.getGeoPoint().getLat());
                 String lng = doubleToString(profile.getGeoPoint().getLng());
-                builder.append(String.format(" -GPSLatitude=%s -GPSLongitude=%s -GPSLatitudeRef=0 -GPSLongitudeRef=0 ", lat, lng));
+                builder.append(String.format(" -F -m -GPSLatitude=%s -GPSLongitude=%s -GPSLatitudeRef=0 -GPSLongitudeRef=0 ", lat, lng));
                 builder.append(" \"");
                 builder.append(f.getAbsolutePath());
                 builder.append("\"");
