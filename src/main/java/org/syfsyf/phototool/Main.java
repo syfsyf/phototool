@@ -6,6 +6,7 @@ import org.picocontainer.MutablePicoContainer;
 import org.syfsyf.phototool.cfg.impl.ConfigServiceImpl;
 import org.syfsyf.phototool.webgui.WebServer;
 import org.syfsyf.phototool.webgui.impl.ApiImpl;
+import org.syfsyf.phototool.webgui.impl.WebApiImpl;
 
 /**
  * The Class Main.
@@ -37,6 +38,7 @@ public class Main {
         pico.addComponent(WebServer.class);
         pico.addComponent(JsonServiceImpl.class);
         pico.addComponent(ApiImpl.class);
+        pico.addComponent(WebApiImpl.class);
 
         return pico;
     }

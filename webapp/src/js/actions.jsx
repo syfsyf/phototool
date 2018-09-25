@@ -8,6 +8,21 @@ function requestJob() {
   }
 }
 
+export const REQUEST_APPINFO = "REQUEST_APPINFO"
+function requestAppInfo() {
+  return {
+    type: REQUEST_APPINFO
+  }
+}
+
+export const RECEIVE_APPINFO = "RECEIVE_APPINFO"
+function receiveAppInfo(data) {
+  return {
+    type: RECEIVE_APPINFO,
+    payload:data
+  }
+}
+
 export const RECEIVE_JOB = "RECEIVE_JOB"
 function receiveJob(json) {
   return {
@@ -73,6 +88,16 @@ export function fetchJob() {
       dispatch(actions.merge("profile", json))
     }
     return fetchGet("/api/loadJob", dispatch, onJson)
+  }
+}
+
+export function fetchAppInfo() {
+  return function(dispatch) {
+    dispatch(requestAppInfo())
+    let onJson = json => {
+      dispatch(receiveAppInfo(json))
+    }
+    return fetchGet("/api/appInfo", dispatch, onJson)
   }
 }
 

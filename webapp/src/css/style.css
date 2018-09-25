@@ -21,3 +21,8 @@ td {
 	padding:15px;
 	font-size: 15pt;
 }
+.buildInfo{
+	font-size: xx-small;
+	color:#ddd;
+	text-align: right;	
+}

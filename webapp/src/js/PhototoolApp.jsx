@@ -8,7 +8,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     startJob: job => dispatch(ACTION.startJob(job)),
-    fetchStatus: () => dispatch(ACTION.fetchStatus())
+    fetchStatus: () => dispatch(ACTION.fetchStatus()),
+    fetchAppInfo:() => dispatch(ACTION.fetchAppInfo())
   }
 }
 

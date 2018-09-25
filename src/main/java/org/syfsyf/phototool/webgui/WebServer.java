@@ -26,6 +26,9 @@ public class WebServer {
     @Inject
     Api apiProfile;
 
+    @Inject
+    WebApi webApi;
+
     public void start() {
         staticFiles.location("/public");
 
@@ -46,6 +49,7 @@ public class WebServer {
             get("/loadJob", apiProfile::loadJob, jsonService::toJson);
             post("/runJob", apiProfile::runJob, jsonService::toJson);
             get("/processStatus", apiProfile::getProcessStatus, jsonService::toJson);
+            get("/appInfo",webApi::getAppInfo,jsonService::toJson);
 
             after("/*", (req, res) -> {
                 res.type(MimeTypes.Type.APPLICATION_JSON.asString());

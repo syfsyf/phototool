@@ -1,6 +1,7 @@
 package org.syfsyf.phototool.cfg;
 
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 public interface ConfigService {
 
@@ -15,5 +16,7 @@ public interface ConfigService {
     GeoPoints loadGeoPoints() throws FileNotFoundException;
 
     void saveGeoPoints(GeoPoints geoPoints) throws FileNotFoundException;
+
+    Map<String,String> getGitInfo();
 
 }

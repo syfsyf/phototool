@@ -6,6 +6,10 @@ import org.syfsyf.phototool.cfg.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Properties;
 
 public class ConfigServiceImpl implements ConfigService {
 
@@ -116,6 +120,18 @@ public class ConfigServiceImpl implements ConfigService {
         file.getParentFile().mkdirs();
         getXstream().toXML(geoPoints, new FileOutputStream(getGeoPointsFile()));
 
+    }
+
+    @Override
+    public Map<String, String> getGitInfo() {
+        try {
+            Properties properties=new Properties();
+            properties.load(ConfigServiceImpl.class.getClassLoader().getResourceAsStream("git.properties"));
+            return (Map)properties;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Collections.EMPTY_MAP;
     }
 
     private File getGeoPointsFile() {
