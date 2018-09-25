@@ -1,11 +1,14 @@
 package org.syfsyf.phototool.webgui;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.eclipse.jetty.http.MimeTypes;
 import org.picocontainer.annotations.Inject;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.Helper;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.cfg.ConfigService;
+import spark.Request;
+import spark.Response;
 
 import java.net.InetAddress;
 
@@ -13,7 +16,7 @@ import static spark.Spark.*;
 
 public class WebServer {
 
-    private static final Logger LOGGER = Logger.getLogger(WebServer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebServer.class);
 
     @Inject
     ConfigService configService;
@@ -48,9 +51,9 @@ public class WebServer {
                 res.type(MimeTypes.Type.APPLICATION_JSON.asString());
             });
 
-            exception(Exception.class, (exc, req, res) -> {
+            exception(Exception.class, (Exception exc, Request req, Response res) -> {
 
-                LOGGER.error(exc);
+                LOGGER.error("error", exc);
                 ErrorDto errorDto = new ErrorDto();
                 res.status(500);
                 errorDto.setMessage(exc.getMessage());

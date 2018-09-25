@@ -4,7 +4,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 import com.thoughtworks.xstream.io.json.JsonWriter;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.Execution;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
@@ -21,7 +22,7 @@ import static spark.Spark.*;
 
 public class GeoPointsServiceImpl implements GeoPointsService {
 
-    private static final Logger LOGGER = Logger.getLogger(GeoPointsServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeoPointsServiceImpl.class);
 
     private ConfigService configService;
 

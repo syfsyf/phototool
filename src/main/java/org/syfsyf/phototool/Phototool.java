@@ -1,7 +1,8 @@
 package org.syfsyf.phototool;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.picocontainer.annotations.Inject;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.webgui.WebServer;
@@ -21,7 +22,7 @@ public class Phototool {
     /**
      * The Constant LOGGER.
      */
-    private static final Logger LOGGER = Logger.getLogger(Phototool.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Phototool.class);
 
     /**
      * The service.
@@ -57,7 +58,7 @@ public class Phototool {
             exe.run();
 
         } catch (Exception e) {
-            LOGGER.error(e);
+            LOGGER.error("",e);
             JOptionPane.showMessageDialog(null, e.getMessage());
             // throw new RuntimeException(e);
         }
@@ -104,7 +105,7 @@ public class Phototool {
                 count++;
             }
         }
-        System.out.println("" + count + "/" + jobs.size());
+        LOGGER.info("" + count + "/" + jobs.size());
 
     }
 }

@@ -5,6 +5,8 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Queue;
@@ -12,6 +14,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @WebSocket
 public class EchoWebSocket {
+
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebServer.class);
 
     // Store sessions if you want to, for example, broadcast a message to all
     // users
@@ -29,7 +34,7 @@ public class EchoWebSocket {
 
     @OnWebSocketMessage
     public void message(Session session, String message) throws IOException {
-        System.out.println("Got: " + message); // Print message
+        LOGGER.debug("Got: " + message); // Print message
         session.getRemote().sendString(message); // and send it back
     }
 }

@@ -1,6 +1,7 @@
 package org.syfsyf.phototool;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class CmdJob.
@@ -10,7 +11,7 @@ public class CmdJob extends AbstractJob {
     /**
      * The Constant LOGGER.
      */
-    private static final Logger LOGGER = Logger.getLogger(CmdJob.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CmdJob.class);
 
     /**
      * The cmd.

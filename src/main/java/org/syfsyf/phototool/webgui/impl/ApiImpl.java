@@ -1,8 +1,9 @@
 package org.syfsyf.phototool.webgui.impl;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
 import org.picocontainer.annotations.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.DataModel;
 import org.syfsyf.phototool.JsonService;
 import org.syfsyf.phototool.PhotoolFacade;
@@ -21,7 +22,7 @@ import java.io.FileNotFoundException;
 
 public class ApiImpl implements Api {
 
-    private static final Logger LOGGER = Logger.getLogger(ApiImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiImpl.class);
 
     private static final String DATA_MODEL = "dataModel";
     private static final String VIEW_MODEL = "viewModel";

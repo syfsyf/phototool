@@ -1,8 +1,9 @@
 package org.syfsyf.phototool;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Logger;
 import org.picocontainer.annotations.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.Profile;
@@ -27,7 +28,7 @@ public class PhotoolFacade {
     /**
      * The Constant LOGGER.
      */
-    private static final Logger LOGGER = Logger.getLogger(PhotoolFacade.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PhotoolFacade.class);
 
     @Inject
     private ConfigService configService;
