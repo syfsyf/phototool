@@ -5,7 +5,7 @@ require("file-loader?name=favicon.ico!../html/favicon.ico")
 import thunkMiddleware from "redux-thunk"
 import React from "react"
 import { render } from "react-dom"
-import { createStore, applyMiddleware, combineReducers } from "redux"
+import { createStore, applyMiddleware, combineReducers, compose  } from "redux"
 import { Provider } from "react-redux"
 import reducer from "./reducer"
 import logger from "redux-logger"
@@ -51,7 +51,19 @@ let reducers = {
   ...createForms({ profile: initialProfile })
 }
 
-const store = createStore(combineReducers(reducers), applyMiddleware(reduxCatch(errorHandler), thunkMiddleware, logger))
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const enhancer = composeEnhancers(
+      applyMiddleware(reduxCatch(errorHandler), thunkMiddleware, logger)
+      // other store enhancers if any
+    );
+
+const store = createStore(combineReducers(reducers), enhancer)
 
 store.dispatch(ACTION.fetchJob())
 
