@@ -24,12 +24,15 @@ public class EchoWebSocket {
 
     @OnWebSocketConnect
     public void connected(Session session) {
+        LOGGER.info("connected:{}",session);
         sessions.add(session);
     }
 
     @OnWebSocketClose
     public void closed(Session session, int statusCode, String reason) {
+        LOGGER.info("closed: session:{}, status:{}, reason: {}",session,statusCode,reason);
         sessions.remove(session);
+        System.exit(0);
     }
 
     @OnWebSocketMessage

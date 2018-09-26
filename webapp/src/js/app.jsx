@@ -67,6 +67,12 @@ const store = createStore(combineReducers(reducers), enhancer)
 
 store.dispatch(ACTION.fetchJob())
 
+// autozamykanie aplikacji
+let wsURL='ws://'+ window.location.hostname+':'+window.location.port+'/echo'
+let ws=new WebSocket(wsURL)
+
+
+
 render(
   <Provider store={store}>
     <PhototoolApp />
