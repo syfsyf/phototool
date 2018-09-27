@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { Control, Form, Errors, combineForms, actions } from "react-redux-form"
 import GeoTagComponent from "./GeoTagComponent"
 import { ChromePicker } from "react-color"
+import Button from '@material-ui/core/Button';
+
 
 class ProfileForm extends React.Component {
   onSubmit(job) {
@@ -162,7 +164,9 @@ class ProfileForm extends React.Component {
               <Control.checkbox model=".autolevel" />
             </label>
           </div>
-          <button type="submit">GO</button>
+          <Button type="submit" variant="contained" color="primary">
+            GO!
+          </Button>
         </Form>
       </div>
     )
