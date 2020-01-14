@@ -78,6 +78,31 @@ public class Profile {
      */
     private String sigResize = "x10";
 
+
+    private boolean addSignature1 = true;
+
+    /**
+     * The sig file.
+     */
+    private String sigFile1;
+
+    /**
+     * The sig gravity.
+     */
+    private String sigGravity1 = "SouthEast";
+
+    /**
+     * The sig geometry.
+     */
+    private String sigGeometry1 = "+20+20";
+
+    /**
+     * The sig resize.
+     */
+    private String sigResize1 = "x10";
+
+
+
     /**
      * The custom params.
      */
@@ -357,4 +382,43 @@ public class Profile {
         this.borderColorHex = borderColorHex;
     }
 
+    public boolean isAddSignature1() {
+        return addSignature1;
+    }
+
+    public void setAddSignature1(boolean addSignature1) {
+        this.addSignature1 = addSignature1;
+    }
+
+    public String getSigFile1() {
+        return sigFile1;
+    }
+
+    public void setSigFile1(String sigFile1) {
+        this.sigFile1 = sigFile1;
+    }
+
+    public String getSigGravity1() {
+        return sigGravity1;
+    }
+
+    public void setSigGravity1(String sigGravity1) {
+        this.sigGravity1 = sigGravity1;
+    }
+
+    public String getSigGeometry1() {
+        return sigGeometry1;
+    }
+
+    public void setSigGeometry1(String sigGeometry1) {
+        this.sigGeometry1 = sigGeometry1;
+    }
+
+    public String getSigResize1() {
+        return sigResize1;
+    }
+
+    public void setSigResize1(String sigResize1) {
+        this.sigResize1 = sigResize1;
+    }
 }
