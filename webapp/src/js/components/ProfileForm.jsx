@@ -114,6 +114,23 @@ class ProfileForm extends React.Component {
                     <br />
                     <span>resize</span> <Control.text disabled={!profile.addSignature.value} model=".sigResize" />
                   </fieldset>
+
+                  <fieldset>
+                    <legend>
+                      <label>
+                        dodaj podpis 1?
+                        <Control.checkbox model=".addSignature1" />
+                      </label>
+                    </legend>
+                    <span>Plik z podpisem</span>
+                    <Control.text disabled={!profile.addSignature1.value} model=".sigFile1" />
+                    <br />
+                    <span>gravity</span> <Control.text disabled={!profile.addSignature1.value} model=".sigGravity1" />
+                    <br />
+                    <span>geometry</span> <Control.text disabled={!profile.addSignature1.value} model=".sigGeometry1" />
+                    <br />
+                    <span>resize</span> <Control.text disabled={!profile.addSignature1.value} model=".sigResize1" />
+                  </fieldset>
                 </td>
               </tr>
             </tbody>

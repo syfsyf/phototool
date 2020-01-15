@@ -222,8 +222,21 @@ public class PhotoolFacade {
                 builder.append("\"" + outFile.getAbsolutePath() + "\"");
 
                 cmds.add(builder.toString());
-
             }
+
+            if (profile.isAddSignature1()) {
+
+                builder = new StringBuilder();
+                builder.append(config.getImgMagicComposite());
+                builder.append(" -gravity " + profile.getSigGravity1() + " -geometry " + profile.getSigGeometry1() + " ");
+
+                builder.append("( \"" + profile.getSigFile1() + "\" -resize \"" + profile.getSigResize1() + "\" ) ");
+                builder.append("\"" + outFile.getAbsolutePath() + "\" ");
+                builder.append("\"" + outFile.getAbsolutePath() + "\"");
+
+                cmds.add(builder.toString());
+            }
+
 
             dataModel.getJobs().add(job);
 
