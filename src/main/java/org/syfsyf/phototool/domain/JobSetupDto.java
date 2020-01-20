@@ -1,4 +1,4 @@
-package org.syfsyf.phototool.webgui;
+package org.syfsyf.phototool.domain;
 
 import org.syfsyf.phototool.cfg.GeoPoint;
 import org.syfsyf.phototool.cfg.Profile;
@@ -6,12 +6,12 @@ import org.syfsyf.phototool.cfg.Profile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApiDto extends Profile {
+public class JobSetupDto extends Profile {
 
     private String directory;
     private int numberOfFiles;
 
-    List<GeoPoint> geoPoints = new ArrayList<>();
+    private List<GeoPoint> geoPoints = new ArrayList<>();
 
     public String getDirectory() {
         return directory;

@@ -1,0 +1,4 @@
+.panelBorder {
+    -fx-border-color:gray;
+    -fx-border-insets:3px;
+}

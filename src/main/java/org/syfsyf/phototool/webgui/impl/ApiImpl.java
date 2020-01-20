@@ -5,14 +5,14 @@ import org.picocontainer.annotations.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.DataModel;
-import org.syfsyf.phototool.JsonService;
-import org.syfsyf.phototool.PhotoolFacade;
+import org.syfsyf.phototool.utils.JsonService;
+import org.syfsyf.phototool.impl.PhotoolFacadeImpl;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.GeoPoints;
 import org.syfsyf.phototool.cfg.Profile;
 import org.syfsyf.phototool.gui.JobsStatusDto;
 import org.syfsyf.phototool.webgui.Api;
-import org.syfsyf.phototool.webgui.ApiDto;
+import org.syfsyf.phototool.domain.JobSetupDto;
 import spark.Request;
 import spark.Response;
 import spark.Session;
@@ -31,7 +31,7 @@ public class ApiImpl implements Api {
     ConfigService configService;
 
     @Inject
-    PhotoolFacade photoolFacade;
+    PhotoolFacadeImpl photoolFacade;
 
     @Inject
     JsonService jsonService;
@@ -51,7 +51,7 @@ public class ApiImpl implements Api {
 
         DataModel dataModel = getDataModel(request);
 
-        ApiDto dto = new ApiDto();
+        JobSetupDto dto = new JobSetupDto();
 
         dto.setDirectory(dataModel.getCwd().getAbsolutePath());
         dto.setNumberOfFiles(dataModel.getFiles().size());
@@ -92,7 +92,7 @@ public class ApiImpl implements Api {
     @Override
     public Object runJob(Request request, Response response) throws Exception {
 
-        ApiDto jobDto = jsonService.fromJson(request.body(), ApiDto.class);
+        JobSetupDto jobDto = jsonService.fromJson(request.body(), JobSetupDto.class);
 
         DataModel dataModel = photoolFacade.createDataModel(new File(jobDto.getDirectory()));
         request.attribute(DATA_MODEL, dataModel);

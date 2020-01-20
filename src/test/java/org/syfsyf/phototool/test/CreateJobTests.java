@@ -4,7 +4,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 import org.syfsyf.phototool.DataModel;
-import org.syfsyf.phototool.PhotoolFacade;
+import org.syfsyf.phototool.impl.PhotoolFacadeImpl;
 import org.syfsyf.phototool.gui.JobsStatusDto;
 
 import java.io.File;
@@ -14,10 +14,10 @@ import static org.junit.Assert.assertNotNull;
 public class CreateJobTests {
 
 
-    public static File TEST_FILE_DIR = new File("d:\\mb\\photootool\\test files\\");
+    private static File TEST_FILE_DIR = new File("d:\\mb\\photootool\\test files\\");
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         BasicConfigurator.configure();
         System.setProperty("user.dir", TEST_FILE_DIR.getAbsolutePath());
     }
@@ -25,7 +25,7 @@ public class CreateJobTests {
     @Test
     public void test() throws Exception {
 
-        PhotoolFacade service = new PhotoolFacade();
+        PhotoolFacadeImpl service = new PhotoolFacadeImpl();
 
         DataModel model = service.createDataModel();
         model.getProfile().setAddSignature(true);

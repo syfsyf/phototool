@@ -1,4 +1,4 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

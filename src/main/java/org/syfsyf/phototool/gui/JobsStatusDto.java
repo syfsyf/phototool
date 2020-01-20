@@ -1,6 +1,8 @@
 package org.syfsyf.phototool.gui;
 
-public class JobsStatusDto {
+import org.syfsyf.phototool.JobsStatus;
+
+public class JobsStatusDto implements JobsStatus {
 
     private String errorLabel = "";
     private String progressLabel = "";

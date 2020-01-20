@@ -12,100 +12,26 @@ public class Profile {
 
     private boolean geoTag = false;
     private GeoPoint geoPoint;
-
     private boolean addGeoTagToSourceFile = true;
     private boolean addGeoTagToConvertedFile = true;
-
-    /**
-     * The autolevel.
-     */
     private boolean autolevel = false;
-
-    /**
-     * The border.
-     */
     private boolean border = false;
-
-    /**
-     * The border color.
-     */
     private Color borderColor = Color.black;
-
     private String borderColorHex = "#000";
-
-    /**
-     * The border size.
-     */
     private int borderSize = 20;
-
-    /**
-     * The out dir name.
-     */
     private String outDirName = "__resize_";
-
-    /**
-     * The resize.
-     */
     private boolean resize = true;
-
-    /**
-     * The resize width.
-     */
     private int resizeWidth = 1300;
-
-    /**
-     * The add signature.
-     */
     private boolean addSignature = true;
-
-    /**
-     * The sig file.
-     */
     private String sigFile;
-
-    /**
-     * The sig gravity.
-     */
     private String sigGravity = "SouthWest";
-
-    /**
-     * The sig geometry.
-     */
     private String sigGeometry = "+20+20";
-
-    /**
-     * The sig resize.
-     */
     private String sigResize = "x10";
-
-
     private boolean addSignature1 = true;
-
-    /**
-     * The sig file.
-     */
     private String sigFile1;
-
-    /**
-     * The sig gravity.
-     */
     private String sigGravity1 = "SouthEast";
-
-    /**
-     * The sig geometry.
-     */
     private String sigGeometry1 = "+20+20";
-
-    /**
-     * The sig resize.
-     */
     private String sigResize1 = "x10";
-
-
-
-    /**
-     * The custom params.
-     */
     private String customParams = "-quality  100%";
 
     /**

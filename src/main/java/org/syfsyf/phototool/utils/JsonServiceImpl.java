@@ -1,7 +1,8 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.syfsyf.phototool.utils.JsonService;
 
 public class JsonServiceImpl implements JsonService {
 

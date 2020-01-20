@@ -1,4 +1,7 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.cmds;
+
+import org.syfsyf.phototool.cmds.Execution;
+import org.syfsyf.phototool.cmds.Job;
 
 import java.io.IOException;
 

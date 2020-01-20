@@ -1,4 +1,4 @@
-package org.syfsyf.phototool;
+package org.syfsyf.phototool.cmds;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

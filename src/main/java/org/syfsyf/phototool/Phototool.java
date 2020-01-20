@@ -5,9 +5,11 @@ import org.picocontainer.annotations.Inject;
 import org.slf4j.LoggerFactory;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
+import org.syfsyf.phototool.cmds.Job;
+import org.syfsyf.phototool.fxgui.PhototoolGUI;
+import org.syfsyf.phototool.impl.PhotoolFacadeImpl;
 import org.syfsyf.phototool.webgui.WebServer;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -28,7 +30,7 @@ public class Phototool {
      * The service.
      */
     @Inject
-    private PhotoolFacade service;
+    private PhotoolFacadeImpl service;
 
     /**
      * The jobs.
@@ -41,6 +43,10 @@ public class Phototool {
     @Inject
     ConfigService configService;
 
+
+    @Inject
+    PhototoolGUI phototoolGUI;
+
     /**
      * Run.
      *
@@ -48,10 +54,14 @@ public class Phototool {
      * @throws Exception the exception
      */
     public void run(String[] args) throws Exception {
-        webServer.start();
 
         Config config = configService.loadConfig();
 
+        phototoolGUI.main(args);
+
+        //webServer.start();
+
+        /*
         try {
             String cmd = config.getChromeExe() + " --app=" + webServer.getServerMainUrl();
             Execution exe = new Execution(cmd);
@@ -61,7 +71,7 @@ public class Phototool {
             LOGGER.error("",e);
             JOptionPane.showMessageDialog(null, e.getMessage());
             // throw new RuntimeException(e);
-        }
+        }*/
     }
 
     /**

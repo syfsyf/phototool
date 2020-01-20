@@ -6,7 +6,7 @@ import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 import com.thoughtworks.xstream.io.json.JsonWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syfsyf.phototool.Execution;
+import org.syfsyf.phototool.cmds.Execution;
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.cfg.GeoPoint;

@@ -2,6 +2,7 @@ package org.syfsyf.phototool;
 
 import org.syfsyf.phototool.cfg.Config;
 import org.syfsyf.phototool.cfg.Profile;
+import org.syfsyf.phototool.cmds.Job;
 
 import java.io.File;
 import java.util.ArrayList;
