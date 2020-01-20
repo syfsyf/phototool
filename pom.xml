@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.syfsyf</groupId>
 	<artifactId>phototool</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -19,23 +19,7 @@
 			</resource>
 		</resources>
 		<plugins>
-			<plugin>
-				<artifactId>exec-maven-plugin</artifactId>
-				<groupId>org.codehaus.mojo</groupId>
-				<version>1.6.0</version>
-				<executions>
-					<execution>
-						<id>Version Calculation</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>${basedir}/build_web_app.bat</executable>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -58,29 +42,6 @@
 					</archive>
 				</configuration>
 			</plugin>
-			<!--<plugin>
-				<groupId>com.jolira</groupId>
-				<artifactId>onejar-maven-plugin</artifactId>
-				<version>1.4.4</version>
-				<executions>
-					<execution>
-						<configuration>
-							&lt;!&ndash; Optional &ndash;&gt;
-							<onejarVersion>0.97</onejarVersion>
-
-							&lt;!&ndash; Optional, default is false &ndash;&gt;
-							<attachToBuild>true</attachToBuild>
-							&lt;!&ndash; Optional, default is "onejar" &ndash;&gt;
-							<classifier>onejar</classifier>
-						</configuration>
-						<goals>
-							<goal>one-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>-->
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -148,11 +109,6 @@
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.4.7</version>
-		</dependency>				
-		<dependency>
-			<groupId>com.sparkjava</groupId>
-			<artifactId>spark-core</artifactId>
-			<version>2.7.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -170,12 +126,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.2</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -191,12 +147,12 @@
 
 
 	</dependencies>
-	<pluginRepositories>
+	<!--<pluginRepositories>
 		<pluginRepository>
 			<id>onejar-maven-plugin.googlecode.com</id>
 			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories>-->
 
 	<repositories>
 		<repository>

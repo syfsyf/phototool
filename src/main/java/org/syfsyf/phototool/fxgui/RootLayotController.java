@@ -15,7 +15,7 @@ import org.syfsyf.phototool.JobsStatus;
 import org.syfsyf.phototool.PhotoolFacade;
 import org.syfsyf.phototool.cfg.ConfigService;
 import org.syfsyf.phototool.domain.JobSetupDto;
-import org.syfsyf.phototool.utils.bindfx.BindService;
+
 
 public class RootLayotController {
 
@@ -24,9 +24,6 @@ public class RootLayotController {
 
     @Inject
     PhotoolFacade photoolFacade;
-
-    @Inject
-    BindService bindService;
 
     Stage stage;
     JobSetupView jobSetupView;

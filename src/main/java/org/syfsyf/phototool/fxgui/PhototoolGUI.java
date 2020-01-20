@@ -7,18 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
-import org.syfsyf.phototool.utils.JsonServiceImpl;
 import org.syfsyf.phototool.impl.PhotoolFacadeImpl;
-import org.syfsyf.phototool.Phototool;
 import org.syfsyf.phototool.cfg.impl.ConfigServiceImpl;
-import org.syfsyf.phototool.utils.bindfx.BindService;
-import org.syfsyf.phototool.utils.bindfx.impl.BindServiceImpl;
-import org.syfsyf.phototool.utils.bindfx.impl.BindTextFieldInt;
-import org.syfsyf.phototool.utils.bindfx.impl.BindTextFieldInteger;
-import org.syfsyf.phototool.utils.bindfx.impl.BindTextFieldString;
-import org.syfsyf.phototool.webgui.WebServer;
-import org.syfsyf.phototool.webgui.impl.ApiImpl;
-import org.syfsyf.phototool.webgui.impl.WebApiImpl;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,18 +55,7 @@ public class PhototoolGUI extends Application {
 
         pico.addComponent(ConfigServiceImpl.class);
         pico.addComponent(PhotoolFacadeImpl.class);
-        pico.addComponent(Phototool.class);
-        pico.addComponent(WebServer.class);
-        pico.addComponent(JsonServiceImpl.class);
-        pico.addComponent(ApiImpl.class);
-        pico.addComponent(WebApiImpl.class);
         pico.addComponent(RootLayotController.class);
-
-        pico.addComponent(BindServiceImpl.class);
-        pico.addComponent(BindTextFieldString.class);
-        pico.addComponent(BindTextFieldInteger.class);
-        pico.addComponent(BindTextFieldInt.class);
-
         pico.addComponent(pico);
 
         return pico;
