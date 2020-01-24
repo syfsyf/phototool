@@ -1,53 +1,42 @@
 package org.syfsyf.phototool.fxgui;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import org.syfsyf.phototool.JobsStatus;
 
 public class JobsStatusView implements JobsStatus {
 
-    private StringProperty errorLabel = new SimpleStringProperty(this,"errorLabel");
-    private StringProperty progressLabel = new SimpleStringProperty(this,"progressLabel");
-    private IntegerProperty progressValue = new SimpleIntegerProperty(this,"progressValue");
+    private ProgressBar progressBar;
+    private Label errorLabel;
+
+    public JobsStatusView(ProgressBar progressBar, Label errorLabel) {
+        this.progressBar = progressBar;
+        this.errorLabel = errorLabel;
+    }
 
     @Override
     public String getErrorLabel() {
-        return errorLabel.get();
+        return errorLabel.getText();
+    }
+    public void setErrorLabel(String errorLabelValue) {
+
+        Platform.runLater(() -> errorLabel.setText(errorLabelValue));
     }
 
-    public StringProperty errorLabelProperty() {
-        return errorLabel;
-    }
 
-    public void setErrorLabel(String errorLabel) {
-        this.errorLabel.set(errorLabel);
-    }
-
-    @Override
-    public String getProgressLabel() {
-        return progressLabel.get();
-    }
-
-    public StringProperty progressLabelProperty() {
-        return progressLabel;
-    }
-
-    public void setProgressLabel(String progressLabel) {
-        this.progressLabel.set(progressLabel);
+    public void setProgressLabel(String progressLabelValue) {
+        Platform.runLater(() -> errorLabel.setText(progressLabelValue));
     }
 
     @Override
-    public int getProgressValue() {
-        return progressValue.get();
+    public double getProgressValue() {
+        return progressBar.getProgress();
     }
 
-    public IntegerProperty progressValueProperty() {
-        return progressValue;
-    }
 
-    public void setProgressValue(int progressValue) {
-        this.progressValue.set(progressValue);
+    @Override
+    public void setProgressValue(double progressValue) {
+        Platform.runLater(() -> progressBar.setProgress(progressValue));
     }
 }

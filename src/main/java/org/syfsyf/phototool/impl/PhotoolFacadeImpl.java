@@ -340,8 +340,7 @@ public class PhotoolFacadeImpl implements org.syfsyf.phototool.PhotoolFacade {
                 }
             }
         }
-        viewModel.setProgressValue(count);
-        viewModel.setProgressLabel("" + count + "/" + dataModel.getJobs().size());
+        viewModel.setProgressValue((double) count/(double)dataModel.getJobs().size());
         viewModel.setErrorLabel("Błędow:" + errors);
     }
 

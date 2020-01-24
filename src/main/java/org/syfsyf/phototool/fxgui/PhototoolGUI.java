@@ -38,7 +38,7 @@ public class PhototoolGUI extends Application {
         loader.setLocation(fxmlLocation);
         Parent parent = loader.load();
         RootLayotController controller =  loader.getController();
-        Scene scene = new Scene(parent, 640, 480);
+        Scene scene = new Scene(parent, 800, 600);
         stage.setScene(scene);
         stage.setTitle("Phototool");
         stage.show();

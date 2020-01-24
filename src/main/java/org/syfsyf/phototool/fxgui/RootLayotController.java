@@ -28,7 +28,7 @@ public class RootLayotController {
     Stage stage;
     JobSetupView jobSetupView;
 
-    JobsStatusView jobsStatusView=new JobsStatusView();
+    JobsStatusView jobsStatusView;
 
 
     @FXML TextField directory;
@@ -42,7 +42,6 @@ public class RootLayotController {
     @FXML TextArea _logTextArea;
     @FXML ProgressBar _progressBar;
 
-    @FXML Label progressLabel;
     @FXML Label errorLabel;
     @FXML Button goButton;
 
@@ -60,10 +59,7 @@ public class RootLayotController {
             numberOfFiles.textProperty().bindBidirectional(jobSetupView.numberOfFilesProperty(),new NumberStringConverter());
             _resizePane.disableProperty().bind(jobSetupView.resizeProperty().not());
 
-            jobsStatusView.setErrorLabel("bum!");
-            //errorLabel.textProperty().bindBidirectional(jobsStatusView.errorLabelProperty());
-            //progressLabel.textProperty().bindBidirectional(jobsStatusView.progressLabelProperty());
-
+            jobsStatusView=new JobsStatusView(_progressBar,errorLabel);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,45 +71,7 @@ public class RootLayotController {
         try {
             JobSetupDto jobSetupDto = new JobSetupDto();
             BeanUtils.copyProperties(jobSetupDto, jobSetupView);
-            //System.out.println(jobSetupDto);
-            JobsStatus jobsStatus = new JobsStatus() {
-                @Override
-                public String getErrorLabel() {
-                    return null;
-                }
-
-                @Override
-                public void setErrorLabel(String errorLabel) {
-
-                }
-
-                @Override
-                public String getProgressLabel() {
-                    return null;
-                }
-
-                @Override
-                public void setProgressLabel(String label) {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressLabel.setText(label);
-                        }
-                    });
-
-                }
-
-                @Override
-                public int getProgressValue() {
-                    return 0;
-                }
-
-                @Override
-                public void setProgressValue(int progressValue) {
-
-                }
-            };
-            photoolFacade.runJob(jobSetupDto, jobsStatus);
+            photoolFacade.runJob(jobSetupDto, jobsStatusView);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -124,13 +82,13 @@ public class RootLayotController {
     public void onGoButtonClick()  {
 
         Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                goButton.setDisable(true);
-                process();
-                goButton.setDisable(false);
-                return null;
-            }
+          @Override
+        protected Void call() throws Exception {
+              goButton.setDisable(true);
+              process();
+              goButton.setDisable(false);
+              return null;
+          }
         };
 
         new Thread(task).start();

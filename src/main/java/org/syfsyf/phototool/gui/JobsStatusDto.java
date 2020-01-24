@@ -6,7 +6,7 @@ public class JobsStatusDto implements JobsStatus {
 
     private String errorLabel = "";
     private String progressLabel = "";
-    private int progressValue = 0;
+    private double progressValue = 0;
 
     public String getErrorLabel() {
         return errorLabel;
@@ -24,11 +24,11 @@ public class JobsStatusDto implements JobsStatus {
         this.progressLabel = progressLabel;
     }
 
-    public int getProgressValue() {
+    public double getProgressValue() {
         return progressValue;
     }
 
-    public void setProgressValue(int progressValue) {
+    public void setProgressValue(double progressValue) {
         this.progressValue = progressValue;
     }
 

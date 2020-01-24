@@ -1,4 +1,7 @@
 .panelBorder {
     -fx-border-color:gray;
     -fx-border-insets:3px;
+    -fx-padding:8;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
 }
